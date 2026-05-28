@@ -13,7 +13,13 @@ The logs will be saved to `/tmp/<last 6 of switch guid>_<switch ports>_<date: MM
 This output directory also shows up at the top of the command line output.
 The output directory will have files for TCP, OPX, and nsdperf.
 
+The script reads from a config file `config-${nm}.sh` where `nm` is the first two characters of the hostname where the script is running. 
+
 ## SETTING UP NEW SYS
+
+Create a new config based on server names and populate it with the hostnames, IP addresses, and PPN intended as default (PPN=PPN_ALL/4), PPN_ALL is the number of physical cores on the server. To make this work, servers that are intended to be run together must be given names that have the same first two letters (i.e. rb11,rb12). And these names must not have the same first two letters as other groups of servers intended for this task (cots, cncc is cutting it close). 
+
+That being said, groups of servers with different names CAN be run together under this script. The user can set set HOSTNM as a comma delimited list of hosts and the PPN variables on the command line.
 
 ### Get SW/FW
 
