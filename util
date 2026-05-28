@@ -90,7 +90,7 @@ universal_opts() {
 set_opx_size() {
     SMALL_SIZE='-msglog 4:8'
     LARGE_SIZE='-msglog 16:24'
-    BYTE_SIZE='-msglen /root/kitchensink-tests/byte_file -data_type byte'
+    BYTE_SIZE="-msglen ${THISDIR}/byte_file -data_type byte"
     case "$SIZE" in
         "SMALL")
             SIZE_FINAL="$SMALL_SIZE"
