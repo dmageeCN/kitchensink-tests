@@ -1,0 +1,2661 @@
+TCP N1 - ITERATION 1 :: Tue May 12 10:07:46 AM EDT 2026 
+mpirun -np 32 -ppn 16 -host cncc-gnr-003,cncc-gnr-004 IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000
+[0] MPI startup(): Intel(R) MPI Library, Version 2021.18.0  Build 20260327 (id: 821f207)
+[0] MPI startup(): Copyright (C) 2003-2026 Intel Corporation.  All rights reserved.
+[0] MPI startup(): library kind: release
+[0] MPI startup(): libfabric version: 2.5.0a1
+[0] MPI startup(): libfabric provider: tcp
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1_x1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp.dat" not found
+[0] MPI startup(): Load tuning file: "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi.dat"
+[0] MPI startup(): Number of NICs:  1 
+[0] MPI startup(): ===== NIC pinning on cncc-gnr-003 =====
+[0] MPI startup(): Rank    Thread id  Pin nic
+[0] MPI startup(): 0       0          eth0
+[0] MPI startup(): 1       0          eth0
+[0] MPI startup(): 2       0          eth0
+[0] MPI startup(): 3       0          eth0
+[0] MPI startup(): 4       0          eth0
+[0] MPI startup(): 5       0          eth0
+[0] MPI startup(): 6       0          eth0
+[0] MPI startup(): 7       0          eth0
+[0] MPI startup(): 8       0          eth0
+[0] MPI startup(): 9       0          eth0
+[0] MPI startup(): 10      0          eth0
+[0] MPI startup(): 11      0          eth0
+[0] MPI startup(): 12      0          eth0
+[0] MPI startup(): 13      0          eth0
+[0] MPI startup(): 14      0          eth0
+[0] MPI startup(): 15      0          eth0
+[0] MPI startup(): ===== CPU pinning =====
+[0] MPI startup(): Rank    Pid      Node name     Pin cpu
+[0] MPI startup(): 0       111009   cncc-gnr-003  {0-3,64-67}
+[0] MPI startup(): 1       111010   cncc-gnr-003  {4-7,68-71}
+[0] MPI startup(): 2       111011   cncc-gnr-003  {8-11,72-75}
+[0] MPI startup(): 3       111012   cncc-gnr-003  {12-15,76-79}
+[0] MPI startup(): 4       111013   cncc-gnr-003  {16-19,80-83}
+[0] MPI startup(): 5       111014   cncc-gnr-003  {20-23,84-87}
+[0] MPI startup(): 6       111015   cncc-gnr-003  {24-27,88-91}
+[0] MPI startup(): 7       111016   cncc-gnr-003  {28-31,92-95}
+[0] MPI startup(): 8       111017   cncc-gnr-003  {32-35,96-99}
+[0] MPI startup(): 9       111018   cncc-gnr-003  {36-39,100-103}
+[0] MPI startup(): 10      111019   cncc-gnr-003  {40-43,104-107}
+[0] MPI startup(): 11      111020   cncc-gnr-003  {44-47,108-111}
+[0] MPI startup(): 12      111021   cncc-gnr-003  {48-51,112-115}
+[0] MPI startup(): 13      111022   cncc-gnr-003  {52-55,116-119}
+[0] MPI startup(): 14      111023   cncc-gnr-003  {56-59,120-123}
+[0] MPI startup(): 15      111024   cncc-gnr-003  {60-63,124-127}
+[0] MPI startup(): 16      232827   cncc-gnr-004  {0-3,64-67}
+[0] MPI startup(): 17      232828   cncc-gnr-004  {4-7,68-71}
+[0] MPI startup(): 18      232829   cncc-gnr-004  {8-11,72-75}
+[0] MPI startup(): 19      232830   cncc-gnr-004  {12-15,76-79}
+[0] MPI startup(): 20      232831   cncc-gnr-004  {16-19,80-83}
+[0] MPI startup(): 21      232832   cncc-gnr-004  {20-23,84-87}
+[0] MPI startup(): 22      232833   cncc-gnr-004  {24-27,88-91}
+[0] MPI startup(): 23      232834   cncc-gnr-004  {28-31,92-95}
+[0] MPI startup(): 24      232835   cncc-gnr-004  {32-35,96-99}
+[0] MPI startup(): 25      232836   cncc-gnr-004  {36-39,100-103}
+[0] MPI startup(): 26      232837   cncc-gnr-004  {40-43,104-107}
+[0] MPI startup(): 27      232838   cncc-gnr-004  {44-47,108-111}
+[0] MPI startup(): 28      232839   cncc-gnr-004  {48-51,112-115}
+[0] MPI startup(): 29      232840   cncc-gnr-004  {52-55,116-119}
+[0] MPI startup(): 30      232841   cncc-gnr-004  {56-59,120-123}
+[0] MPI startup(): 31      232844   cncc-gnr-004  {60-63,124-127}
+[0] MPI startup(): I_MPI_OFI_LIBRARY_INTERNAL=0
+[0] MPI startup(): I_MPI_ROOT=/opt/intel/oneapi/mpi/2021.18
+[0] MPI startup(): ONEAPI_ROOT=/opt/intel/oneapi
+[0] MPI startup(): I_MPI_MPIRUN=mpirun
+[0] MPI startup(): I_MPI_BIND_WIN_ALLOCATE=localalloc
+[0] MPI startup(): I_MPI_HYDRA_TOPOLIB=ipl2
+[0] MPI startup(): I_MPI_RETURN_WIN_MEM_NUMA=0
+[0] MPI startup(): I_MPI_INTERNAL_MEM_POLICY=default
+[0] MPI startup(): I_MPI_DEBUG=5
+#----------------------------------------------------------------
+#    Intel(R) MPI Benchmarks 2021.11, MPI-1 part
+#----------------------------------------------------------------
+# Date                  : Tue May 12 10:08:10 2026
+# Machine               : x86_64
+# System                : Linux
+# Release               : 5.14.0-611.5.1.el9_7.x86_64
+# Version               : #1 SMP PREEMPT_DYNAMIC Fri Oct 17 14:16:35 EDT 2025
+# MPI Version           : 4.1
+# MPI Thread Environment: 
+
+
+# Calling sequence was: 
+
+# IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000 
+
+# Minimum message length in bytes:   0
+# Maximum message length in bytes:   256
+#
+# MPI_Datatype                   :   MPI_BYTE 
+# MPI_Datatype for reductions    :   MPI_FLOAT 
+# MPI_Op                         :   MPI_SUM  
+# 
+# 
+
+# List of Benchmarks to run:
+
+# Biband
+
+#---------------------------------------------------
+# Benchmarking Biband 
+# #processes = 32 
+#---------------------------------------------------
+       #bytes #repetitions   Mbytes/sec      Msg/sec
+            0         1000         0.00      8778039
+           16         1000        88.17      5510861
+           32         1000       128.08      4002360
+           64         1000       164.41      2568888
+          128         1000       190.92      1491574
+          256         1000       208.39       814035
+
+
+# All processes entering MPI_Finalize
+
+TCP N1 - ITERATION 2 :: Tue May 12 10:08:28 AM EDT 2026 
+mpirun -np 32 -ppn 16 -host cncc-gnr-003,cncc-gnr-004 IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000
+[0] MPI startup(): Intel(R) MPI Library, Version 2021.18.0  Build 20260327 (id: 821f207)
+[0] MPI startup(): Copyright (C) 2003-2026 Intel Corporation.  All rights reserved.
+[0] MPI startup(): library kind: release
+[0] MPI startup(): libfabric version: 2.5.0a1
+[0] MPI startup(): libfabric provider: tcp
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1_x1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp.dat" not found
+[0] MPI startup(): Load tuning file: "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi.dat"
+[0] MPI startup(): Number of NICs:  1 
+[0] MPI startup(): ===== NIC pinning on cncc-gnr-003 =====
+[0] MPI startup(): Rank    Thread id  Pin nic
+[0] MPI startup(): 0       0          eth0
+[0] MPI startup(): 1       0          eth0
+[0] MPI startup(): 2       0          eth0
+[0] MPI startup(): 3       0          eth0
+[0] MPI startup(): 4       0          eth0
+[0] MPI startup(): 5       0          eth0
+[0] MPI startup(): 6       0          eth0
+[0] MPI startup(): 7       0          eth0
+[0] MPI startup(): 8       0          eth0
+[0] MPI startup(): 9       0          eth0
+[0] MPI startup(): 10      0          eth0
+[0] MPI startup(): 11      0          eth0
+[0] MPI startup(): 12      0          eth0
+[0] MPI startup(): 13      0          eth0
+[0] MPI startup(): 14      0          eth0
+[0] MPI startup(): 15      0          eth0
+[0] MPI startup(): ===== CPU pinning =====
+[0] MPI startup(): Rank    Pid      Node name     Pin cpu
+[0] MPI startup(): 0       111318   cncc-gnr-003  {0-3,64-67}
+[0] MPI startup(): 1       111319   cncc-gnr-003  {4-7,68-71}
+[0] MPI startup(): 2       111320   cncc-gnr-003  {8-11,72-75}
+[0] MPI startup(): 3       111321   cncc-gnr-003  {12-15,76-79}
+[0] MPI startup(): 4       111322   cncc-gnr-003  {16-19,80-83}
+[0] MPI startup(): 5       111323   cncc-gnr-003  {20-23,84-87}
+[0] MPI startup(): 6       111324   cncc-gnr-003  {24-27,88-91}
+[0] MPI startup(): 7       111325   cncc-gnr-003  {28-31,92-95}
+[0] MPI startup(): 8       111326   cncc-gnr-003  {32-35,96-99}
+[0] MPI startup(): 9       111327   cncc-gnr-003  {36-39,100-103}
+[0] MPI startup(): 10      111328   cncc-gnr-003  {40-43,104-107}
+[0] MPI startup(): 11      111329   cncc-gnr-003  {44-47,108-111}
+[0] MPI startup(): 12      111330   cncc-gnr-003  {48-51,112-115}
+[0] MPI startup(): 13      111331   cncc-gnr-003  {52-55,116-119}
+[0] MPI startup(): 14      111332   cncc-gnr-003  {56-59,120-123}
+[0] MPI startup(): 15      111333   cncc-gnr-003  {60-63,124-127}
+[0] MPI startup(): 16      233833   cncc-gnr-004  {0-3,64-67}
+[0] MPI startup(): 17      233834   cncc-gnr-004  {4-7,68-71}
+[0] MPI startup(): 18      233835   cncc-gnr-004  {8-11,72-75}
+[0] MPI startup(): 19      233836   cncc-gnr-004  {12-15,76-79}
+[0] MPI startup(): 20      233837   cncc-gnr-004  {16-19,80-83}
+[0] MPI startup(): 21      233838   cncc-gnr-004  {20-23,84-87}
+[0] MPI startup(): 22      233839   cncc-gnr-004  {24-27,88-91}
+[0] MPI startup(): 23      233840   cncc-gnr-004  {28-31,92-95}
+[0] MPI startup(): 24      233841   cncc-gnr-004  {32-35,96-99}
+[0] MPI startup(): 25      233842   cncc-gnr-004  {36-39,100-103}
+[0] MPI startup(): 26      233843   cncc-gnr-004  {40-43,104-107}
+[0] MPI startup(): 27      233844   cncc-gnr-004  {44-47,108-111}
+[0] MPI startup(): 28      233845   cncc-gnr-004  {48-51,112-115}
+[0] MPI startup(): 29      233846   cncc-gnr-004  {52-55,116-119}
+[0] MPI startup(): 30      233847   cncc-gnr-004  {56-59,120-123}
+[0] MPI startup(): 31      233848   cncc-gnr-004  {60-63,124-127}
+[0] MPI startup(): I_MPI_OFI_LIBRARY_INTERNAL=0
+[0] MPI startup(): I_MPI_ROOT=/opt/intel/oneapi/mpi/2021.18
+[0] MPI startup(): ONEAPI_ROOT=/opt/intel/oneapi
+[0] MPI startup(): I_MPI_MPIRUN=mpirun
+[0] MPI startup(): I_MPI_BIND_WIN_ALLOCATE=localalloc
+[0] MPI startup(): I_MPI_HYDRA_TOPOLIB=ipl2
+[0] MPI startup(): I_MPI_RETURN_WIN_MEM_NUMA=0
+[0] MPI startup(): I_MPI_INTERNAL_MEM_POLICY=default
+[0] MPI startup(): I_MPI_DEBUG=5
+#----------------------------------------------------------------
+#    Intel(R) MPI Benchmarks 2021.11, MPI-1 part
+#----------------------------------------------------------------
+# Date                  : Tue May 12 10:08:52 2026
+# Machine               : x86_64
+# System                : Linux
+# Release               : 5.14.0-611.5.1.el9_7.x86_64
+# Version               : #1 SMP PREEMPT_DYNAMIC Fri Oct 17 14:16:35 EDT 2025
+# MPI Version           : 4.1
+# MPI Thread Environment: 
+
+
+# Calling sequence was: 
+
+# IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000 
+
+# Minimum message length in bytes:   0
+# Maximum message length in bytes:   256
+#
+# MPI_Datatype                   :   MPI_BYTE 
+# MPI_Datatype for reductions    :   MPI_FLOAT 
+# MPI_Op                         :   MPI_SUM  
+# 
+# 
+
+# List of Benchmarks to run:
+
+# Biband
+
+#---------------------------------------------------
+# Benchmarking Biband 
+# #processes = 32 
+#---------------------------------------------------
+       #bytes #repetitions   Mbytes/sec      Msg/sec
+            0         1000         0.00      8825087
+           16         1000        88.11      5506897
+           32         1000       128.05      4001711
+           64         1000       164.42      2569052
+          128         1000       191.01      1492293
+          256         1000       208.53       814583
+
+
+# All processes entering MPI_Finalize
+
+TCP N1 - ITERATION 3 :: Tue May 12 10:09:10 AM EDT 2026 
+mpirun -np 32 -ppn 16 -host cncc-gnr-003,cncc-gnr-004 IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000
+[0] MPI startup(): Intel(R) MPI Library, Version 2021.18.0  Build 20260327 (id: 821f207)
+[0] MPI startup(): Copyright (C) 2003-2026 Intel Corporation.  All rights reserved.
+[0] MPI startup(): library kind: release
+[0] MPI startup(): libfabric version: 2.5.0a1
+[0] MPI startup(): libfabric provider: tcp
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1_x1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp.dat" not found
+[0] MPI startup(): Load tuning file: "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi.dat"
+[0] MPI startup(): Number of NICs:  1 
+[0] MPI startup(): ===== NIC pinning on cncc-gnr-003 =====
+[0] MPI startup(): Rank    Thread id  Pin nic
+[0] MPI startup(): 0       0          eth0
+[0] MPI startup(): 1       0          eth0
+[0] MPI startup(): 2       0          eth0
+[0] MPI startup(): 3       0          eth0
+[0] MPI startup(): 4       0          eth0
+[0] MPI startup(): 5       0          eth0
+[0] MPI startup(): 6       0          eth0
+[0] MPI startup(): 7       0          eth0
+[0] MPI startup(): 8       0          eth0
+[0] MPI startup(): 9       0          eth0
+[0] MPI startup(): 10      0          eth0
+[0] MPI startup(): 11      0          eth0
+[0] MPI startup(): 12      0          eth0
+[0] MPI startup(): 13      0          eth0
+[0] MPI startup(): 14      0          eth0
+[0] MPI startup(): 15      0          eth0
+[0] MPI startup(): ===== CPU pinning =====
+[0] MPI startup(): Rank    Pid      Node name     Pin cpu
+[0] MPI startup(): 0       111365   cncc-gnr-003  {0-3,64-67}
+[0] MPI startup(): 1       111366   cncc-gnr-003  {4-7,68-71}
+[0] MPI startup(): 2       111367   cncc-gnr-003  {8-11,72-75}
+[0] MPI startup(): 3       111368   cncc-gnr-003  {12-15,76-79}
+[0] MPI startup(): 4       111369   cncc-gnr-003  {16-19,80-83}
+[0] MPI startup(): 5       111370   cncc-gnr-003  {20-23,84-87}
+[0] MPI startup(): 6       111371   cncc-gnr-003  {24-27,88-91}
+[0] MPI startup(): 7       111372   cncc-gnr-003  {28-31,92-95}
+[0] MPI startup(): 8       111373   cncc-gnr-003  {32-35,96-99}
+[0] MPI startup(): 9       111374   cncc-gnr-003  {36-39,100-103}
+[0] MPI startup(): 10      111375   cncc-gnr-003  {40-43,104-107}
+[0] MPI startup(): 11      111376   cncc-gnr-003  {44-47,108-111}
+[0] MPI startup(): 12      111377   cncc-gnr-003  {48-51,112-115}
+[0] MPI startup(): 13      111378   cncc-gnr-003  {52-55,116-119}
+[0] MPI startup(): 14      111379   cncc-gnr-003  {56-59,120-123}
+[0] MPI startup(): 15      111380   cncc-gnr-003  {60-63,124-127}
+[0] MPI startup(): 16      234544   cncc-gnr-004  {0-3,64-67}
+[0] MPI startup(): 17      234545   cncc-gnr-004  {4-7,68-71}
+[0] MPI startup(): 18      234546   cncc-gnr-004  {8-11,72-75}
+[0] MPI startup(): 19      234547   cncc-gnr-004  {12-15,76-79}
+[0] MPI startup(): 20      234548   cncc-gnr-004  {16-19,80-83}
+[0] MPI startup(): 21      234549   cncc-gnr-004  {20-23,84-87}
+[0] MPI startup(): 22      234550   cncc-gnr-004  {24-27,88-91}
+[0] MPI startup(): 23      234551   cncc-gnr-004  {28-31,92-95}
+[0] MPI startup(): 24      234552   cncc-gnr-004  {32-35,96-99}
+[0] MPI startup(): 25      234553   cncc-gnr-004  {36-39,100-103}
+[0] MPI startup(): 26      234554   cncc-gnr-004  {40-43,104-107}
+[0] MPI startup(): 27      234555   cncc-gnr-004  {44-47,108-111}
+[0] MPI startup(): 28      234556   cncc-gnr-004  {48-51,112-115}
+[0] MPI startup(): 29      234557   cncc-gnr-004  {52-55,116-119}
+[0] MPI startup(): 30      234558   cncc-gnr-004  {56-59,120-123}
+[0] MPI startup(): 31      234559   cncc-gnr-004  {60-63,124-127}
+[0] MPI startup(): I_MPI_OFI_LIBRARY_INTERNAL=0
+[0] MPI startup(): I_MPI_ROOT=/opt/intel/oneapi/mpi/2021.18
+[0] MPI startup(): ONEAPI_ROOT=/opt/intel/oneapi
+[0] MPI startup(): I_MPI_MPIRUN=mpirun
+[0] MPI startup(): I_MPI_BIND_WIN_ALLOCATE=localalloc
+[0] MPI startup(): I_MPI_HYDRA_TOPOLIB=ipl2
+[0] MPI startup(): I_MPI_RETURN_WIN_MEM_NUMA=0
+[0] MPI startup(): I_MPI_INTERNAL_MEM_POLICY=default
+[0] MPI startup(): I_MPI_DEBUG=5
+#----------------------------------------------------------------
+#    Intel(R) MPI Benchmarks 2021.11, MPI-1 part
+#----------------------------------------------------------------
+# Date                  : Tue May 12 10:09:35 2026
+# Machine               : x86_64
+# System                : Linux
+# Release               : 5.14.0-611.5.1.el9_7.x86_64
+# Version               : #1 SMP PREEMPT_DYNAMIC Fri Oct 17 14:16:35 EDT 2025
+# MPI Version           : 4.1
+# MPI Thread Environment: 
+
+
+# Calling sequence was: 
+
+# IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000 
+
+# Minimum message length in bytes:   0
+# Maximum message length in bytes:   256
+#
+# MPI_Datatype                   :   MPI_BYTE 
+# MPI_Datatype for reductions    :   MPI_FLOAT 
+# MPI_Op                         :   MPI_SUM  
+# 
+# 
+
+# List of Benchmarks to run:
+
+# Biband
+
+#---------------------------------------------------
+# Benchmarking Biband 
+# #processes = 32 
+#---------------------------------------------------
+       #bytes #repetitions   Mbytes/sec      Msg/sec
+            0         1000         0.00      8280377
+           16         1000        87.93      5495643
+           32         1000       127.34      3979310
+           64         1000       164.30      2567219
+          128         1000       190.26      1486434
+          256         1000       208.57       814709
+
+
+# All processes entering MPI_Finalize
+
+TCP N1 - ITERATION 4 :: Tue May 12 10:09:53 AM EDT 2026 
+mpirun -np 32 -ppn 16 -host cncc-gnr-003,cncc-gnr-004 IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000
+[0] MPI startup(): Intel(R) MPI Library, Version 2021.18.0  Build 20260327 (id: 821f207)
+[0] MPI startup(): Copyright (C) 2003-2026 Intel Corporation.  All rights reserved.
+[0] MPI startup(): library kind: release
+[0] MPI startup(): libfabric version: 2.5.0a1
+[0] MPI startup(): libfabric provider: tcp
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1_x1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp.dat" not found
+[0] MPI startup(): Load tuning file: "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi.dat"
+[0] MPI startup(): Number of NICs:  1 
+[0] MPI startup(): ===== NIC pinning on cncc-gnr-003 =====
+[0] MPI startup(): Rank    Thread id  Pin nic
+[0] MPI startup(): 0       0          eth0
+[0] MPI startup(): 1       0          eth0
+[0] MPI startup(): 2       0          eth0
+[0] MPI startup(): 3       0          eth0
+[0] MPI startup(): 4       0          eth0
+[0] MPI startup(): 5       0          eth0
+[0] MPI startup(): 6       0          eth0
+[0] MPI startup(): 7       0          eth0
+[0] MPI startup(): 8       0          eth0
+[0] MPI startup(): 9       0          eth0
+[0] MPI startup(): 10      0          eth0
+[0] MPI startup(): 11      0          eth0
+[0] MPI startup(): 12      0          eth0
+[0] MPI startup(): 13      0          eth0
+[0] MPI startup(): 14      0          eth0
+[0] MPI startup(): 15      0          eth0
+[0] MPI startup(): ===== CPU pinning =====
+[0] MPI startup(): Rank    Pid      Node name     Pin cpu
+[0] MPI startup(): 0       111410   cncc-gnr-003  {0-3,64-67}
+[0] MPI startup(): 1       111411   cncc-gnr-003  {4-7,68-71}
+[0] MPI startup(): 2       111412   cncc-gnr-003  {8-11,72-75}
+[0] MPI startup(): 3       111413   cncc-gnr-003  {12-15,76-79}
+[0] MPI startup(): 4       111414   cncc-gnr-003  {16-19,80-83}
+[0] MPI startup(): 5       111415   cncc-gnr-003  {20-23,84-87}
+[0] MPI startup(): 6       111416   cncc-gnr-003  {24-27,88-91}
+[0] MPI startup(): 7       111417   cncc-gnr-003  {28-31,92-95}
+[0] MPI startup(): 8       111418   cncc-gnr-003  {32-35,96-99}
+[0] MPI startup(): 9       111419   cncc-gnr-003  {36-39,100-103}
+[0] MPI startup(): 10      111420   cncc-gnr-003  {40-43,104-107}
+[0] MPI startup(): 11      111421   cncc-gnr-003  {44-47,108-111}
+[0] MPI startup(): 12      111422   cncc-gnr-003  {48-51,112-115}
+[0] MPI startup(): 13      111423   cncc-gnr-003  {52-55,116-119}
+[0] MPI startup(): 14      111424   cncc-gnr-003  {56-59,120-123}
+[0] MPI startup(): 15      111425   cncc-gnr-003  {60-63,124-127}
+[0] MPI startup(): 16      235246   cncc-gnr-004  {0-3,64-67}
+[0] MPI startup(): 17      235247   cncc-gnr-004  {4-7,68-71}
+[0] MPI startup(): 18      235248   cncc-gnr-004  {8-11,72-75}
+[0] MPI startup(): 19      235249   cncc-gnr-004  {12-15,76-79}
+[0] MPI startup(): 20      235250   cncc-gnr-004  {16-19,80-83}
+[0] MPI startup(): 21      235251   cncc-gnr-004  {20-23,84-87}
+[0] MPI startup(): 22      235252   cncc-gnr-004  {24-27,88-91}
+[0] MPI startup(): 23      235253   cncc-gnr-004  {28-31,92-95}
+[0] MPI startup(): 24      235254   cncc-gnr-004  {32-35,96-99}
+[0] MPI startup(): 25      235255   cncc-gnr-004  {36-39,100-103}
+[0] MPI startup(): 26      235256   cncc-gnr-004  {40-43,104-107}
+[0] MPI startup(): 27      235257   cncc-gnr-004  {44-47,108-111}
+[0] MPI startup(): 28      235258   cncc-gnr-004  {48-51,112-115}
+[0] MPI startup(): 29      235259   cncc-gnr-004  {52-55,116-119}
+[0] MPI startup(): 30      235260   cncc-gnr-004  {56-59,120-123}
+[0] MPI startup(): 31      235261   cncc-gnr-004  {60-63,124-127}
+[0] MPI startup(): I_MPI_OFI_LIBRARY_INTERNAL=0
+[0] MPI startup(): I_MPI_ROOT=/opt/intel/oneapi/mpi/2021.18
+[0] MPI startup(): ONEAPI_ROOT=/opt/intel/oneapi
+[0] MPI startup(): I_MPI_MPIRUN=mpirun
+[0] MPI startup(): I_MPI_BIND_WIN_ALLOCATE=localalloc
+[0] MPI startup(): I_MPI_HYDRA_TOPOLIB=ipl2
+[0] MPI startup(): I_MPI_RETURN_WIN_MEM_NUMA=0
+[0] MPI startup(): I_MPI_INTERNAL_MEM_POLICY=default
+[0] MPI startup(): I_MPI_DEBUG=5
+#----------------------------------------------------------------
+#    Intel(R) MPI Benchmarks 2021.11, MPI-1 part
+#----------------------------------------------------------------
+# Date                  : Tue May 12 10:10:17 2026
+# Machine               : x86_64
+# System                : Linux
+# Release               : 5.14.0-611.5.1.el9_7.x86_64
+# Version               : #1 SMP PREEMPT_DYNAMIC Fri Oct 17 14:16:35 EDT 2025
+# MPI Version           : 4.1
+# MPI Thread Environment: 
+
+
+# Calling sequence was: 
+
+# IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000 
+
+# Minimum message length in bytes:   0
+# Maximum message length in bytes:   256
+#
+# MPI_Datatype                   :   MPI_BYTE 
+# MPI_Datatype for reductions    :   MPI_FLOAT 
+# MPI_Op                         :   MPI_SUM  
+# 
+# 
+
+# List of Benchmarks to run:
+
+# Biband
+
+#---------------------------------------------------
+# Benchmarking Biband 
+# #processes = 32 
+#---------------------------------------------------
+       #bytes #repetitions   Mbytes/sec      Msg/sec
+            0         1000         0.00      8760952
+           16         1000        87.89      5493235
+           32         1000       127.00      3968755
+           64         1000       164.14      2564709
+          128         1000       190.54      1488589
+          256         1000       207.87       811980
+
+
+# All processes entering MPI_Finalize
+
+TCP N1 - ITERATION 5 :: Tue May 12 10:10:35 AM EDT 2026 
+mpirun -np 32 -ppn 16 -host cncc-gnr-003,cncc-gnr-004 IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000
+[0] MPI startup(): Intel(R) MPI Library, Version 2021.18.0  Build 20260327 (id: 821f207)
+[0] MPI startup(): Copyright (C) 2003-2026 Intel Corporation.  All rights reserved.
+[0] MPI startup(): library kind: release
+[0] MPI startup(): libfabric version: 2.5.0a1
+[0] MPI startup(): libfabric provider: tcp
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1_x1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp.dat" not found
+[0] MPI startup(): Load tuning file: "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi.dat"
+[0] MPI startup(): Number of NICs:  1 
+[0] MPI startup(): ===== NIC pinning on cncc-gnr-003 =====
+[0] MPI startup(): Rank    Thread id  Pin nic
+[0] MPI startup(): 0       0          eth0
+[0] MPI startup(): 1       0          eth0
+[0] MPI startup(): 2       0          eth0
+[0] MPI startup(): 3       0          eth0
+[0] MPI startup(): 4       0          eth0
+[0] MPI startup(): 5       0          eth0
+[0] MPI startup(): 6       0          eth0
+[0] MPI startup(): 7       0          eth0
+[0] MPI startup(): 8       0          eth0
+[0] MPI startup(): 9       0          eth0
+[0] MPI startup(): 10      0          eth0
+[0] MPI startup(): 11      0          eth0
+[0] MPI startup(): 12      0          eth0
+[0] MPI startup(): 13      0          eth0
+[0] MPI startup(): 14      0          eth0
+[0] MPI startup(): 15      0          eth0
+[0] MPI startup(): ===== CPU pinning =====
+[0] MPI startup(): Rank    Pid      Node name     Pin cpu
+[0] MPI startup(): 0       111455   cncc-gnr-003  {0-3,64-67}
+[0] MPI startup(): 1       111456   cncc-gnr-003  {4-7,68-71}
+[0] MPI startup(): 2       111457   cncc-gnr-003  {8-11,72-75}
+[0] MPI startup(): 3       111458   cncc-gnr-003  {12-15,76-79}
+[0] MPI startup(): 4       111459   cncc-gnr-003  {16-19,80-83}
+[0] MPI startup(): 5       111460   cncc-gnr-003  {20-23,84-87}
+[0] MPI startup(): 6       111461   cncc-gnr-003  {24-27,88-91}
+[0] MPI startup(): 7       111462   cncc-gnr-003  {28-31,92-95}
+[0] MPI startup(): 8       111463   cncc-gnr-003  {32-35,96-99}
+[0] MPI startup(): 9       111464   cncc-gnr-003  {36-39,100-103}
+[0] MPI startup(): 10      111465   cncc-gnr-003  {40-43,104-107}
+[0] MPI startup(): 11      111466   cncc-gnr-003  {44-47,108-111}
+[0] MPI startup(): 12      111467   cncc-gnr-003  {48-51,112-115}
+[0] MPI startup(): 13      111468   cncc-gnr-003  {52-55,116-119}
+[0] MPI startup(): 14      111469   cncc-gnr-003  {56-59,120-123}
+[0] MPI startup(): 15      111470   cncc-gnr-003  {60-63,124-127}
+[0] MPI startup(): 16      235942   cncc-gnr-004  {0-3,64-67}
+[0] MPI startup(): 17      235943   cncc-gnr-004  {4-7,68-71}
+[0] MPI startup(): 18      235944   cncc-gnr-004  {8-11,72-75}
+[0] MPI startup(): 19      235945   cncc-gnr-004  {12-15,76-79}
+[0] MPI startup(): 20      235946   cncc-gnr-004  {16-19,80-83}
+[0] MPI startup(): 21      235947   cncc-gnr-004  {20-23,84-87}
+[0] MPI startup(): 22      235948   cncc-gnr-004  {24-27,88-91}
+[0] MPI startup(): 23      235949   cncc-gnr-004  {28-31,92-95}
+[0] MPI startup(): 24      235950   cncc-gnr-004  {32-35,96-99}
+[0] MPI startup(): 25      235951   cncc-gnr-004  {36-39,100-103}
+[0] MPI startup(): 26      235952   cncc-gnr-004  {40-43,104-107}
+[0] MPI startup(): 27      235953   cncc-gnr-004  {44-47,108-111}
+[0] MPI startup(): 28      235954   cncc-gnr-004  {48-51,112-115}
+[0] MPI startup(): 29      235955   cncc-gnr-004  {52-55,116-119}
+[0] MPI startup(): 30      235956   cncc-gnr-004  {56-59,120-123}
+[0] MPI startup(): 31      235957   cncc-gnr-004  {60-63,124-127}
+[0] MPI startup(): I_MPI_OFI_LIBRARY_INTERNAL=0
+[0] MPI startup(): I_MPI_ROOT=/opt/intel/oneapi/mpi/2021.18
+[0] MPI startup(): ONEAPI_ROOT=/opt/intel/oneapi
+[0] MPI startup(): I_MPI_MPIRUN=mpirun
+[0] MPI startup(): I_MPI_BIND_WIN_ALLOCATE=localalloc
+[0] MPI startup(): I_MPI_HYDRA_TOPOLIB=ipl2
+[0] MPI startup(): I_MPI_RETURN_WIN_MEM_NUMA=0
+[0] MPI startup(): I_MPI_INTERNAL_MEM_POLICY=default
+[0] MPI startup(): I_MPI_DEBUG=5
+#----------------------------------------------------------------
+#    Intel(R) MPI Benchmarks 2021.11, MPI-1 part
+#----------------------------------------------------------------
+# Date                  : Tue May 12 10:10:59 2026
+# Machine               : x86_64
+# System                : Linux
+# Release               : 5.14.0-611.5.1.el9_7.x86_64
+# Version               : #1 SMP PREEMPT_DYNAMIC Fri Oct 17 14:16:35 EDT 2025
+# MPI Version           : 4.1
+# MPI Thread Environment: 
+
+
+# Calling sequence was: 
+
+# IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000 
+
+# Minimum message length in bytes:   0
+# Maximum message length in bytes:   256
+#
+# MPI_Datatype                   :   MPI_BYTE 
+# MPI_Datatype for reductions    :   MPI_FLOAT 
+# MPI_Op                         :   MPI_SUM  
+# 
+# 
+
+# List of Benchmarks to run:
+
+# Biband
+
+#---------------------------------------------------
+# Benchmarking Biband 
+# #processes = 32 
+#---------------------------------------------------
+       #bytes #repetitions   Mbytes/sec      Msg/sec
+            0         1000         0.00      8806757
+           16         1000        88.03      5501739
+           32         1000       128.00      4000138
+           64         1000       164.35      2568015
+          128         1000       190.66      1489533
+          256         1000       208.31       813720
+
+
+# All processes entering MPI_Finalize
+
+TCP N1 - ITERATION 6 :: Tue May 12 10:11:17 AM EDT 2026 
+mpirun -np 32 -ppn 16 -host cncc-gnr-003,cncc-gnr-004 IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000
+[0] MPI startup(): Intel(R) MPI Library, Version 2021.18.0  Build 20260327 (id: 821f207)
+[0] MPI startup(): Copyright (C) 2003-2026 Intel Corporation.  All rights reserved.
+[0] MPI startup(): library kind: release
+[0] MPI startup(): libfabric version: 2.5.0a1
+[0] MPI startup(): libfabric provider: tcp
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1_x1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp.dat" not found
+[0] MPI startup(): Load tuning file: "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi.dat"
+[0] MPI startup(): Number of NICs:  1 
+[0] MPI startup(): ===== NIC pinning on cncc-gnr-003 =====
+[0] MPI startup(): Rank    Thread id  Pin nic
+[0] MPI startup(): 0       0          eth0
+[0] MPI startup(): 1       0          eth0
+[0] MPI startup(): 2       0          eth0
+[0] MPI startup(): 3       0          eth0
+[0] MPI startup(): 4       0          eth0
+[0] MPI startup(): 5       0          eth0
+[0] MPI startup(): 6       0          eth0
+[0] MPI startup(): 7       0          eth0
+[0] MPI startup(): 8       0          eth0
+[0] MPI startup(): 9       0          eth0
+[0] MPI startup(): 10      0          eth0
+[0] MPI startup(): 11      0          eth0
+[0] MPI startup(): 12      0          eth0
+[0] MPI startup(): 13      0          eth0
+[0] MPI startup(): 14      0          eth0
+[0] MPI startup(): 15      0          eth0
+[0] MPI startup(): ===== CPU pinning =====
+[0] MPI startup(): Rank    Pid      Node name     Pin cpu
+[0] MPI startup(): 0       111501   cncc-gnr-003  {0-3,64-67}
+[0] MPI startup(): 1       111502   cncc-gnr-003  {4-7,68-71}
+[0] MPI startup(): 2       111503   cncc-gnr-003  {8-11,72-75}
+[0] MPI startup(): 3       111504   cncc-gnr-003  {12-15,76-79}
+[0] MPI startup(): 4       111505   cncc-gnr-003  {16-19,80-83}
+[0] MPI startup(): 5       111506   cncc-gnr-003  {20-23,84-87}
+[0] MPI startup(): 6       111507   cncc-gnr-003  {24-27,88-91}
+[0] MPI startup(): 7       111508   cncc-gnr-003  {28-31,92-95}
+[0] MPI startup(): 8       111509   cncc-gnr-003  {32-35,96-99}
+[0] MPI startup(): 9       111510   cncc-gnr-003  {36-39,100-103}
+[0] MPI startup(): 10      111511   cncc-gnr-003  {40-43,104-107}
+[0] MPI startup(): 11      111512   cncc-gnr-003  {44-47,108-111}
+[0] MPI startup(): 12      111513   cncc-gnr-003  {48-51,112-115}
+[0] MPI startup(): 13      111514   cncc-gnr-003  {52-55,116-119}
+[0] MPI startup(): 14      111515   cncc-gnr-003  {56-59,120-123}
+[0] MPI startup(): 15      111516   cncc-gnr-003  {60-63,124-127}
+[0] MPI startup(): 16      236654   cncc-gnr-004  {0-3,64-67}
+[0] MPI startup(): 17      236655   cncc-gnr-004  {4-7,68-71}
+[0] MPI startup(): 18      236656   cncc-gnr-004  {8-11,72-75}
+[0] MPI startup(): 19      236657   cncc-gnr-004  {12-15,76-79}
+[0] MPI startup(): 20      236658   cncc-gnr-004  {16-19,80-83}
+[0] MPI startup(): 21      236659   cncc-gnr-004  {20-23,84-87}
+[0] MPI startup(): 22      236660   cncc-gnr-004  {24-27,88-91}
+[0] MPI startup(): 23      236661   cncc-gnr-004  {28-31,92-95}
+[0] MPI startup(): 24      236662   cncc-gnr-004  {32-35,96-99}
+[0] MPI startup(): 25      236663   cncc-gnr-004  {36-39,100-103}
+[0] MPI startup(): 26      236664   cncc-gnr-004  {40-43,104-107}
+[0] MPI startup(): 27      236665   cncc-gnr-004  {44-47,108-111}
+[0] MPI startup(): 28      236666   cncc-gnr-004  {48-51,112-115}
+[0] MPI startup(): 29      236667   cncc-gnr-004  {52-55,116-119}
+[0] MPI startup(): 30      236668   cncc-gnr-004  {56-59,120-123}
+[0] MPI startup(): 31      236669   cncc-gnr-004  {60-63,124-127}
+[0] MPI startup(): I_MPI_OFI_LIBRARY_INTERNAL=0
+[0] MPI startup(): I_MPI_ROOT=/opt/intel/oneapi/mpi/2021.18
+[0] MPI startup(): ONEAPI_ROOT=/opt/intel/oneapi
+[0] MPI startup(): I_MPI_MPIRUN=mpirun
+[0] MPI startup(): I_MPI_BIND_WIN_ALLOCATE=localalloc
+[0] MPI startup(): I_MPI_HYDRA_TOPOLIB=ipl2
+[0] MPI startup(): I_MPI_RETURN_WIN_MEM_NUMA=0
+[0] MPI startup(): I_MPI_INTERNAL_MEM_POLICY=default
+[0] MPI startup(): I_MPI_DEBUG=5
+#----------------------------------------------------------------
+#    Intel(R) MPI Benchmarks 2021.11, MPI-1 part
+#----------------------------------------------------------------
+# Date                  : Tue May 12 10:11:42 2026
+# Machine               : x86_64
+# System                : Linux
+# Release               : 5.14.0-611.5.1.el9_7.x86_64
+# Version               : #1 SMP PREEMPT_DYNAMIC Fri Oct 17 14:16:35 EDT 2025
+# MPI Version           : 4.1
+# MPI Thread Environment: 
+
+
+# Calling sequence was: 
+
+# IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000 
+
+# Minimum message length in bytes:   0
+# Maximum message length in bytes:   256
+#
+# MPI_Datatype                   :   MPI_BYTE 
+# MPI_Datatype for reductions    :   MPI_FLOAT 
+# MPI_Op                         :   MPI_SUM  
+# 
+# 
+
+# List of Benchmarks to run:
+
+# Biband
+
+#---------------------------------------------------
+# Benchmarking Biband 
+# #processes = 32 
+#---------------------------------------------------
+       #bytes #repetitions   Mbytes/sec      Msg/sec
+            0         1000         0.00      8445471
+           16         1000        88.22      5514016
+           32         1000       128.06      4001917
+           64         1000       164.34      2567802
+          128         1000       190.96      1491893
+          256         1000       208.18       813202
+
+
+# All processes entering MPI_Finalize
+
+TCP N1 - ITERATION 7 :: Tue May 12 10:12:00 AM EDT 2026 
+mpirun -np 32 -ppn 16 -host cncc-gnr-003,cncc-gnr-004 IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000
+[0] MPI startup(): Intel(R) MPI Library, Version 2021.18.0  Build 20260327 (id: 821f207)
+[0] MPI startup(): Copyright (C) 2003-2026 Intel Corporation.  All rights reserved.
+[0] MPI startup(): library kind: release
+[0] MPI startup(): libfabric version: 2.5.0a1
+[0] MPI startup(): libfabric provider: tcp
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1_x1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp.dat" not found
+[0] MPI startup(): Load tuning file: "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi.dat"
+[0] MPI startup(): Number of NICs:  1 
+[0] MPI startup(): ===== NIC pinning on cncc-gnr-003 =====
+[0] MPI startup(): Rank    Thread id  Pin nic
+[0] MPI startup(): 0       0          eth0
+[0] MPI startup(): 1       0          eth0
+[0] MPI startup(): 2       0          eth0
+[0] MPI startup(): 3       0          eth0
+[0] MPI startup(): 4       0          eth0
+[0] MPI startup(): 5       0          eth0
+[0] MPI startup(): 6       0          eth0
+[0] MPI startup(): 7       0          eth0
+[0] MPI startup(): 8       0          eth0
+[0] MPI startup(): 9       0          eth0
+[0] MPI startup(): 10      0          eth0
+[0] MPI startup(): 11      0          eth0
+[0] MPI startup(): 12      0          eth0
+[0] MPI startup(): 13      0          eth0
+[0] MPI startup(): 14      0          eth0
+[0] MPI startup(): 15      0          eth0
+[0] MPI startup(): ===== CPU pinning =====
+[0] MPI startup(): Rank    Pid      Node name     Pin cpu
+[0] MPI startup(): 0       111546   cncc-gnr-003  {0-3,64-67}
+[0] MPI startup(): 1       111547   cncc-gnr-003  {4-7,68-71}
+[0] MPI startup(): 2       111548   cncc-gnr-003  {8-11,72-75}
+[0] MPI startup(): 3       111549   cncc-gnr-003  {12-15,76-79}
+[0] MPI startup(): 4       111550   cncc-gnr-003  {16-19,80-83}
+[0] MPI startup(): 5       111551   cncc-gnr-003  {20-23,84-87}
+[0] MPI startup(): 6       111552   cncc-gnr-003  {24-27,88-91}
+[0] MPI startup(): 7       111553   cncc-gnr-003  {28-31,92-95}
+[0] MPI startup(): 8       111554   cncc-gnr-003  {32-35,96-99}
+[0] MPI startup(): 9       111555   cncc-gnr-003  {36-39,100-103}
+[0] MPI startup(): 10      111556   cncc-gnr-003  {40-43,104-107}
+[0] MPI startup(): 11      111557   cncc-gnr-003  {44-47,108-111}
+[0] MPI startup(): 12      111558   cncc-gnr-003  {48-51,112-115}
+[0] MPI startup(): 13      111559   cncc-gnr-003  {52-55,116-119}
+[0] MPI startup(): 14      111560   cncc-gnr-003  {56-59,120-123}
+[0] MPI startup(): 15      111561   cncc-gnr-003  {60-63,124-127}
+[0] MPI startup(): 16      237391   cncc-gnr-004  {0-3,64-67}
+[0] MPI startup(): 17      237392   cncc-gnr-004  {4-7,68-71}
+[0] MPI startup(): 18      237393   cncc-gnr-004  {8-11,72-75}
+[0] MPI startup(): 19      237394   cncc-gnr-004  {12-15,76-79}
+[0] MPI startup(): 20      237395   cncc-gnr-004  {16-19,80-83}
+[0] MPI startup(): 21      237396   cncc-gnr-004  {20-23,84-87}
+[0] MPI startup(): 22      237397   cncc-gnr-004  {24-27,88-91}
+[0] MPI startup(): 23      237398   cncc-gnr-004  {28-31,92-95}
+[0] MPI startup(): 24      237399   cncc-gnr-004  {32-35,96-99}
+[0] MPI startup(): 25      237400   cncc-gnr-004  {36-39,100-103}
+[0] MPI startup(): 26      237401   cncc-gnr-004  {40-43,104-107}
+[0] MPI startup(): 27      237402   cncc-gnr-004  {44-47,108-111}
+[0] MPI startup(): 28      237403   cncc-gnr-004  {48-51,112-115}
+[0] MPI startup(): 29      237404   cncc-gnr-004  {52-55,116-119}
+[0] MPI startup(): 30      237405   cncc-gnr-004  {56-59,120-123}
+[0] MPI startup(): 31      237406   cncc-gnr-004  {60-63,124-127}
+[0] MPI startup(): I_MPI_OFI_LIBRARY_INTERNAL=0
+[0] MPI startup(): I_MPI_ROOT=/opt/intel/oneapi/mpi/2021.18
+[0] MPI startup(): ONEAPI_ROOT=/opt/intel/oneapi
+[0] MPI startup(): I_MPI_MPIRUN=mpirun
+[0] MPI startup(): I_MPI_BIND_WIN_ALLOCATE=localalloc
+[0] MPI startup(): I_MPI_HYDRA_TOPOLIB=ipl2
+[0] MPI startup(): I_MPI_RETURN_WIN_MEM_NUMA=0
+[0] MPI startup(): I_MPI_INTERNAL_MEM_POLICY=default
+[0] MPI startup(): I_MPI_DEBUG=5
+#----------------------------------------------------------------
+#    Intel(R) MPI Benchmarks 2021.11, MPI-1 part
+#----------------------------------------------------------------
+# Date                  : Tue May 12 10:12:24 2026
+# Machine               : x86_64
+# System                : Linux
+# Release               : 5.14.0-611.5.1.el9_7.x86_64
+# Version               : #1 SMP PREEMPT_DYNAMIC Fri Oct 17 14:16:35 EDT 2025
+# MPI Version           : 4.1
+# MPI Thread Environment: 
+
+
+# Calling sequence was: 
+
+# IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000 
+
+# Minimum message length in bytes:   0
+# Maximum message length in bytes:   256
+#
+# MPI_Datatype                   :   MPI_BYTE 
+# MPI_Datatype for reductions    :   MPI_FLOAT 
+# MPI_Op                         :   MPI_SUM  
+# 
+# 
+
+# List of Benchmarks to run:
+
+# Biband
+
+#---------------------------------------------------
+# Benchmarking Biband 
+# #processes = 32 
+#---------------------------------------------------
+       #bytes #repetitions   Mbytes/sec      Msg/sec
+            0         1000         0.00      6848707
+           16         1000        88.09      5505691
+           32         1000       128.01      4000305
+           64         1000       163.68      2557521
+          128         1000       190.74      1490131
+          256         1000       208.43       814173
+
+
+# All processes entering MPI_Finalize
+
+TCP N1 - ITERATION 8 :: Tue May 12 10:12:42 AM EDT 2026 
+mpirun -np 32 -ppn 16 -host cncc-gnr-003,cncc-gnr-004 IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000
+[0] MPI startup(): Intel(R) MPI Library, Version 2021.18.0  Build 20260327 (id: 821f207)
+[0] MPI startup(): Copyright (C) 2003-2026 Intel Corporation.  All rights reserved.
+[0] MPI startup(): library kind: release
+[0] MPI startup(): libfabric version: 2.5.0a1
+[0] MPI startup(): libfabric provider: tcp
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1_x1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp.dat" not found
+[0] MPI startup(): Load tuning file: "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi.dat"
+[0] MPI startup(): Number of NICs:  1 
+[0] MPI startup(): ===== NIC pinning on cncc-gnr-003 =====
+[0] MPI startup(): Rank    Thread id  Pin nic
+[0] MPI startup(): 0       0          eth0
+[0] MPI startup(): 1       0          eth0
+[0] MPI startup(): 2       0          eth0
+[0] MPI startup(): 3       0          eth0
+[0] MPI startup(): 4       0          eth0
+[0] MPI startup(): 5       0          eth0
+[0] MPI startup(): 6       0          eth0
+[0] MPI startup(): 7       0          eth0
+[0] MPI startup(): 8       0          eth0
+[0] MPI startup(): 9       0          eth0
+[0] MPI startup(): 10      0          eth0
+[0] MPI startup(): 11      0          eth0
+[0] MPI startup(): 12      0          eth0
+[0] MPI startup(): 13      0          eth0
+[0] MPI startup(): 14      0          eth0
+[0] MPI startup(): 15      0          eth0
+[0] MPI startup(): ===== CPU pinning =====
+[0] MPI startup(): Rank    Pid      Node name     Pin cpu
+[0] MPI startup(): 0       111591   cncc-gnr-003  {0-3,64-67}
+[0] MPI startup(): 1       111592   cncc-gnr-003  {4-7,68-71}
+[0] MPI startup(): 2       111593   cncc-gnr-003  {8-11,72-75}
+[0] MPI startup(): 3       111594   cncc-gnr-003  {12-15,76-79}
+[0] MPI startup(): 4       111595   cncc-gnr-003  {16-19,80-83}
+[0] MPI startup(): 5       111596   cncc-gnr-003  {20-23,84-87}
+[0] MPI startup(): 6       111597   cncc-gnr-003  {24-27,88-91}
+[0] MPI startup(): 7       111598   cncc-gnr-003  {28-31,92-95}
+[0] MPI startup(): 8       111599   cncc-gnr-003  {32-35,96-99}
+[0] MPI startup(): 9       111600   cncc-gnr-003  {36-39,100-103}
+[0] MPI startup(): 10      111601   cncc-gnr-003  {40-43,104-107}
+[0] MPI startup(): 11      111602   cncc-gnr-003  {44-47,108-111}
+[0] MPI startup(): 12      111603   cncc-gnr-003  {48-51,112-115}
+[0] MPI startup(): 13      111604   cncc-gnr-003  {52-55,116-119}
+[0] MPI startup(): 14      111605   cncc-gnr-003  {56-59,120-123}
+[0] MPI startup(): 15      111606   cncc-gnr-003  {60-63,124-127}
+[0] MPI startup(): 16      238122   cncc-gnr-004  {0-3,64-67}
+[0] MPI startup(): 17      238123   cncc-gnr-004  {4-7,68-71}
+[0] MPI startup(): 18      238124   cncc-gnr-004  {8-11,72-75}
+[0] MPI startup(): 19      238125   cncc-gnr-004  {12-15,76-79}
+[0] MPI startup(): 20      238126   cncc-gnr-004  {16-19,80-83}
+[0] MPI startup(): 21      238127   cncc-gnr-004  {20-23,84-87}
+[0] MPI startup(): 22      238128   cncc-gnr-004  {24-27,88-91}
+[0] MPI startup(): 23      238129   cncc-gnr-004  {28-31,92-95}
+[0] MPI startup(): 24      238130   cncc-gnr-004  {32-35,96-99}
+[0] MPI startup(): 25      238131   cncc-gnr-004  {36-39,100-103}
+[0] MPI startup(): 26      238132   cncc-gnr-004  {40-43,104-107}
+[0] MPI startup(): 27      238133   cncc-gnr-004  {44-47,108-111}
+[0] MPI startup(): 28      238134   cncc-gnr-004  {48-51,112-115}
+[0] MPI startup(): 29      238135   cncc-gnr-004  {52-55,116-119}
+[0] MPI startup(): 30      238136   cncc-gnr-004  {56-59,120-123}
+[0] MPI startup(): 31      238137   cncc-gnr-004  {60-63,124-127}
+[0] MPI startup(): I_MPI_OFI_LIBRARY_INTERNAL=0
+[0] MPI startup(): I_MPI_ROOT=/opt/intel/oneapi/mpi/2021.18
+[0] MPI startup(): ONEAPI_ROOT=/opt/intel/oneapi
+[0] MPI startup(): I_MPI_MPIRUN=mpirun
+[0] MPI startup(): I_MPI_BIND_WIN_ALLOCATE=localalloc
+[0] MPI startup(): I_MPI_HYDRA_TOPOLIB=ipl2
+[0] MPI startup(): I_MPI_RETURN_WIN_MEM_NUMA=0
+[0] MPI startup(): I_MPI_INTERNAL_MEM_POLICY=default
+[0] MPI startup(): I_MPI_DEBUG=5
+#----------------------------------------------------------------
+#    Intel(R) MPI Benchmarks 2021.11, MPI-1 part
+#----------------------------------------------------------------
+# Date                  : Tue May 12 10:13:07 2026
+# Machine               : x86_64
+# System                : Linux
+# Release               : 5.14.0-611.5.1.el9_7.x86_64
+# Version               : #1 SMP PREEMPT_DYNAMIC Fri Oct 17 14:16:35 EDT 2025
+# MPI Version           : 4.1
+# MPI Thread Environment: 
+
+
+# Calling sequence was: 
+
+# IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000 
+
+# Minimum message length in bytes:   0
+# Maximum message length in bytes:   256
+#
+# MPI_Datatype                   :   MPI_BYTE 
+# MPI_Datatype for reductions    :   MPI_FLOAT 
+# MPI_Op                         :   MPI_SUM  
+# 
+# 
+
+# List of Benchmarks to run:
+
+# Biband
+
+#---------------------------------------------------
+# Benchmarking Biband 
+# #processes = 32 
+#---------------------------------------------------
+       #bytes #repetitions   Mbytes/sec      Msg/sec
+            0         1000         0.00      8799028
+           16         1000        88.07      5504291
+           32         1000       127.91      3997095
+           64         1000       164.29      2567064
+          128         1000       190.62      1489182
+          256         1000       208.28       813581
+
+
+# All processes entering MPI_Finalize
+
+TCP N1 - ITERATION 9 :: Tue May 12 10:13:25 AM EDT 2026 
+mpirun -np 32 -ppn 16 -host cncc-gnr-003,cncc-gnr-004 IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000
+[0] MPI startup(): Intel(R) MPI Library, Version 2021.18.0  Build 20260327 (id: 821f207)
+[0] MPI startup(): Copyright (C) 2003-2026 Intel Corporation.  All rights reserved.
+[0] MPI startup(): library kind: release
+[0] MPI startup(): libfabric version: 2.5.0a1
+[0] MPI startup(): libfabric provider: tcp
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1_x1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp.dat" not found
+[0] MPI startup(): Load tuning file: "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi.dat"
+[0] MPI startup(): Number of NICs:  1 
+[0] MPI startup(): ===== NIC pinning on cncc-gnr-003 =====
+[0] MPI startup(): Rank    Thread id  Pin nic
+[0] MPI startup(): 0       0          eth0
+[0] MPI startup(): 1       0          eth0
+[0] MPI startup(): 2       0          eth0
+[0] MPI startup(): 3       0          eth0
+[0] MPI startup(): 4       0          eth0
+[0] MPI startup(): 5       0          eth0
+[0] MPI startup(): 6       0          eth0
+[0] MPI startup(): 7       0          eth0
+[0] MPI startup(): 8       0          eth0
+[0] MPI startup(): 9       0          eth0
+[0] MPI startup(): 10      0          eth0
+[0] MPI startup(): 11      0          eth0
+[0] MPI startup(): 12      0          eth0
+[0] MPI startup(): 13      0          eth0
+[0] MPI startup(): 14      0          eth0
+[0] MPI startup(): 15      0          eth0
+[0] MPI startup(): ===== CPU pinning =====
+[0] MPI startup(): Rank    Pid      Node name     Pin cpu
+[0] MPI startup(): 0       111637   cncc-gnr-003  {0-3,64-67}
+[0] MPI startup(): 1       111638   cncc-gnr-003  {4-7,68-71}
+[0] MPI startup(): 2       111639   cncc-gnr-003  {8-11,72-75}
+[0] MPI startup(): 3       111640   cncc-gnr-003  {12-15,76-79}
+[0] MPI startup(): 4       111641   cncc-gnr-003  {16-19,80-83}
+[0] MPI startup(): 5       111642   cncc-gnr-003  {20-23,84-87}
+[0] MPI startup(): 6       111643   cncc-gnr-003  {24-27,88-91}
+[0] MPI startup(): 7       111644   cncc-gnr-003  {28-31,92-95}
+[0] MPI startup(): 8       111645   cncc-gnr-003  {32-35,96-99}
+[0] MPI startup(): 9       111646   cncc-gnr-003  {36-39,100-103}
+[0] MPI startup(): 10      111647   cncc-gnr-003  {40-43,104-107}
+[0] MPI startup(): 11      111648   cncc-gnr-003  {44-47,108-111}
+[0] MPI startup(): 12      111649   cncc-gnr-003  {48-51,112-115}
+[0] MPI startup(): 13      111650   cncc-gnr-003  {52-55,116-119}
+[0] MPI startup(): 14      111651   cncc-gnr-003  {56-59,120-123}
+[0] MPI startup(): 15      111652   cncc-gnr-003  {60-63,124-127}
+[0] MPI startup(): 16      238831   cncc-gnr-004  {0-3,64-67}
+[0] MPI startup(): 17      238832   cncc-gnr-004  {4-7,68-71}
+[0] MPI startup(): 18      238833   cncc-gnr-004  {8-11,72-75}
+[0] MPI startup(): 19      238834   cncc-gnr-004  {12-15,76-79}
+[0] MPI startup(): 20      238835   cncc-gnr-004  {16-19,80-83}
+[0] MPI startup(): 21      238836   cncc-gnr-004  {20-23,84-87}
+[0] MPI startup(): 22      238837   cncc-gnr-004  {24-27,88-91}
+[0] MPI startup(): 23      238838   cncc-gnr-004  {28-31,92-95}
+[0] MPI startup(): 24      238839   cncc-gnr-004  {32-35,96-99}
+[0] MPI startup(): 25      238840   cncc-gnr-004  {36-39,100-103}
+[0] MPI startup(): 26      238841   cncc-gnr-004  {40-43,104-107}
+[0] MPI startup(): 27      238842   cncc-gnr-004  {44-47,108-111}
+[0] MPI startup(): 28      238843   cncc-gnr-004  {48-51,112-115}
+[0] MPI startup(): 29      238844   cncc-gnr-004  {52-55,116-119}
+[0] MPI startup(): 30      238845   cncc-gnr-004  {56-59,120-123}
+[0] MPI startup(): 31      238846   cncc-gnr-004  {60-63,124-127}
+[0] MPI startup(): I_MPI_OFI_LIBRARY_INTERNAL=0
+[0] MPI startup(): I_MPI_ROOT=/opt/intel/oneapi/mpi/2021.18
+[0] MPI startup(): ONEAPI_ROOT=/opt/intel/oneapi
+[0] MPI startup(): I_MPI_MPIRUN=mpirun
+[0] MPI startup(): I_MPI_BIND_WIN_ALLOCATE=localalloc
+[0] MPI startup(): I_MPI_HYDRA_TOPOLIB=ipl2
+[0] MPI startup(): I_MPI_RETURN_WIN_MEM_NUMA=0
+[0] MPI startup(): I_MPI_INTERNAL_MEM_POLICY=default
+[0] MPI startup(): I_MPI_DEBUG=5
+#----------------------------------------------------------------
+#    Intel(R) MPI Benchmarks 2021.11, MPI-1 part
+#----------------------------------------------------------------
+# Date                  : Tue May 12 10:13:49 2026
+# Machine               : x86_64
+# System                : Linux
+# Release               : 5.14.0-611.5.1.el9_7.x86_64
+# Version               : #1 SMP PREEMPT_DYNAMIC Fri Oct 17 14:16:35 EDT 2025
+# MPI Version           : 4.1
+# MPI Thread Environment: 
+
+
+# Calling sequence was: 
+
+# IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000 
+
+# Minimum message length in bytes:   0
+# Maximum message length in bytes:   256
+#
+# MPI_Datatype                   :   MPI_BYTE 
+# MPI_Datatype for reductions    :   MPI_FLOAT 
+# MPI_Op                         :   MPI_SUM  
+# 
+# 
+
+# List of Benchmarks to run:
+
+# Biband
+
+#---------------------------------------------------
+# Benchmarking Biband 
+# #processes = 32 
+#---------------------------------------------------
+       #bytes #repetitions   Mbytes/sec      Msg/sec
+            0         1000         0.00      7842954
+           16         1000        87.75      5484168
+           32         1000       128.04      4001241
+           64         1000       164.28      2566846
+          128         1000       190.97      1491923
+          256         1000       208.27       813541
+
+
+# All processes entering MPI_Finalize
+
+TCP N1 - ITERATION 10 :: Tue May 12 10:14:07 AM EDT 2026 
+mpirun -np 32 -ppn 16 -host cncc-gnr-003,cncc-gnr-004 IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000
+[0] MPI startup(): Intel(R) MPI Library, Version 2021.18.0  Build 20260327 (id: 821f207)
+[0] MPI startup(): Copyright (C) 2003-2026 Intel Corporation.  All rights reserved.
+[0] MPI startup(): library kind: release
+[0] MPI startup(): libfabric version: 2.5.0a1
+[0] MPI startup(): libfabric provider: tcp
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1_x1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp.dat" not found
+[0] MPI startup(): Load tuning file: "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi.dat"
+[0] MPI startup(): Number of NICs:  1 
+[0] MPI startup(): ===== NIC pinning on cncc-gnr-003 =====
+[0] MPI startup(): Rank    Thread id  Pin nic
+[0] MPI startup(): 0       0          eth0
+[0] MPI startup(): 1       0          eth0
+[0] MPI startup(): 2       0          eth0
+[0] MPI startup(): 3       0          eth0
+[0] MPI startup(): 4       0          eth0
+[0] MPI startup(): 5       0          eth0
+[0] MPI startup(): 6       0          eth0
+[0] MPI startup(): 7       0          eth0
+[0] MPI startup(): 8       0          eth0
+[0] MPI startup(): 9       0          eth0
+[0] MPI startup(): 10      0          eth0
+[0] MPI startup(): 11      0          eth0
+[0] MPI startup(): 12      0          eth0
+[0] MPI startup(): 13      0          eth0
+[0] MPI startup(): 14      0          eth0
+[0] MPI startup(): 15      0          eth0
+[0] MPI startup(): ===== CPU pinning =====
+[0] MPI startup(): Rank    Pid      Node name     Pin cpu
+[0] MPI startup(): 0       111813   cncc-gnr-003  {0-3,64-67}
+[0] MPI startup(): 1       111814   cncc-gnr-003  {4-7,68-71}
+[0] MPI startup(): 2       111815   cncc-gnr-003  {8-11,72-75}
+[0] MPI startup(): 3       111816   cncc-gnr-003  {12-15,76-79}
+[0] MPI startup(): 4       111817   cncc-gnr-003  {16-19,80-83}
+[0] MPI startup(): 5       111818   cncc-gnr-003  {20-23,84-87}
+[0] MPI startup(): 6       111819   cncc-gnr-003  {24-27,88-91}
+[0] MPI startup(): 7       111820   cncc-gnr-003  {28-31,92-95}
+[0] MPI startup(): 8       111821   cncc-gnr-003  {32-35,96-99}
+[0] MPI startup(): 9       111822   cncc-gnr-003  {36-39,100-103}
+[0] MPI startup(): 10      111823   cncc-gnr-003  {40-43,104-107}
+[0] MPI startup(): 11      111824   cncc-gnr-003  {44-47,108-111}
+[0] MPI startup(): 12      111825   cncc-gnr-003  {48-51,112-115}
+[0] MPI startup(): 13      111826   cncc-gnr-003  {52-55,116-119}
+[0] MPI startup(): 14      111827   cncc-gnr-003  {56-59,120-123}
+[0] MPI startup(): 15      111828   cncc-gnr-003  {60-63,124-127}
+[0] MPI startup(): 16      239780   cncc-gnr-004  {0-3,64-67}
+[0] MPI startup(): 17      239781   cncc-gnr-004  {4-7,68-71}
+[0] MPI startup(): 18      239782   cncc-gnr-004  {8-11,72-75}
+[0] MPI startup(): 19      239783   cncc-gnr-004  {12-15,76-79}
+[0] MPI startup(): 20      239784   cncc-gnr-004  {16-19,80-83}
+[0] MPI startup(): 21      239785   cncc-gnr-004  {20-23,84-87}
+[0] MPI startup(): 22      239786   cncc-gnr-004  {24-27,88-91}
+[0] MPI startup(): 23      239787   cncc-gnr-004  {28-31,92-95}
+[0] MPI startup(): 24      239788   cncc-gnr-004  {32-35,96-99}
+[0] MPI startup(): 25      239789   cncc-gnr-004  {36-39,100-103}
+[0] MPI startup(): 26      239790   cncc-gnr-004  {40-43,104-107}
+[0] MPI startup(): 27      239791   cncc-gnr-004  {44-47,108-111}
+[0] MPI startup(): 28      239792   cncc-gnr-004  {48-51,112-115}
+[0] MPI startup(): 29      239793   cncc-gnr-004  {52-55,116-119}
+[0] MPI startup(): 30      239794   cncc-gnr-004  {56-59,120-123}
+[0] MPI startup(): 31      239795   cncc-gnr-004  {60-63,124-127}
+[0] MPI startup(): I_MPI_OFI_LIBRARY_INTERNAL=0
+[0] MPI startup(): I_MPI_ROOT=/opt/intel/oneapi/mpi/2021.18
+[0] MPI startup(): ONEAPI_ROOT=/opt/intel/oneapi
+[0] MPI startup(): I_MPI_MPIRUN=mpirun
+[0] MPI startup(): I_MPI_BIND_WIN_ALLOCATE=localalloc
+[0] MPI startup(): I_MPI_HYDRA_TOPOLIB=ipl2
+[0] MPI startup(): I_MPI_RETURN_WIN_MEM_NUMA=0
+[0] MPI startup(): I_MPI_INTERNAL_MEM_POLICY=default
+[0] MPI startup(): I_MPI_DEBUG=5
+#----------------------------------------------------------------
+#    Intel(R) MPI Benchmarks 2021.11, MPI-1 part
+#----------------------------------------------------------------
+# Date                  : Tue May 12 10:14:32 2026
+# Machine               : x86_64
+# System                : Linux
+# Release               : 5.14.0-611.5.1.el9_7.x86_64
+# Version               : #1 SMP PREEMPT_DYNAMIC Fri Oct 17 14:16:35 EDT 2025
+# MPI Version           : 4.1
+# MPI Thread Environment: 
+
+
+# Calling sequence was: 
+
+# IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000 
+
+# Minimum message length in bytes:   0
+# Maximum message length in bytes:   256
+#
+# MPI_Datatype                   :   MPI_BYTE 
+# MPI_Datatype for reductions    :   MPI_FLOAT 
+# MPI_Op                         :   MPI_SUM  
+# 
+# 
+
+# List of Benchmarks to run:
+
+# Biband
+
+#---------------------------------------------------
+# Benchmarking Biband 
+# #processes = 32 
+#---------------------------------------------------
+       #bytes #repetitions   Mbytes/sec      Msg/sec
+            0         1000         0.00      8729992
+           16         1000        75.04      4690242
+           32         1000       118.22      3694506
+           64         1000       162.43      2538047
+          128         1000       190.54      1488589
+          256         1000       208.23       813411
+
+
+# All processes entering MPI_Finalize
+
+TCP N1 - ITERATION 11 :: Tue May 12 10:14:50 AM EDT 2026 
+mpirun -np 32 -ppn 16 -host cncc-gnr-003,cncc-gnr-004 IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000
+[0] MPI startup(): Intel(R) MPI Library, Version 2021.18.0  Build 20260327 (id: 821f207)
+[0] MPI startup(): Copyright (C) 2003-2026 Intel Corporation.  All rights reserved.
+[0] MPI startup(): library kind: release
+[0] MPI startup(): libfabric version: 2.5.0a1
+[0] MPI startup(): libfabric provider: tcp
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1_x1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp.dat" not found
+[0] MPI startup(): Load tuning file: "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi.dat"
+[0] MPI startup(): Number of NICs:  1 
+[0] MPI startup(): ===== NIC pinning on cncc-gnr-003 =====
+[0] MPI startup(): Rank    Thread id  Pin nic
+[0] MPI startup(): 0       0          eth0
+[0] MPI startup(): 1       0          eth0
+[0] MPI startup(): 2       0          eth0
+[0] MPI startup(): 3       0          eth0
+[0] MPI startup(): 4       0          eth0
+[0] MPI startup(): 5       0          eth0
+[0] MPI startup(): 6       0          eth0
+[0] MPI startup(): 7       0          eth0
+[0] MPI startup(): 8       0          eth0
+[0] MPI startup(): 9       0          eth0
+[0] MPI startup(): 10      0          eth0
+[0] MPI startup(): 11      0          eth0
+[0] MPI startup(): 12      0          eth0
+[0] MPI startup(): 13      0          eth0
+[0] MPI startup(): 14      0          eth0
+[0] MPI startup(): 15      0          eth0
+[0] MPI startup(): ===== CPU pinning =====
+[0] MPI startup(): Rank    Pid      Node name     Pin cpu
+[0] MPI startup(): 0       111859   cncc-gnr-003  {0-3,64-67}
+[0] MPI startup(): 1       111860   cncc-gnr-003  {4-7,68-71}
+[0] MPI startup(): 2       111861   cncc-gnr-003  {8-11,72-75}
+[0] MPI startup(): 3       111862   cncc-gnr-003  {12-15,76-79}
+[0] MPI startup(): 4       111863   cncc-gnr-003  {16-19,80-83}
+[0] MPI startup(): 5       111864   cncc-gnr-003  {20-23,84-87}
+[0] MPI startup(): 6       111865   cncc-gnr-003  {24-27,88-91}
+[0] MPI startup(): 7       111866   cncc-gnr-003  {28-31,92-95}
+[0] MPI startup(): 8       111867   cncc-gnr-003  {32-35,96-99}
+[0] MPI startup(): 9       111868   cncc-gnr-003  {36-39,100-103}
+[0] MPI startup(): 10      111869   cncc-gnr-003  {40-43,104-107}
+[0] MPI startup(): 11      111870   cncc-gnr-003  {44-47,108-111}
+[0] MPI startup(): 12      111871   cncc-gnr-003  {48-51,112-115}
+[0] MPI startup(): 13      111872   cncc-gnr-003  {52-55,116-119}
+[0] MPI startup(): 14      111873   cncc-gnr-003  {56-59,120-123}
+[0] MPI startup(): 15      111874   cncc-gnr-003  {60-63,124-127}
+[0] MPI startup(): 16      240491   cncc-gnr-004  {0-3,64-67}
+[0] MPI startup(): 17      240492   cncc-gnr-004  {4-7,68-71}
+[0] MPI startup(): 18      240493   cncc-gnr-004  {8-11,72-75}
+[0] MPI startup(): 19      240494   cncc-gnr-004  {12-15,76-79}
+[0] MPI startup(): 20      240495   cncc-gnr-004  {16-19,80-83}
+[0] MPI startup(): 21      240496   cncc-gnr-004  {20-23,84-87}
+[0] MPI startup(): 22      240497   cncc-gnr-004  {24-27,88-91}
+[0] MPI startup(): 23      240498   cncc-gnr-004  {28-31,92-95}
+[0] MPI startup(): 24      240499   cncc-gnr-004  {32-35,96-99}
+[0] MPI startup(): 25      240500   cncc-gnr-004  {36-39,100-103}
+[0] MPI startup(): 26      240501   cncc-gnr-004  {40-43,104-107}
+[0] MPI startup(): 27      240502   cncc-gnr-004  {44-47,108-111}
+[0] MPI startup(): 28      240503   cncc-gnr-004  {48-51,112-115}
+[0] MPI startup(): 29      240504   cncc-gnr-004  {52-55,116-119}
+[0] MPI startup(): 30      240505   cncc-gnr-004  {56-59,120-123}
+[0] MPI startup(): 31      240506   cncc-gnr-004  {60-63,124-127}
+[0] MPI startup(): I_MPI_OFI_LIBRARY_INTERNAL=0
+[0] MPI startup(): I_MPI_ROOT=/opt/intel/oneapi/mpi/2021.18
+[0] MPI startup(): ONEAPI_ROOT=/opt/intel/oneapi
+[0] MPI startup(): I_MPI_MPIRUN=mpirun
+[0] MPI startup(): I_MPI_BIND_WIN_ALLOCATE=localalloc
+[0] MPI startup(): I_MPI_HYDRA_TOPOLIB=ipl2
+[0] MPI startup(): I_MPI_RETURN_WIN_MEM_NUMA=0
+[0] MPI startup(): I_MPI_INTERNAL_MEM_POLICY=default
+[0] MPI startup(): I_MPI_DEBUG=5
+#----------------------------------------------------------------
+#    Intel(R) MPI Benchmarks 2021.11, MPI-1 part
+#----------------------------------------------------------------
+# Date                  : Tue May 12 10:15:14 2026
+# Machine               : x86_64
+# System                : Linux
+# Release               : 5.14.0-611.5.1.el9_7.x86_64
+# Version               : #1 SMP PREEMPT_DYNAMIC Fri Oct 17 14:16:35 EDT 2025
+# MPI Version           : 4.1
+# MPI Thread Environment: 
+
+
+# Calling sequence was: 
+
+# IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000 
+
+# Minimum message length in bytes:   0
+# Maximum message length in bytes:   256
+#
+# MPI_Datatype                   :   MPI_BYTE 
+# MPI_Datatype for reductions    :   MPI_FLOAT 
+# MPI_Op                         :   MPI_SUM  
+# 
+# 
+
+# List of Benchmarks to run:
+
+# Biband
+
+#---------------------------------------------------
+# Benchmarking Biband 
+# #processes = 32 
+#---------------------------------------------------
+       #bytes #repetitions   Mbytes/sec      Msg/sec
+            0         1000         0.00      8860795
+           16         1000        88.14      5508687
+           32         1000       128.04      4001267
+           64         1000       164.31      2567415
+          128         1000       190.92      1491595
+          256         1000       208.58       814764
+
+
+# All processes entering MPI_Finalize
+
+TCP N1 - ITERATION 12 :: Tue May 12 10:15:32 AM EDT 2026 
+mpirun -np 32 -ppn 16 -host cncc-gnr-003,cncc-gnr-004 IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000
+[0] MPI startup(): Intel(R) MPI Library, Version 2021.18.0  Build 20260327 (id: 821f207)
+[0] MPI startup(): Copyright (C) 2003-2026 Intel Corporation.  All rights reserved.
+[0] MPI startup(): library kind: release
+[0] MPI startup(): libfabric version: 2.5.0a1
+[0] MPI startup(): libfabric provider: tcp
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1_x1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp.dat" not found
+[0] MPI startup(): Load tuning file: "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi.dat"
+[0] MPI startup(): Number of NICs:  1 
+[0] MPI startup(): ===== NIC pinning on cncc-gnr-003 =====
+[0] MPI startup(): Rank    Thread id  Pin nic
+[0] MPI startup(): 0       0          eth0
+[0] MPI startup(): 1       0          eth0
+[0] MPI startup(): 2       0          eth0
+[0] MPI startup(): 3       0          eth0
+[0] MPI startup(): 4       0          eth0
+[0] MPI startup(): 5       0          eth0
+[0] MPI startup(): 6       0          eth0
+[0] MPI startup(): 7       0          eth0
+[0] MPI startup(): 8       0          eth0
+[0] MPI startup(): 9       0          eth0
+[0] MPI startup(): 10      0          eth0
+[0] MPI startup(): 11      0          eth0
+[0] MPI startup(): 12      0          eth0
+[0] MPI startup(): 13      0          eth0
+[0] MPI startup(): 14      0          eth0
+[0] MPI startup(): 15      0          eth0
+[0] MPI startup(): ===== CPU pinning =====
+[0] MPI startup(): Rank    Pid      Node name     Pin cpu
+[0] MPI startup(): 0       111905   cncc-gnr-003  {0-3,64-67}
+[0] MPI startup(): 1       111906   cncc-gnr-003  {4-7,68-71}
+[0] MPI startup(): 2       111907   cncc-gnr-003  {8-11,72-75}
+[0] MPI startup(): 3       111908   cncc-gnr-003  {12-15,76-79}
+[0] MPI startup(): 4       111909   cncc-gnr-003  {16-19,80-83}
+[0] MPI startup(): 5       111910   cncc-gnr-003  {20-23,84-87}
+[0] MPI startup(): 6       111911   cncc-gnr-003  {24-27,88-91}
+[0] MPI startup(): 7       111912   cncc-gnr-003  {28-31,92-95}
+[0] MPI startup(): 8       111913   cncc-gnr-003  {32-35,96-99}
+[0] MPI startup(): 9       111914   cncc-gnr-003  {36-39,100-103}
+[0] MPI startup(): 10      111915   cncc-gnr-003  {40-43,104-107}
+[0] MPI startup(): 11      111916   cncc-gnr-003  {44-47,108-111}
+[0] MPI startup(): 12      111917   cncc-gnr-003  {48-51,112-115}
+[0] MPI startup(): 13      111918   cncc-gnr-003  {52-55,116-119}
+[0] MPI startup(): 14      111919   cncc-gnr-003  {56-59,120-123}
+[0] MPI startup(): 15      111920   cncc-gnr-003  {60-63,124-127}
+[0] MPI startup(): 16      241209   cncc-gnr-004  {0-3,64-67}
+[0] MPI startup(): 17      241210   cncc-gnr-004  {4-7,68-71}
+[0] MPI startup(): 18      241211   cncc-gnr-004  {8-11,72-75}
+[0] MPI startup(): 19      241212   cncc-gnr-004  {12-15,76-79}
+[0] MPI startup(): 20      241213   cncc-gnr-004  {16-19,80-83}
+[0] MPI startup(): 21      241214   cncc-gnr-004  {20-23,84-87}
+[0] MPI startup(): 22      241215   cncc-gnr-004  {24-27,88-91}
+[0] MPI startup(): 23      241216   cncc-gnr-004  {28-31,92-95}
+[0] MPI startup(): 24      241217   cncc-gnr-004  {32-35,96-99}
+[0] MPI startup(): 25      241218   cncc-gnr-004  {36-39,100-103}
+[0] MPI startup(): 26      241219   cncc-gnr-004  {40-43,104-107}
+[0] MPI startup(): 27      241220   cncc-gnr-004  {44-47,108-111}
+[0] MPI startup(): 28      241221   cncc-gnr-004  {48-51,112-115}
+[0] MPI startup(): 29      241222   cncc-gnr-004  {52-55,116-119}
+[0] MPI startup(): 30      241223   cncc-gnr-004  {56-59,120-123}
+[0] MPI startup(): 31      241224   cncc-gnr-004  {60-63,124-127}
+[0] MPI startup(): I_MPI_OFI_LIBRARY_INTERNAL=0
+[0] MPI startup(): I_MPI_ROOT=/opt/intel/oneapi/mpi/2021.18
+[0] MPI startup(): ONEAPI_ROOT=/opt/intel/oneapi
+[0] MPI startup(): I_MPI_MPIRUN=mpirun
+[0] MPI startup(): I_MPI_BIND_WIN_ALLOCATE=localalloc
+[0] MPI startup(): I_MPI_HYDRA_TOPOLIB=ipl2
+[0] MPI startup(): I_MPI_RETURN_WIN_MEM_NUMA=0
+[0] MPI startup(): I_MPI_INTERNAL_MEM_POLICY=default
+[0] MPI startup(): I_MPI_DEBUG=5
+#----------------------------------------------------------------
+#    Intel(R) MPI Benchmarks 2021.11, MPI-1 part
+#----------------------------------------------------------------
+# Date                  : Tue May 12 10:15:57 2026
+# Machine               : x86_64
+# System                : Linux
+# Release               : 5.14.0-611.5.1.el9_7.x86_64
+# Version               : #1 SMP PREEMPT_DYNAMIC Fri Oct 17 14:16:35 EDT 2025
+# MPI Version           : 4.1
+# MPI Thread Environment: 
+
+
+# Calling sequence was: 
+
+# IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000 
+
+# Minimum message length in bytes:   0
+# Maximum message length in bytes:   256
+#
+# MPI_Datatype                   :   MPI_BYTE 
+# MPI_Datatype for reductions    :   MPI_FLOAT 
+# MPI_Op                         :   MPI_SUM  
+# 
+# 
+
+# List of Benchmarks to run:
+
+# Biband
+
+#---------------------------------------------------
+# Benchmarking Biband 
+# #processes = 32 
+#---------------------------------------------------
+       #bytes #repetitions   Mbytes/sec      Msg/sec
+            0         1000         0.00      5499958
+           16         1000        69.84      4365003
+           32         1000       113.79      3555818
+           64         1000       164.36      2568095
+          128         1000       190.90      1491390
+          256         1000       208.79       815572
+
+
+# All processes entering MPI_Finalize
+
+TCP N1 - ITERATION 13 :: Tue May 12 10:16:16 AM EDT 2026 
+mpirun -np 32 -ppn 16 -host cncc-gnr-003,cncc-gnr-004 IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000
+[0] MPI startup(): Intel(R) MPI Library, Version 2021.18.0  Build 20260327 (id: 821f207)
+[0] MPI startup(): Copyright (C) 2003-2026 Intel Corporation.  All rights reserved.
+[0] MPI startup(): library kind: release
+[0] MPI startup(): libfabric version: 2.5.0a1
+[0] MPI startup(): libfabric provider: tcp
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1_x1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp.dat" not found
+[0] MPI startup(): Load tuning file: "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi.dat"
+[0] MPI startup(): Number of NICs:  1 
+[0] MPI startup(): ===== NIC pinning on cncc-gnr-003 =====
+[0] MPI startup(): Rank    Thread id  Pin nic
+[0] MPI startup(): 0       0          eth0
+[0] MPI startup(): 1       0          eth0
+[0] MPI startup(): 2       0          eth0
+[0] MPI startup(): 3       0          eth0
+[0] MPI startup(): 4       0          eth0
+[0] MPI startup(): 5       0          eth0
+[0] MPI startup(): 6       0          eth0
+[0] MPI startup(): 7       0          eth0
+[0] MPI startup(): 8       0          eth0
+[0] MPI startup(): 9       0          eth0
+[0] MPI startup(): 10      0          eth0
+[0] MPI startup(): 11      0          eth0
+[0] MPI startup(): 12      0          eth0
+[0] MPI startup(): 13      0          eth0
+[0] MPI startup(): 14      0          eth0
+[0] MPI startup(): 15      0          eth0
+[0] MPI startup(): ===== CPU pinning =====
+[0] MPI startup(): Rank    Pid      Node name     Pin cpu
+[0] MPI startup(): 0       111954   cncc-gnr-003  {0-3,64-67}
+[0] MPI startup(): 1       111955   cncc-gnr-003  {4-7,68-71}
+[0] MPI startup(): 2       111956   cncc-gnr-003  {8-11,72-75}
+[0] MPI startup(): 3       111957   cncc-gnr-003  {12-15,76-79}
+[0] MPI startup(): 4       111958   cncc-gnr-003  {16-19,80-83}
+[0] MPI startup(): 5       111959   cncc-gnr-003  {20-23,84-87}
+[0] MPI startup(): 6       111960   cncc-gnr-003  {24-27,88-91}
+[0] MPI startup(): 7       111961   cncc-gnr-003  {28-31,92-95}
+[0] MPI startup(): 8       111962   cncc-gnr-003  {32-35,96-99}
+[0] MPI startup(): 9       111963   cncc-gnr-003  {36-39,100-103}
+[0] MPI startup(): 10      111964   cncc-gnr-003  {40-43,104-107}
+[0] MPI startup(): 11      111965   cncc-gnr-003  {44-47,108-111}
+[0] MPI startup(): 12      111966   cncc-gnr-003  {48-51,112-115}
+[0] MPI startup(): 13      111967   cncc-gnr-003  {52-55,116-119}
+[0] MPI startup(): 14      111968   cncc-gnr-003  {56-59,120-123}
+[0] MPI startup(): 15      111969   cncc-gnr-003  {60-63,124-127}
+[0] MPI startup(): 16      241922   cncc-gnr-004  {0-3,64-67}
+[0] MPI startup(): 17      241923   cncc-gnr-004  {4-7,68-71}
+[0] MPI startup(): 18      241924   cncc-gnr-004  {8-11,72-75}
+[0] MPI startup(): 19      241925   cncc-gnr-004  {12-15,76-79}
+[0] MPI startup(): 20      241926   cncc-gnr-004  {16-19,80-83}
+[0] MPI startup(): 21      241927   cncc-gnr-004  {20-23,84-87}
+[0] MPI startup(): 22      241928   cncc-gnr-004  {24-27,88-91}
+[0] MPI startup(): 23      241929   cncc-gnr-004  {28-31,92-95}
+[0] MPI startup(): 24      241930   cncc-gnr-004  {32-35,96-99}
+[0] MPI startup(): 25      241931   cncc-gnr-004  {36-39,100-103}
+[0] MPI startup(): 26      241932   cncc-gnr-004  {40-43,104-107}
+[0] MPI startup(): 27      241933   cncc-gnr-004  {44-47,108-111}
+[0] MPI startup(): 28      241934   cncc-gnr-004  {48-51,112-115}
+[0] MPI startup(): 29      241935   cncc-gnr-004  {52-55,116-119}
+[0] MPI startup(): 30      241936   cncc-gnr-004  {56-59,120-123}
+[0] MPI startup(): 31      241937   cncc-gnr-004  {60-63,124-127}
+[0] MPI startup(): I_MPI_OFI_LIBRARY_INTERNAL=0
+[0] MPI startup(): I_MPI_ROOT=/opt/intel/oneapi/mpi/2021.18
+[0] MPI startup(): ONEAPI_ROOT=/opt/intel/oneapi
+[0] MPI startup(): I_MPI_MPIRUN=mpirun
+[0] MPI startup(): I_MPI_BIND_WIN_ALLOCATE=localalloc
+[0] MPI startup(): I_MPI_HYDRA_TOPOLIB=ipl2
+[0] MPI startup(): I_MPI_RETURN_WIN_MEM_NUMA=0
+[0] MPI startup(): I_MPI_INTERNAL_MEM_POLICY=default
+[0] MPI startup(): I_MPI_DEBUG=5
+#----------------------------------------------------------------
+#    Intel(R) MPI Benchmarks 2021.11, MPI-1 part
+#----------------------------------------------------------------
+# Date                  : Tue May 12 10:16:41 2026
+# Machine               : x86_64
+# System                : Linux
+# Release               : 5.14.0-611.5.1.el9_7.x86_64
+# Version               : #1 SMP PREEMPT_DYNAMIC Fri Oct 17 14:16:35 EDT 2025
+# MPI Version           : 4.1
+# MPI Thread Environment: 
+
+
+# Calling sequence was: 
+
+# IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000 
+
+# Minimum message length in bytes:   0
+# Maximum message length in bytes:   256
+#
+# MPI_Datatype                   :   MPI_BYTE 
+# MPI_Datatype for reductions    :   MPI_FLOAT 
+# MPI_Op                         :   MPI_SUM  
+# 
+# 
+
+# List of Benchmarks to run:
+
+# Biband
+
+#---------------------------------------------------
+# Benchmarking Biband 
+# #processes = 32 
+#---------------------------------------------------
+       #bytes #repetitions   Mbytes/sec      Msg/sec
+            0         1000         0.00      5626846
+           16         1000        87.65      5478074
+           32         1000       124.72      3897603
+           64         1000       164.30      2567150
+          128         1000       190.89      1491363
+          256         1000       208.38       813993
+
+
+# All processes entering MPI_Finalize
+
+TCP N1 - ITERATION 14 :: Tue May 12 10:16:59 AM EDT 2026 
+mpirun -np 32 -ppn 16 -host cncc-gnr-003,cncc-gnr-004 IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000
+[0] MPI startup(): Intel(R) MPI Library, Version 2021.18.0  Build 20260327 (id: 821f207)
+[0] MPI startup(): Copyright (C) 2003-2026 Intel Corporation.  All rights reserved.
+[0] MPI startup(): library kind: release
+[0] MPI startup(): libfabric version: 2.5.0a1
+[0] MPI startup(): libfabric provider: tcp
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1_x1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp.dat" not found
+[0] MPI startup(): Load tuning file: "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi.dat"
+[0] MPI startup(): Number of NICs:  1 
+[0] MPI startup(): ===== NIC pinning on cncc-gnr-003 =====
+[0] MPI startup(): Rank    Thread id  Pin nic
+[0] MPI startup(): 0       0          eth0
+[0] MPI startup(): 1       0          eth0
+[0] MPI startup(): 2       0          eth0
+[0] MPI startup(): 3       0          eth0
+[0] MPI startup(): 4       0          eth0
+[0] MPI startup(): 5       0          eth0
+[0] MPI startup(): 6       0          eth0
+[0] MPI startup(): 7       0          eth0
+[0] MPI startup(): 8       0          eth0
+[0] MPI startup(): 9       0          eth0
+[0] MPI startup(): 10      0          eth0
+[0] MPI startup(): 11      0          eth0
+[0] MPI startup(): 12      0          eth0
+[0] MPI startup(): 13      0          eth0
+[0] MPI startup(): 14      0          eth0
+[0] MPI startup(): 15      0          eth0
+[0] MPI startup(): ===== CPU pinning =====
+[0] MPI startup(): Rank    Pid      Node name     Pin cpu
+[0] MPI startup(): 0       112000   cncc-gnr-003  {0-3,64-67}
+[0] MPI startup(): 1       112001   cncc-gnr-003  {4-7,68-71}
+[0] MPI startup(): 2       112002   cncc-gnr-003  {8-11,72-75}
+[0] MPI startup(): 3       112003   cncc-gnr-003  {12-15,76-79}
+[0] MPI startup(): 4       112004   cncc-gnr-003  {16-19,80-83}
+[0] MPI startup(): 5       112005   cncc-gnr-003  {20-23,84-87}
+[0] MPI startup(): 6       112006   cncc-gnr-003  {24-27,88-91}
+[0] MPI startup(): 7       112007   cncc-gnr-003  {28-31,92-95}
+[0] MPI startup(): 8       112008   cncc-gnr-003  {32-35,96-99}
+[0] MPI startup(): 9       112009   cncc-gnr-003  {36-39,100-103}
+[0] MPI startup(): 10      112010   cncc-gnr-003  {40-43,104-107}
+[0] MPI startup(): 11      112011   cncc-gnr-003  {44-47,108-111}
+[0] MPI startup(): 12      112012   cncc-gnr-003  {48-51,112-115}
+[0] MPI startup(): 13      112013   cncc-gnr-003  {52-55,116-119}
+[0] MPI startup(): 14      112014   cncc-gnr-003  {56-59,120-123}
+[0] MPI startup(): 15      112015   cncc-gnr-003  {60-63,124-127}
+[0] MPI startup(): 16      242651   cncc-gnr-004  {0-3,64-67}
+[0] MPI startup(): 17      242652   cncc-gnr-004  {4-7,68-71}
+[0] MPI startup(): 18      242653   cncc-gnr-004  {8-11,72-75}
+[0] MPI startup(): 19      242654   cncc-gnr-004  {12-15,76-79}
+[0] MPI startup(): 20      242655   cncc-gnr-004  {16-19,80-83}
+[0] MPI startup(): 21      242656   cncc-gnr-004  {20-23,84-87}
+[0] MPI startup(): 22      242657   cncc-gnr-004  {24-27,88-91}
+[0] MPI startup(): 23      242658   cncc-gnr-004  {28-31,92-95}
+[0] MPI startup(): 24      242659   cncc-gnr-004  {32-35,96-99}
+[0] MPI startup(): 25      242660   cncc-gnr-004  {36-39,100-103}
+[0] MPI startup(): 26      242661   cncc-gnr-004  {40-43,104-107}
+[0] MPI startup(): 27      242662   cncc-gnr-004  {44-47,108-111}
+[0] MPI startup(): 28      242663   cncc-gnr-004  {48-51,112-115}
+[0] MPI startup(): 29      242664   cncc-gnr-004  {52-55,116-119}
+[0] MPI startup(): 30      242665   cncc-gnr-004  {56-59,120-123}
+[0] MPI startup(): 31      242666   cncc-gnr-004  {60-63,124-127}
+[0] MPI startup(): I_MPI_OFI_LIBRARY_INTERNAL=0
+[0] MPI startup(): I_MPI_ROOT=/opt/intel/oneapi/mpi/2021.18
+[0] MPI startup(): ONEAPI_ROOT=/opt/intel/oneapi
+[0] MPI startup(): I_MPI_MPIRUN=mpirun
+[0] MPI startup(): I_MPI_BIND_WIN_ALLOCATE=localalloc
+[0] MPI startup(): I_MPI_HYDRA_TOPOLIB=ipl2
+[0] MPI startup(): I_MPI_RETURN_WIN_MEM_NUMA=0
+[0] MPI startup(): I_MPI_INTERNAL_MEM_POLICY=default
+[0] MPI startup(): I_MPI_DEBUG=5
+#----------------------------------------------------------------
+#    Intel(R) MPI Benchmarks 2021.11, MPI-1 part
+#----------------------------------------------------------------
+# Date                  : Tue May 12 10:17:24 2026
+# Machine               : x86_64
+# System                : Linux
+# Release               : 5.14.0-611.5.1.el9_7.x86_64
+# Version               : #1 SMP PREEMPT_DYNAMIC Fri Oct 17 14:16:35 EDT 2025
+# MPI Version           : 4.1
+# MPI Thread Environment: 
+
+
+# Calling sequence was: 
+
+# IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000 
+
+# Minimum message length in bytes:   0
+# Maximum message length in bytes:   256
+#
+# MPI_Datatype                   :   MPI_BYTE 
+# MPI_Datatype for reductions    :   MPI_FLOAT 
+# MPI_Op                         :   MPI_SUM  
+# 
+# 
+
+# List of Benchmarks to run:
+
+# Biband
+
+#---------------------------------------------------
+# Benchmarking Biband 
+# #processes = 32 
+#---------------------------------------------------
+       #bytes #repetitions   Mbytes/sec      Msg/sec
+            0         1000         0.00      8877864
+           16         1000        88.18      5511212
+           32         1000       127.99      3999588
+           64         1000       164.28      2566904
+          128         1000       190.56      1488755
+          256         1000       208.16       813121
+
+
+# All processes entering MPI_Finalize
+
+TCP N1 - ITERATION 15 :: Tue May 12 10:17:42 AM EDT 2026 
+mpirun -np 32 -ppn 16 -host cncc-gnr-003,cncc-gnr-004 IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000
+[0] MPI startup(): Intel(R) MPI Library, Version 2021.18.0  Build 20260327 (id: 821f207)
+[0] MPI startup(): Copyright (C) 2003-2026 Intel Corporation.  All rights reserved.
+[0] MPI startup(): library kind: release
+[0] MPI startup(): libfabric version: 2.5.0a1
+[0] MPI startup(): libfabric provider: tcp
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1_x1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp.dat" not found
+[0] MPI startup(): Load tuning file: "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi.dat"
+[0] MPI startup(): Number of NICs:  1 
+[0] MPI startup(): ===== NIC pinning on cncc-gnr-003 =====
+[0] MPI startup(): Rank    Thread id  Pin nic
+[0] MPI startup(): 0       0          eth0
+[0] MPI startup(): 1       0          eth0
+[0] MPI startup(): 2       0          eth0
+[0] MPI startup(): 3       0          eth0
+[0] MPI startup(): 4       0          eth0
+[0] MPI startup(): 5       0          eth0
+[0] MPI startup(): 6       0          eth0
+[0] MPI startup(): 7       0          eth0
+[0] MPI startup(): 8       0          eth0
+[0] MPI startup(): 9       0          eth0
+[0] MPI startup(): 10      0          eth0
+[0] MPI startup(): 11      0          eth0
+[0] MPI startup(): 12      0          eth0
+[0] MPI startup(): 13      0          eth0
+[0] MPI startup(): 14      0          eth0
+[0] MPI startup(): 15      0          eth0
+[0] MPI startup(): ===== CPU pinning =====
+[0] MPI startup(): Rank    Pid      Node name     Pin cpu
+[0] MPI startup(): 0       112045   cncc-gnr-003  {0-3,64-67}
+[0] MPI startup(): 1       112046   cncc-gnr-003  {4-7,68-71}
+[0] MPI startup(): 2       112047   cncc-gnr-003  {8-11,72-75}
+[0] MPI startup(): 3       112048   cncc-gnr-003  {12-15,76-79}
+[0] MPI startup(): 4       112049   cncc-gnr-003  {16-19,80-83}
+[0] MPI startup(): 5       112050   cncc-gnr-003  {20-23,84-87}
+[0] MPI startup(): 6       112051   cncc-gnr-003  {24-27,88-91}
+[0] MPI startup(): 7       112052   cncc-gnr-003  {28-31,92-95}
+[0] MPI startup(): 8       112053   cncc-gnr-003  {32-35,96-99}
+[0] MPI startup(): 9       112054   cncc-gnr-003  {36-39,100-103}
+[0] MPI startup(): 10      112055   cncc-gnr-003  {40-43,104-107}
+[0] MPI startup(): 11      112056   cncc-gnr-003  {44-47,108-111}
+[0] MPI startup(): 12      112057   cncc-gnr-003  {48-51,112-115}
+[0] MPI startup(): 13      112058   cncc-gnr-003  {52-55,116-119}
+[0] MPI startup(): 14      112059   cncc-gnr-003  {56-59,120-123}
+[0] MPI startup(): 15      112060   cncc-gnr-003  {60-63,124-127}
+[0] MPI startup(): 16      243365   cncc-gnr-004  {0-3,64-67}
+[0] MPI startup(): 17      243366   cncc-gnr-004  {4-7,68-71}
+[0] MPI startup(): 18      243367   cncc-gnr-004  {8-11,72-75}
+[0] MPI startup(): 19      243368   cncc-gnr-004  {12-15,76-79}
+[0] MPI startup(): 20      243369   cncc-gnr-004  {16-19,80-83}
+[0] MPI startup(): 21      243370   cncc-gnr-004  {20-23,84-87}
+[0] MPI startup(): 22      243371   cncc-gnr-004  {24-27,88-91}
+[0] MPI startup(): 23      243372   cncc-gnr-004  {28-31,92-95}
+[0] MPI startup(): 24      243373   cncc-gnr-004  {32-35,96-99}
+[0] MPI startup(): 25      243374   cncc-gnr-004  {36-39,100-103}
+[0] MPI startup(): 26      243375   cncc-gnr-004  {40-43,104-107}
+[0] MPI startup(): 27      243376   cncc-gnr-004  {44-47,108-111}
+[0] MPI startup(): 28      243377   cncc-gnr-004  {48-51,112-115}
+[0] MPI startup(): 29      243378   cncc-gnr-004  {52-55,116-119}
+[0] MPI startup(): 30      243379   cncc-gnr-004  {56-59,120-123}
+[0] MPI startup(): 31      243380   cncc-gnr-004  {60-63,124-127}
+[0] MPI startup(): I_MPI_OFI_LIBRARY_INTERNAL=0
+[0] MPI startup(): I_MPI_ROOT=/opt/intel/oneapi/mpi/2021.18
+[0] MPI startup(): ONEAPI_ROOT=/opt/intel/oneapi
+[0] MPI startup(): I_MPI_MPIRUN=mpirun
+[0] MPI startup(): I_MPI_BIND_WIN_ALLOCATE=localalloc
+[0] MPI startup(): I_MPI_HYDRA_TOPOLIB=ipl2
+[0] MPI startup(): I_MPI_RETURN_WIN_MEM_NUMA=0
+[0] MPI startup(): I_MPI_INTERNAL_MEM_POLICY=default
+[0] MPI startup(): I_MPI_DEBUG=5
+#----------------------------------------------------------------
+#    Intel(R) MPI Benchmarks 2021.11, MPI-1 part
+#----------------------------------------------------------------
+# Date                  : Tue May 12 10:18:06 2026
+# Machine               : x86_64
+# System                : Linux
+# Release               : 5.14.0-611.5.1.el9_7.x86_64
+# Version               : #1 SMP PREEMPT_DYNAMIC Fri Oct 17 14:16:35 EDT 2025
+# MPI Version           : 4.1
+# MPI Thread Environment: 
+
+
+# Calling sequence was: 
+
+# IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000 
+
+# Minimum message length in bytes:   0
+# Maximum message length in bytes:   256
+#
+# MPI_Datatype                   :   MPI_BYTE 
+# MPI_Datatype for reductions    :   MPI_FLOAT 
+# MPI_Op                         :   MPI_SUM  
+# 
+# 
+
+# List of Benchmarks to run:
+
+# Biband
+
+#---------------------------------------------------
+# Benchmarking Biband 
+# #processes = 32 
+#---------------------------------------------------
+       #bytes #repetitions   Mbytes/sec      Msg/sec
+            0         1000         0.00      8892200
+           16         1000        88.23      5514628
+           32         1000       121.77      3805270
+           64         1000       163.86      2560315
+          128         1000       190.72      1490034
+          256         1000       208.16       813144
+
+
+# All processes entering MPI_Finalize
+
+TCP N1 - ITERATION 16 :: Tue May 12 10:18:24 AM EDT 2026 
+mpirun -np 32 -ppn 16 -host cncc-gnr-003,cncc-gnr-004 IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000
+[0] MPI startup(): Intel(R) MPI Library, Version 2021.18.0  Build 20260327 (id: 821f207)
+[0] MPI startup(): Copyright (C) 2003-2026 Intel Corporation.  All rights reserved.
+[0] MPI startup(): library kind: release
+[0] MPI startup(): libfabric version: 2.5.0a1
+[0] MPI startup(): libfabric provider: tcp
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1_x1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp.dat" not found
+[0] MPI startup(): Load tuning file: "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi.dat"
+[0] MPI startup(): Number of NICs:  1 
+[0] MPI startup(): ===== NIC pinning on cncc-gnr-003 =====
+[0] MPI startup(): Rank    Thread id  Pin nic
+[0] MPI startup(): 0       0          eth0
+[0] MPI startup(): 1       0          eth0
+[0] MPI startup(): 2       0          eth0
+[0] MPI startup(): 3       0          eth0
+[0] MPI startup(): 4       0          eth0
+[0] MPI startup(): 5       0          eth0
+[0] MPI startup(): 6       0          eth0
+[0] MPI startup(): 7       0          eth0
+[0] MPI startup(): 8       0          eth0
+[0] MPI startup(): 9       0          eth0
+[0] MPI startup(): 10      0          eth0
+[0] MPI startup(): 11      0          eth0
+[0] MPI startup(): 12      0          eth0
+[0] MPI startup(): 13      0          eth0
+[0] MPI startup(): 14      0          eth0
+[0] MPI startup(): 15      0          eth0
+[0] MPI startup(): ===== CPU pinning =====
+[0] MPI startup(): Rank    Pid      Node name     Pin cpu
+[0] MPI startup(): 0       112090   cncc-gnr-003  {0-3,64-67}
+[0] MPI startup(): 1       112091   cncc-gnr-003  {4-7,68-71}
+[0] MPI startup(): 2       112092   cncc-gnr-003  {8-11,72-75}
+[0] MPI startup(): 3       112093   cncc-gnr-003  {12-15,76-79}
+[0] MPI startup(): 4       112094   cncc-gnr-003  {16-19,80-83}
+[0] MPI startup(): 5       112095   cncc-gnr-003  {20-23,84-87}
+[0] MPI startup(): 6       112096   cncc-gnr-003  {24-27,88-91}
+[0] MPI startup(): 7       112097   cncc-gnr-003  {28-31,92-95}
+[0] MPI startup(): 8       112098   cncc-gnr-003  {32-35,96-99}
+[0] MPI startup(): 9       112099   cncc-gnr-003  {36-39,100-103}
+[0] MPI startup(): 10      112100   cncc-gnr-003  {40-43,104-107}
+[0] MPI startup(): 11      112101   cncc-gnr-003  {44-47,108-111}
+[0] MPI startup(): 12      112102   cncc-gnr-003  {48-51,112-115}
+[0] MPI startup(): 13      112103   cncc-gnr-003  {52-55,116-119}
+[0] MPI startup(): 14      112104   cncc-gnr-003  {56-59,120-123}
+[0] MPI startup(): 15      112105   cncc-gnr-003  {60-63,124-127}
+[0] MPI startup(): 16      244076   cncc-gnr-004  {0-3,64-67}
+[0] MPI startup(): 17      244077   cncc-gnr-004  {4-7,68-71}
+[0] MPI startup(): 18      244078   cncc-gnr-004  {8-11,72-75}
+[0] MPI startup(): 19      244079   cncc-gnr-004  {12-15,76-79}
+[0] MPI startup(): 20      244080   cncc-gnr-004  {16-19,80-83}
+[0] MPI startup(): 21      244081   cncc-gnr-004  {20-23,84-87}
+[0] MPI startup(): 22      244082   cncc-gnr-004  {24-27,88-91}
+[0] MPI startup(): 23      244083   cncc-gnr-004  {28-31,92-95}
+[0] MPI startup(): 24      244084   cncc-gnr-004  {32-35,96-99}
+[0] MPI startup(): 25      244085   cncc-gnr-004  {36-39,100-103}
+[0] MPI startup(): 26      244086   cncc-gnr-004  {40-43,104-107}
+[0] MPI startup(): 27      244087   cncc-gnr-004  {44-47,108-111}
+[0] MPI startup(): 28      244088   cncc-gnr-004  {48-51,112-115}
+[0] MPI startup(): 29      244089   cncc-gnr-004  {52-55,116-119}
+[0] MPI startup(): 30      244090   cncc-gnr-004  {56-59,120-123}
+[0] MPI startup(): 31      244091   cncc-gnr-004  {60-63,124-127}
+[0] MPI startup(): I_MPI_OFI_LIBRARY_INTERNAL=0
+[0] MPI startup(): I_MPI_ROOT=/opt/intel/oneapi/mpi/2021.18
+[0] MPI startup(): ONEAPI_ROOT=/opt/intel/oneapi
+[0] MPI startup(): I_MPI_MPIRUN=mpirun
+[0] MPI startup(): I_MPI_BIND_WIN_ALLOCATE=localalloc
+[0] MPI startup(): I_MPI_HYDRA_TOPOLIB=ipl2
+[0] MPI startup(): I_MPI_RETURN_WIN_MEM_NUMA=0
+[0] MPI startup(): I_MPI_INTERNAL_MEM_POLICY=default
+[0] MPI startup(): I_MPI_DEBUG=5
+#----------------------------------------------------------------
+#    Intel(R) MPI Benchmarks 2021.11, MPI-1 part
+#----------------------------------------------------------------
+# Date                  : Tue May 12 10:18:49 2026
+# Machine               : x86_64
+# System                : Linux
+# Release               : 5.14.0-611.5.1.el9_7.x86_64
+# Version               : #1 SMP PREEMPT_DYNAMIC Fri Oct 17 14:16:35 EDT 2025
+# MPI Version           : 4.1
+# MPI Thread Environment: 
+
+
+# Calling sequence was: 
+
+# IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000 
+
+# Minimum message length in bytes:   0
+# Maximum message length in bytes:   256
+#
+# MPI_Datatype                   :   MPI_BYTE 
+# MPI_Datatype for reductions    :   MPI_FLOAT 
+# MPI_Op                         :   MPI_SUM  
+# 
+# 
+
+# List of Benchmarks to run:
+
+# Biband
+
+#---------------------------------------------------
+# Benchmarking Biband 
+# #processes = 32 
+#---------------------------------------------------
+       #bytes #repetitions   Mbytes/sec      Msg/sec
+            0         1000         0.00      6559906
+           16         1000        87.17      5448126
+           32         1000       127.11      3972291
+           64         1000       152.45      2382001
+          128         1000       189.42      1479846
+          256         1000       208.14       813049
+
+
+# All processes entering MPI_Finalize
+
+TCP N1 - ITERATION 17 :: Tue May 12 10:19:06 AM EDT 2026 
+mpirun -np 32 -ppn 16 -host cncc-gnr-003,cncc-gnr-004 IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000
+[0] MPI startup(): Intel(R) MPI Library, Version 2021.18.0  Build 20260327 (id: 821f207)
+[0] MPI startup(): Copyright (C) 2003-2026 Intel Corporation.  All rights reserved.
+[0] MPI startup(): library kind: release
+[0] MPI startup(): libfabric version: 2.5.0a1
+[0] MPI startup(): libfabric provider: tcp
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1_x1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp.dat" not found
+[0] MPI startup(): Load tuning file: "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi.dat"
+[0] MPI startup(): Number of NICs:  1 
+[0] MPI startup(): ===== NIC pinning on cncc-gnr-003 =====
+[0] MPI startup(): Rank    Thread id  Pin nic
+[0] MPI startup(): 0       0          eth0
+[0] MPI startup(): 1       0          eth0
+[0] MPI startup(): 2       0          eth0
+[0] MPI startup(): 3       0          eth0
+[0] MPI startup(): 4       0          eth0
+[0] MPI startup(): 5       0          eth0
+[0] MPI startup(): 6       0          eth0
+[0] MPI startup(): 7       0          eth0
+[0] MPI startup(): 8       0          eth0
+[0] MPI startup(): 9       0          eth0
+[0] MPI startup(): 10      0          eth0
+[0] MPI startup(): 11      0          eth0
+[0] MPI startup(): 12      0          eth0
+[0] MPI startup(): 13      0          eth0
+[0] MPI startup(): 14      0          eth0
+[0] MPI startup(): 15      0          eth0
+[0] MPI startup(): ===== CPU pinning =====
+[0] MPI startup(): Rank    Pid      Node name     Pin cpu
+[0] MPI startup(): 0       112135   cncc-gnr-003  {0-3,64-67}
+[0] MPI startup(): 1       112136   cncc-gnr-003  {4-7,68-71}
+[0] MPI startup(): 2       112137   cncc-gnr-003  {8-11,72-75}
+[0] MPI startup(): 3       112138   cncc-gnr-003  {12-15,76-79}
+[0] MPI startup(): 4       112139   cncc-gnr-003  {16-19,80-83}
+[0] MPI startup(): 5       112140   cncc-gnr-003  {20-23,84-87}
+[0] MPI startup(): 6       112141   cncc-gnr-003  {24-27,88-91}
+[0] MPI startup(): 7       112142   cncc-gnr-003  {28-31,92-95}
+[0] MPI startup(): 8       112143   cncc-gnr-003  {32-35,96-99}
+[0] MPI startup(): 9       112144   cncc-gnr-003  {36-39,100-103}
+[0] MPI startup(): 10      112145   cncc-gnr-003  {40-43,104-107}
+[0] MPI startup(): 11      112146   cncc-gnr-003  {44-47,108-111}
+[0] MPI startup(): 12      112147   cncc-gnr-003  {48-51,112-115}
+[0] MPI startup(): 13      112148   cncc-gnr-003  {52-55,116-119}
+[0] MPI startup(): 14      112149   cncc-gnr-003  {56-59,120-123}
+[0] MPI startup(): 15      112150   cncc-gnr-003  {60-63,124-127}
+[0] MPI startup(): 16      244770   cncc-gnr-004  {0-3,64-67}
+[0] MPI startup(): 17      244771   cncc-gnr-004  {4-7,68-71}
+[0] MPI startup(): 18      244772   cncc-gnr-004  {8-11,72-75}
+[0] MPI startup(): 19      244773   cncc-gnr-004  {12-15,76-79}
+[0] MPI startup(): 20      244774   cncc-gnr-004  {16-19,80-83}
+[0] MPI startup(): 21      244775   cncc-gnr-004  {20-23,84-87}
+[0] MPI startup(): 22      244776   cncc-gnr-004  {24-27,88-91}
+[0] MPI startup(): 23      244777   cncc-gnr-004  {28-31,92-95}
+[0] MPI startup(): 24      244778   cncc-gnr-004  {32-35,96-99}
+[0] MPI startup(): 25      244779   cncc-gnr-004  {36-39,100-103}
+[0] MPI startup(): 26      244780   cncc-gnr-004  {40-43,104-107}
+[0] MPI startup(): 27      244781   cncc-gnr-004  {44-47,108-111}
+[0] MPI startup(): 28      244782   cncc-gnr-004  {48-51,112-115}
+[0] MPI startup(): 29      244783   cncc-gnr-004  {52-55,116-119}
+[0] MPI startup(): 30      244784   cncc-gnr-004  {56-59,120-123}
+[0] MPI startup(): 31      244785   cncc-gnr-004  {60-63,124-127}
+[0] MPI startup(): I_MPI_OFI_LIBRARY_INTERNAL=0
+[0] MPI startup(): I_MPI_ROOT=/opt/intel/oneapi/mpi/2021.18
+[0] MPI startup(): ONEAPI_ROOT=/opt/intel/oneapi
+[0] MPI startup(): I_MPI_MPIRUN=mpirun
+[0] MPI startup(): I_MPI_BIND_WIN_ALLOCATE=localalloc
+[0] MPI startup(): I_MPI_HYDRA_TOPOLIB=ipl2
+[0] MPI startup(): I_MPI_RETURN_WIN_MEM_NUMA=0
+[0] MPI startup(): I_MPI_INTERNAL_MEM_POLICY=default
+[0] MPI startup(): I_MPI_DEBUG=5
+#----------------------------------------------------------------
+#    Intel(R) MPI Benchmarks 2021.11, MPI-1 part
+#----------------------------------------------------------------
+# Date                  : Tue May 12 10:19:31 2026
+# Machine               : x86_64
+# System                : Linux
+# Release               : 5.14.0-611.5.1.el9_7.x86_64
+# Version               : #1 SMP PREEMPT_DYNAMIC Fri Oct 17 14:16:35 EDT 2025
+# MPI Version           : 4.1
+# MPI Thread Environment: 
+
+
+# Calling sequence was: 
+
+# IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000 
+
+# Minimum message length in bytes:   0
+# Maximum message length in bytes:   256
+#
+# MPI_Datatype                   :   MPI_BYTE 
+# MPI_Datatype for reductions    :   MPI_FLOAT 
+# MPI_Op                         :   MPI_SUM  
+# 
+# 
+
+# List of Benchmarks to run:
+
+# Biband
+
+#---------------------------------------------------
+# Benchmarking Biband 
+# #processes = 32 
+#---------------------------------------------------
+       #bytes #repetitions   Mbytes/sec      Msg/sec
+            0         1000         0.00      5289626
+           16         1000        88.15      5509625
+           32         1000       128.02      4000755
+           64         1000       164.33      2567584
+          128         1000       190.98      1492011
+          256         1000       208.48       814373
+
+
+# All processes entering MPI_Finalize
+
+TCP N1 - ITERATION 18 :: Tue May 12 10:19:50 AM EDT 2026 
+mpirun -np 32 -ppn 16 -host cncc-gnr-003,cncc-gnr-004 IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000
+[0] MPI startup(): Intel(R) MPI Library, Version 2021.18.0  Build 20260327 (id: 821f207)
+[0] MPI startup(): Copyright (C) 2003-2026 Intel Corporation.  All rights reserved.
+[0] MPI startup(): library kind: release
+[0] MPI startup(): libfabric version: 2.5.0a1
+[0] MPI startup(): libfabric provider: tcp
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1_x1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp.dat" not found
+[0] MPI startup(): Load tuning file: "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi.dat"
+[0] MPI startup(): Number of NICs:  1 
+[0] MPI startup(): ===== NIC pinning on cncc-gnr-003 =====
+[0] MPI startup(): Rank    Thread id  Pin nic
+[0] MPI startup(): 0       0          eth0
+[0] MPI startup(): 1       0          eth0
+[0] MPI startup(): 2       0          eth0
+[0] MPI startup(): 3       0          eth0
+[0] MPI startup(): 4       0          eth0
+[0] MPI startup(): 5       0          eth0
+[0] MPI startup(): 6       0          eth0
+[0] MPI startup(): 7       0          eth0
+[0] MPI startup(): 8       0          eth0
+[0] MPI startup(): 9       0          eth0
+[0] MPI startup(): 10      0          eth0
+[0] MPI startup(): 11      0          eth0
+[0] MPI startup(): 12      0          eth0
+[0] MPI startup(): 13      0          eth0
+[0] MPI startup(): 14      0          eth0
+[0] MPI startup(): 15      0          eth0
+[0] MPI startup(): ===== CPU pinning =====
+[0] MPI startup(): Rank    Pid      Node name     Pin cpu
+[0] MPI startup(): 0       112181   cncc-gnr-003  {0-3,64-67}
+[0] MPI startup(): 1       112182   cncc-gnr-003  {4-7,68-71}
+[0] MPI startup(): 2       112183   cncc-gnr-003  {8-11,72-75}
+[0] MPI startup(): 3       112184   cncc-gnr-003  {12-15,76-79}
+[0] MPI startup(): 4       112185   cncc-gnr-003  {16-19,80-83}
+[0] MPI startup(): 5       112186   cncc-gnr-003  {20-23,84-87}
+[0] MPI startup(): 6       112187   cncc-gnr-003  {24-27,88-91}
+[0] MPI startup(): 7       112188   cncc-gnr-003  {28-31,92-95}
+[0] MPI startup(): 8       112189   cncc-gnr-003  {32-35,96-99}
+[0] MPI startup(): 9       112190   cncc-gnr-003  {36-39,100-103}
+[0] MPI startup(): 10      112191   cncc-gnr-003  {40-43,104-107}
+[0] MPI startup(): 11      112192   cncc-gnr-003  {44-47,108-111}
+[0] MPI startup(): 12      112193   cncc-gnr-003  {48-51,112-115}
+[0] MPI startup(): 13      112194   cncc-gnr-003  {52-55,116-119}
+[0] MPI startup(): 14      112195   cncc-gnr-003  {56-59,120-123}
+[0] MPI startup(): 15      112196   cncc-gnr-003  {60-63,124-127}
+[0] MPI startup(): 16      245481   cncc-gnr-004  {0-3,64-67}
+[0] MPI startup(): 17      245482   cncc-gnr-004  {4-7,68-71}
+[0] MPI startup(): 18      245483   cncc-gnr-004  {8-11,72-75}
+[0] MPI startup(): 19      245484   cncc-gnr-004  {12-15,76-79}
+[0] MPI startup(): 20      245485   cncc-gnr-004  {16-19,80-83}
+[0] MPI startup(): 21      245486   cncc-gnr-004  {20-23,84-87}
+[0] MPI startup(): 22      245487   cncc-gnr-004  {24-27,88-91}
+[0] MPI startup(): 23      245488   cncc-gnr-004  {28-31,92-95}
+[0] MPI startup(): 24      245489   cncc-gnr-004  {32-35,96-99}
+[0] MPI startup(): 25      245490   cncc-gnr-004  {36-39,100-103}
+[0] MPI startup(): 26      245491   cncc-gnr-004  {40-43,104-107}
+[0] MPI startup(): 27      245492   cncc-gnr-004  {44-47,108-111}
+[0] MPI startup(): 28      245493   cncc-gnr-004  {48-51,112-115}
+[0] MPI startup(): 29      245494   cncc-gnr-004  {52-55,116-119}
+[0] MPI startup(): 30      245495   cncc-gnr-004  {56-59,120-123}
+[0] MPI startup(): 31      245496   cncc-gnr-004  {60-63,124-127}
+[0] MPI startup(): I_MPI_OFI_LIBRARY_INTERNAL=0
+[0] MPI startup(): I_MPI_ROOT=/opt/intel/oneapi/mpi/2021.18
+[0] MPI startup(): ONEAPI_ROOT=/opt/intel/oneapi
+[0] MPI startup(): I_MPI_MPIRUN=mpirun
+[0] MPI startup(): I_MPI_BIND_WIN_ALLOCATE=localalloc
+[0] MPI startup(): I_MPI_HYDRA_TOPOLIB=ipl2
+[0] MPI startup(): I_MPI_RETURN_WIN_MEM_NUMA=0
+[0] MPI startup(): I_MPI_INTERNAL_MEM_POLICY=default
+[0] MPI startup(): I_MPI_DEBUG=5
+#----------------------------------------------------------------
+#    Intel(R) MPI Benchmarks 2021.11, MPI-1 part
+#----------------------------------------------------------------
+# Date                  : Tue May 12 10:20:14 2026
+# Machine               : x86_64
+# System                : Linux
+# Release               : 5.14.0-611.5.1.el9_7.x86_64
+# Version               : #1 SMP PREEMPT_DYNAMIC Fri Oct 17 14:16:35 EDT 2025
+# MPI Version           : 4.1
+# MPI Thread Environment: 
+
+
+# Calling sequence was: 
+
+# IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000 
+
+# Minimum message length in bytes:   0
+# Maximum message length in bytes:   256
+#
+# MPI_Datatype                   :   MPI_BYTE 
+# MPI_Datatype for reductions    :   MPI_FLOAT 
+# MPI_Op                         :   MPI_SUM  
+# 
+# 
+
+# List of Benchmarks to run:
+
+# Biband
+
+#---------------------------------------------------
+# Benchmarking Biband 
+# #processes = 32 
+#---------------------------------------------------
+       #bytes #repetitions   Mbytes/sec      Msg/sec
+            0         1000         0.00      8826921
+           16         1000        88.05      5503331
+           32         1000       128.08      4002428
+           64         1000       164.43      2569244
+          128         1000       190.17      1485721
+          256         1000       208.06       812729
+
+
+# All processes entering MPI_Finalize
+
+TCP N1 - ITERATION 19 :: Tue May 12 10:20:32 AM EDT 2026 
+mpirun -np 32 -ppn 16 -host cncc-gnr-003,cncc-gnr-004 IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000
+[0] MPI startup(): Intel(R) MPI Library, Version 2021.18.0  Build 20260327 (id: 821f207)
+[0] MPI startup(): Copyright (C) 2003-2026 Intel Corporation.  All rights reserved.
+[0] MPI startup(): library kind: release
+[0] MPI startup(): libfabric version: 2.5.0a1
+[0] MPI startup(): libfabric provider: tcp
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1_x1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp.dat" not found
+[0] MPI startup(): Load tuning file: "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi.dat"
+[0] MPI startup(): Number of NICs:  1 
+[0] MPI startup(): ===== NIC pinning on cncc-gnr-003 =====
+[0] MPI startup(): Rank    Thread id  Pin nic
+[0] MPI startup(): 0       0          eth0
+[0] MPI startup(): 1       0          eth0
+[0] MPI startup(): 2       0          eth0
+[0] MPI startup(): 3       0          eth0
+[0] MPI startup(): 4       0          eth0
+[0] MPI startup(): 5       0          eth0
+[0] MPI startup(): 6       0          eth0
+[0] MPI startup(): 7       0          eth0
+[0] MPI startup(): 8       0          eth0
+[0] MPI startup(): 9       0          eth0
+[0] MPI startup(): 10      0          eth0
+[0] MPI startup(): 11      0          eth0
+[0] MPI startup(): 12      0          eth0
+[0] MPI startup(): 13      0          eth0
+[0] MPI startup(): 14      0          eth0
+[0] MPI startup(): 15      0          eth0
+[0] MPI startup(): ===== CPU pinning =====
+[0] MPI startup(): Rank    Pid      Node name     Pin cpu
+[0] MPI startup(): 0       112364   cncc-gnr-003  {0-3,64-67}
+[0] MPI startup(): 1       112365   cncc-gnr-003  {4-7,68-71}
+[0] MPI startup(): 2       112366   cncc-gnr-003  {8-11,72-75}
+[0] MPI startup(): 3       112367   cncc-gnr-003  {12-15,76-79}
+[0] MPI startup(): 4       112368   cncc-gnr-003  {16-19,80-83}
+[0] MPI startup(): 5       112369   cncc-gnr-003  {20-23,84-87}
+[0] MPI startup(): 6       112370   cncc-gnr-003  {24-27,88-91}
+[0] MPI startup(): 7       112371   cncc-gnr-003  {28-31,92-95}
+[0] MPI startup(): 8       112372   cncc-gnr-003  {32-35,96-99}
+[0] MPI startup(): 9       112373   cncc-gnr-003  {36-39,100-103}
+[0] MPI startup(): 10      112374   cncc-gnr-003  {40-43,104-107}
+[0] MPI startup(): 11      112375   cncc-gnr-003  {44-47,108-111}
+[0] MPI startup(): 12      112376   cncc-gnr-003  {48-51,112-115}
+[0] MPI startup(): 13      112377   cncc-gnr-003  {52-55,116-119}
+[0] MPI startup(): 14      112378   cncc-gnr-003  {56-59,120-123}
+[0] MPI startup(): 15      112379   cncc-gnr-003  {60-63,124-127}
+[0] MPI startup(): 16      246445   cncc-gnr-004  {0-3,64-67}
+[0] MPI startup(): 17      246446   cncc-gnr-004  {4-7,68-71}
+[0] MPI startup(): 18      246447   cncc-gnr-004  {8-11,72-75}
+[0] MPI startup(): 19      246448   cncc-gnr-004  {12-15,76-79}
+[0] MPI startup(): 20      246449   cncc-gnr-004  {16-19,80-83}
+[0] MPI startup(): 21      246450   cncc-gnr-004  {20-23,84-87}
+[0] MPI startup(): 22      246451   cncc-gnr-004  {24-27,88-91}
+[0] MPI startup(): 23      246452   cncc-gnr-004  {28-31,92-95}
+[0] MPI startup(): 24      246453   cncc-gnr-004  {32-35,96-99}
+[0] MPI startup(): 25      246454   cncc-gnr-004  {36-39,100-103}
+[0] MPI startup(): 26      246455   cncc-gnr-004  {40-43,104-107}
+[0] MPI startup(): 27      246456   cncc-gnr-004  {44-47,108-111}
+[0] MPI startup(): 28      246457   cncc-gnr-004  {48-51,112-115}
+[0] MPI startup(): 29      246458   cncc-gnr-004  {52-55,116-119}
+[0] MPI startup(): 30      246459   cncc-gnr-004  {56-59,120-123}
+[0] MPI startup(): 31      246460   cncc-gnr-004  {60-63,124-127}
+[0] MPI startup(): I_MPI_OFI_LIBRARY_INTERNAL=0
+[0] MPI startup(): I_MPI_ROOT=/opt/intel/oneapi/mpi/2021.18
+[0] MPI startup(): ONEAPI_ROOT=/opt/intel/oneapi
+[0] MPI startup(): I_MPI_MPIRUN=mpirun
+[0] MPI startup(): I_MPI_BIND_WIN_ALLOCATE=localalloc
+[0] MPI startup(): I_MPI_HYDRA_TOPOLIB=ipl2
+[0] MPI startup(): I_MPI_RETURN_WIN_MEM_NUMA=0
+[0] MPI startup(): I_MPI_INTERNAL_MEM_POLICY=default
+[0] MPI startup(): I_MPI_DEBUG=5
+#----------------------------------------------------------------
+#    Intel(R) MPI Benchmarks 2021.11, MPI-1 part
+#----------------------------------------------------------------
+# Date                  : Tue May 12 10:20:56 2026
+# Machine               : x86_64
+# System                : Linux
+# Release               : 5.14.0-611.5.1.el9_7.x86_64
+# Version               : #1 SMP PREEMPT_DYNAMIC Fri Oct 17 14:16:35 EDT 2025
+# MPI Version           : 4.1
+# MPI Thread Environment: 
+
+
+# Calling sequence was: 
+
+# IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000 
+
+# Minimum message length in bytes:   0
+# Maximum message length in bytes:   256
+#
+# MPI_Datatype                   :   MPI_BYTE 
+# MPI_Datatype for reductions    :   MPI_FLOAT 
+# MPI_Op                         :   MPI_SUM  
+# 
+# 
+
+# List of Benchmarks to run:
+
+# Biband
+
+#---------------------------------------------------
+# Benchmarking Biband 
+# #processes = 32 
+#---------------------------------------------------
+       #bytes #repetitions   Mbytes/sec      Msg/sec
+            0         1000         0.00      4134250
+           16         1000        81.80      5112753
+           32         1000       119.99      3749678
+           64         1000       161.72      2526844
+          128         1000       190.64      1489394
+          256         1000       208.22       813376
+
+
+# All processes entering MPI_Finalize
+
+TCP N1 - ITERATION 20 :: Tue May 12 10:21:15 AM EDT 2026 
+mpirun -np 32 -ppn 16 -host cncc-gnr-003,cncc-gnr-004 IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000
+[0] MPI startup(): Intel(R) MPI Library, Version 2021.18.0  Build 20260327 (id: 821f207)
+[0] MPI startup(): Copyright (C) 2003-2026 Intel Corporation.  All rights reserved.
+[0] MPI startup(): library kind: release
+[0] MPI startup(): libfabric version: 2.5.0a1
+[0] MPI startup(): libfabric provider: tcp
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1_x1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp.dat" not found
+[0] MPI startup(): Load tuning file: "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi.dat"
+[0] MPI startup(): Number of NICs:  1 
+[0] MPI startup(): ===== NIC pinning on cncc-gnr-003 =====
+[0] MPI startup(): Rank    Thread id  Pin nic
+[0] MPI startup(): 0       0          eth0
+[0] MPI startup(): 1       0          eth0
+[0] MPI startup(): 2       0          eth0
+[0] MPI startup(): 3       0          eth0
+[0] MPI startup(): 4       0          eth0
+[0] MPI startup(): 5       0          eth0
+[0] MPI startup(): 6       0          eth0
+[0] MPI startup(): 7       0          eth0
+[0] MPI startup(): 8       0          eth0
+[0] MPI startup(): 9       0          eth0
+[0] MPI startup(): 10      0          eth0
+[0] MPI startup(): 11      0          eth0
+[0] MPI startup(): 12      0          eth0
+[0] MPI startup(): 13      0          eth0
+[0] MPI startup(): 14      0          eth0
+[0] MPI startup(): 15      0          eth0
+[0] MPI startup(): ===== CPU pinning =====
+[0] MPI startup(): Rank    Pid      Node name     Pin cpu
+[0] MPI startup(): 0       112410   cncc-gnr-003  {0-3,64-67}
+[0] MPI startup(): 1       112411   cncc-gnr-003  {4-7,68-71}
+[0] MPI startup(): 2       112412   cncc-gnr-003  {8-11,72-75}
+[0] MPI startup(): 3       112413   cncc-gnr-003  {12-15,76-79}
+[0] MPI startup(): 4       112414   cncc-gnr-003  {16-19,80-83}
+[0] MPI startup(): 5       112415   cncc-gnr-003  {20-23,84-87}
+[0] MPI startup(): 6       112416   cncc-gnr-003  {24-27,88-91}
+[0] MPI startup(): 7       112417   cncc-gnr-003  {28-31,92-95}
+[0] MPI startup(): 8       112418   cncc-gnr-003  {32-35,96-99}
+[0] MPI startup(): 9       112419   cncc-gnr-003  {36-39,100-103}
+[0] MPI startup(): 10      112420   cncc-gnr-003  {40-43,104-107}
+[0] MPI startup(): 11      112421   cncc-gnr-003  {44-47,108-111}
+[0] MPI startup(): 12      112422   cncc-gnr-003  {48-51,112-115}
+[0] MPI startup(): 13      112423   cncc-gnr-003  {52-55,116-119}
+[0] MPI startup(): 14      112424   cncc-gnr-003  {56-59,120-123}
+[0] MPI startup(): 15      112425   cncc-gnr-003  {60-63,124-127}
+[0] MPI startup(): 16      247156   cncc-gnr-004  {0-3,64-67}
+[0] MPI startup(): 17      247157   cncc-gnr-004  {4-7,68-71}
+[0] MPI startup(): 18      247158   cncc-gnr-004  {8-11,72-75}
+[0] MPI startup(): 19      247159   cncc-gnr-004  {12-15,76-79}
+[0] MPI startup(): 20      247160   cncc-gnr-004  {16-19,80-83}
+[0] MPI startup(): 21      247161   cncc-gnr-004  {20-23,84-87}
+[0] MPI startup(): 22      247162   cncc-gnr-004  {24-27,88-91}
+[0] MPI startup(): 23      247163   cncc-gnr-004  {28-31,92-95}
+[0] MPI startup(): 24      247164   cncc-gnr-004  {32-35,96-99}
+[0] MPI startup(): 25      247165   cncc-gnr-004  {36-39,100-103}
+[0] MPI startup(): 26      247166   cncc-gnr-004  {40-43,104-107}
+[0] MPI startup(): 27      247167   cncc-gnr-004  {44-47,108-111}
+[0] MPI startup(): 28      247168   cncc-gnr-004  {48-51,112-115}
+[0] MPI startup(): 29      247169   cncc-gnr-004  {52-55,116-119}
+[0] MPI startup(): 30      247170   cncc-gnr-004  {56-59,120-123}
+[0] MPI startup(): 31      247171   cncc-gnr-004  {60-63,124-127}
+[0] MPI startup(): I_MPI_OFI_LIBRARY_INTERNAL=0
+[0] MPI startup(): I_MPI_ROOT=/opt/intel/oneapi/mpi/2021.18
+[0] MPI startup(): ONEAPI_ROOT=/opt/intel/oneapi
+[0] MPI startup(): I_MPI_MPIRUN=mpirun
+[0] MPI startup(): I_MPI_BIND_WIN_ALLOCATE=localalloc
+[0] MPI startup(): I_MPI_HYDRA_TOPOLIB=ipl2
+[0] MPI startup(): I_MPI_RETURN_WIN_MEM_NUMA=0
+[0] MPI startup(): I_MPI_INTERNAL_MEM_POLICY=default
+[0] MPI startup(): I_MPI_DEBUG=5
+#----------------------------------------------------------------
+#    Intel(R) MPI Benchmarks 2021.11, MPI-1 part
+#----------------------------------------------------------------
+# Date                  : Tue May 12 10:21:40 2026
+# Machine               : x86_64
+# System                : Linux
+# Release               : 5.14.0-611.5.1.el9_7.x86_64
+# Version               : #1 SMP PREEMPT_DYNAMIC Fri Oct 17 14:16:35 EDT 2025
+# MPI Version           : 4.1
+# MPI Thread Environment: 
+
+
+# Calling sequence was: 
+
+# IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000 
+
+# Minimum message length in bytes:   0
+# Maximum message length in bytes:   256
+#
+# MPI_Datatype                   :   MPI_BYTE 
+# MPI_Datatype for reductions    :   MPI_FLOAT 
+# MPI_Op                         :   MPI_SUM  
+# 
+# 
+
+# List of Benchmarks to run:
+
+# Biband
+
+#---------------------------------------------------
+# Benchmarking Biband 
+# #processes = 32 
+#---------------------------------------------------
+       #bytes #repetitions   Mbytes/sec      Msg/sec
+            0         1000         0.00      8791305
+           16         1000        87.95      5496881
+           32         1000       127.65      3989044
+           64         1000       164.19      2565470
+          128         1000       191.17      1493524
+          256         1000       208.60       814829
+
+
+# All processes entering MPI_Finalize
+
+TCP N1 - ITERATION 21 :: Tue May 12 10:21:58 AM EDT 2026 
+mpirun -np 32 -ppn 16 -host cncc-gnr-003,cncc-gnr-004 IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000
+[0] MPI startup(): Intel(R) MPI Library, Version 2021.18.0  Build 20260327 (id: 821f207)
+[0] MPI startup(): Copyright (C) 2003-2026 Intel Corporation.  All rights reserved.
+[0] MPI startup(): library kind: release
+[0] MPI startup(): libfabric version: 2.5.0a1
+[0] MPI startup(): libfabric provider: tcp
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1_x1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp.dat" not found
+[0] MPI startup(): Load tuning file: "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi.dat"
+[0] MPI startup(): Number of NICs:  1 
+[0] MPI startup(): ===== NIC pinning on cncc-gnr-003 =====
+[0] MPI startup(): Rank    Thread id  Pin nic
+[0] MPI startup(): 0       0          eth0
+[0] MPI startup(): 1       0          eth0
+[0] MPI startup(): 2       0          eth0
+[0] MPI startup(): 3       0          eth0
+[0] MPI startup(): 4       0          eth0
+[0] MPI startup(): 5       0          eth0
+[0] MPI startup(): 6       0          eth0
+[0] MPI startup(): 7       0          eth0
+[0] MPI startup(): 8       0          eth0
+[0] MPI startup(): 9       0          eth0
+[0] MPI startup(): 10      0          eth0
+[0] MPI startup(): 11      0          eth0
+[0] MPI startup(): 12      0          eth0
+[0] MPI startup(): 13      0          eth0
+[0] MPI startup(): 14      0          eth0
+[0] MPI startup(): 15      0          eth0
+[0] MPI startup(): ===== CPU pinning =====
+[0] MPI startup(): Rank    Pid      Node name     Pin cpu
+[0] MPI startup(): 0       112457   cncc-gnr-003  {0-3,64-67}
+[0] MPI startup(): 1       112458   cncc-gnr-003  {4-7,68-71}
+[0] MPI startup(): 2       112459   cncc-gnr-003  {8-11,72-75}
+[0] MPI startup(): 3       112460   cncc-gnr-003  {12-15,76-79}
+[0] MPI startup(): 4       112461   cncc-gnr-003  {16-19,80-83}
+[0] MPI startup(): 5       112462   cncc-gnr-003  {20-23,84-87}
+[0] MPI startup(): 6       112463   cncc-gnr-003  {24-27,88-91}
+[0] MPI startup(): 7       112464   cncc-gnr-003  {28-31,92-95}
+[0] MPI startup(): 8       112465   cncc-gnr-003  {32-35,96-99}
+[0] MPI startup(): 9       112466   cncc-gnr-003  {36-39,100-103}
+[0] MPI startup(): 10      112467   cncc-gnr-003  {40-43,104-107}
+[0] MPI startup(): 11      112468   cncc-gnr-003  {44-47,108-111}
+[0] MPI startup(): 12      112469   cncc-gnr-003  {48-51,112-115}
+[0] MPI startup(): 13      112470   cncc-gnr-003  {52-55,116-119}
+[0] MPI startup(): 14      112471   cncc-gnr-003  {56-59,120-123}
+[0] MPI startup(): 15      112472   cncc-gnr-003  {60-63,124-127}
+[0] MPI startup(): 16      247874   cncc-gnr-004  {0-3,64-67}
+[0] MPI startup(): 17      247875   cncc-gnr-004  {4-7,68-71}
+[0] MPI startup(): 18      247876   cncc-gnr-004  {8-11,72-75}
+[0] MPI startup(): 19      247877   cncc-gnr-004  {12-15,76-79}
+[0] MPI startup(): 20      247878   cncc-gnr-004  {16-19,80-83}
+[0] MPI startup(): 21      247879   cncc-gnr-004  {20-23,84-87}
+[0] MPI startup(): 22      247880   cncc-gnr-004  {24-27,88-91}
+[0] MPI startup(): 23      247881   cncc-gnr-004  {28-31,92-95}
+[0] MPI startup(): 24      247882   cncc-gnr-004  {32-35,96-99}
+[0] MPI startup(): 25      247883   cncc-gnr-004  {36-39,100-103}
+[0] MPI startup(): 26      247884   cncc-gnr-004  {40-43,104-107}
+[0] MPI startup(): 27      247885   cncc-gnr-004  {44-47,108-111}
+[0] MPI startup(): 28      247886   cncc-gnr-004  {48-51,112-115}
+[0] MPI startup(): 29      247887   cncc-gnr-004  {52-55,116-119}
+[0] MPI startup(): 30      247888   cncc-gnr-004  {56-59,120-123}
+[0] MPI startup(): 31      247889   cncc-gnr-004  {60-63,124-127}
+[0] MPI startup(): I_MPI_OFI_LIBRARY_INTERNAL=0
+[0] MPI startup(): I_MPI_ROOT=/opt/intel/oneapi/mpi/2021.18
+[0] MPI startup(): ONEAPI_ROOT=/opt/intel/oneapi
+[0] MPI startup(): I_MPI_MPIRUN=mpirun
+[0] MPI startup(): I_MPI_BIND_WIN_ALLOCATE=localalloc
+[0] MPI startup(): I_MPI_HYDRA_TOPOLIB=ipl2
+[0] MPI startup(): I_MPI_RETURN_WIN_MEM_NUMA=0
+[0] MPI startup(): I_MPI_INTERNAL_MEM_POLICY=default
+[0] MPI startup(): I_MPI_DEBUG=5
+#----------------------------------------------------------------
+#    Intel(R) MPI Benchmarks 2021.11, MPI-1 part
+#----------------------------------------------------------------
+# Date                  : Tue May 12 10:22:22 2026
+# Machine               : x86_64
+# System                : Linux
+# Release               : 5.14.0-611.5.1.el9_7.x86_64
+# Version               : #1 SMP PREEMPT_DYNAMIC Fri Oct 17 14:16:35 EDT 2025
+# MPI Version           : 4.1
+# MPI Thread Environment: 
+
+
+# Calling sequence was: 
+
+# IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000 
+
+# Minimum message length in bytes:   0
+# Maximum message length in bytes:   256
+#
+# MPI_Datatype                   :   MPI_BYTE 
+# MPI_Datatype for reductions    :   MPI_FLOAT 
+# MPI_Op                         :   MPI_SUM  
+# 
+# 
+
+# List of Benchmarks to run:
+
+# Biband
+
+#---------------------------------------------------
+# Benchmarking Biband 
+# #processes = 32 
+#---------------------------------------------------
+       #bytes #repetitions   Mbytes/sec      Msg/sec
+            0         1000         0.00      8737364
+           16         1000        83.35      5209296
+           32         1000       127.82      3994294
+           64         1000       163.97      2562064
+          128         1000       190.41      1487579
+          256         1000       207.69       811287
+
+
+# All processes entering MPI_Finalize
+
+TCP N1 - ITERATION 22 :: Tue May 12 10:22:40 AM EDT 2026 
+mpirun -np 32 -ppn 16 -host cncc-gnr-003,cncc-gnr-004 IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000
+[0] MPI startup(): Intel(R) MPI Library, Version 2021.18.0  Build 20260327 (id: 821f207)
+[0] MPI startup(): Copyright (C) 2003-2026 Intel Corporation.  All rights reserved.
+[0] MPI startup(): library kind: release
+[0] MPI startup(): libfabric version: 2.5.0a1
+[0] MPI startup(): libfabric provider: tcp
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1_x1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp_1.dat" not found
+[0] MPI startup(): File "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi_tcp.dat" not found
+[0] MPI startup(): Load tuning file: "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_emr_shm-ofi.dat"
+[0] MPI startup(): Number of NICs:  1 
+[0] MPI startup(): ===== NIC pinning on cncc-gnr-003 =====
+[0] MPI startup(): Rank    Thread id  Pin nic
+[0] MPI startup(): 0       0          eth0
+[0] MPI startup(): 1       0          eth0
+[0] MPI startup(): 2       0          eth0
+[0] MPI startup(): 3       0          eth0
+[0] MPI startup(): 4       0          eth0
+[0] MPI startup(): 5       0          eth0
+[0] MPI startup(): 6       0          eth0
+[0] MPI startup(): 7       0          eth0
+[0] MPI startup(): 8       0          eth0
+[0] MPI startup(): 9       0          eth0
+[0] MPI startup(): 10      0          eth0
+[0] MPI startup(): 11      0          eth0
+[0] MPI startup(): 12      0          eth0
+[0] MPI startup(): 13      0          eth0
+[0] MPI startup(): 14      0          eth0
+[0] MPI startup(): 15      0          eth0
+[0] MPI startup(): ===== CPU pinning =====
+[0] MPI startup(): Rank    Pid      Node name     Pin cpu
+[0] MPI startup(): 0       112503   cncc-gnr-003  {0-3,64-67}
+[0] MPI startup(): 1       112504   cncc-gnr-003  {4-7,68-71}
+[0] MPI startup(): 2       112505   cncc-gnr-003  {8-11,72-75}
+[0] MPI startup(): 3       112506   cncc-gnr-003  {12-15,76-79}
+[0] MPI startup(): 4       112507   cncc-gnr-003  {16-19,80-83}
+[0] MPI startup(): 5       112508   cncc-gnr-003  {20-23,84-87}
+[0] MPI startup(): 6       112509   cncc-gnr-003  {24-27,88-91}
+[0] MPI startup(): 7       112510   cncc-gnr-003  {28-31,92-95}
+[0] MPI startup(): 8       112511   cncc-gnr-003  {32-35,96-99}
+[0] MPI startup(): 9       112512   cncc-gnr-003  {36-39,100-103}
+[0] MPI startup(): 10      112513   cncc-gnr-003  {40-43,104-107}
+[0] MPI startup(): 11      112514   cncc-gnr-003  {44-47,108-111}
+[0] MPI startup(): 12      112515   cncc-gnr-003  {48-51,112-115}
+[0] MPI startup(): 13      112516   cncc-gnr-003  {52-55,116-119}
+[0] MPI startup(): 14      112517   cncc-gnr-003  {56-59,120-123}
+[0] MPI startup(): 15      112518   cncc-gnr-003  {60-63,124-127}
+[0] MPI startup(): 16      248569   cncc-gnr-004  {0-3,64-67}
+[0] MPI startup(): 17      248570   cncc-gnr-004  {4-7,68-71}
+[0] MPI startup(): 18      248571   cncc-gnr-004  {8-11,72-75}
+[0] MPI startup(): 19      248572   cncc-gnr-004  {12-15,76-79}
+[0] MPI startup(): 20      248573   cncc-gnr-004  {16-19,80-83}
+[0] MPI startup(): 21      248574   cncc-gnr-004  {20-23,84-87}
+[0] MPI startup(): 22      248575   cncc-gnr-004  {24-27,88-91}
+[0] MPI startup(): 23      248576   cncc-gnr-004  {28-31,92-95}
+[0] MPI startup(): 24      248577   cncc-gnr-004  {32-35,96-99}
+[0] MPI startup(): 25      248578   cncc-gnr-004  {36-39,100-103}
+[0] MPI startup(): 26      248579   cncc-gnr-004  {40-43,104-107}
+[0] MPI startup(): 27      248580   cncc-gnr-004  {44-47,108-111}
+[0] MPI startup(): 28      248581   cncc-gnr-004  {48-51,112-115}
+[0] MPI startup(): 29      248582   cncc-gnr-004  {52-55,116-119}
+[0] MPI startup(): 30      248583   cncc-gnr-004  {56-59,120-123}
+[0] MPI startup(): 31      248584   cncc-gnr-004  {60-63,124-127}
+[0] MPI startup(): I_MPI_OFI_LIBRARY_INTERNAL=0
+[0] MPI startup(): I_MPI_ROOT=/opt/intel/oneapi/mpi/2021.18
+[0] MPI startup(): ONEAPI_ROOT=/opt/intel/oneapi
+[0] MPI startup(): I_MPI_MPIRUN=mpirun
+[0] MPI startup(): I_MPI_BIND_WIN_ALLOCATE=localalloc
+[0] MPI startup(): I_MPI_HYDRA_TOPOLIB=ipl2
+[0] MPI startup(): I_MPI_RETURN_WIN_MEM_NUMA=0
+[0] MPI startup(): I_MPI_INTERNAL_MEM_POLICY=default
+[0] MPI startup(): I_MPI_DEBUG=5
+#----------------------------------------------------------------
+#    Intel(R) MPI Benchmarks 2021.11, MPI-1 part
+#----------------------------------------------------------------
+# Date                  : Tue May 12 10:23:05 2026
+# Machine               : x86_64
+# System                : Linux
+# Release               : 5.14.0-611.5.1.el9_7.x86_64
+# Version               : #1 SMP PREEMPT_DYNAMIC Fri Oct 17 14:16:35 EDT 2025
+# MPI Version           : 4.1
+# MPI Thread Environment: 
+
+
+# Calling sequence was: 
+
+# IMB-MPI1 Biband -npmin 99999 -msglog 4:8 -time 1000 -iter 1000 
+
+# Minimum message length in bytes:   0
+# Maximum message length in bytes:   256
+#
+# MPI_Datatype                   :   MPI_BYTE 
+# MPI_Datatype for reductions    :   MPI_FLOAT 
+# MPI_Op                         :   MPI_SUM  
+# 
+# 
+
+# List of Benchmarks to run:
+
+# Biband
+
+#---------------------------------------------------
+# Benchmarking Biband 
+# #processes = 32 
+#---------------------------------------------------
+       #bytes #repetitions   Mbytes/sec      Msg/sec
+            0         1000         0.00      6860765
+
+===================================================================================
+=   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES
+=   RANK 0 PID 112503 RUNNING AT cncc-gnr-003
+=   KILLED BY SIGNAL: 15 (Terminated)
+===================================================================================
+
+===================================================================================
+=   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES
+=   RANK 1 PID 112504 RUNNING AT cncc-gnr-003
+=   KILLED BY SIGNAL: 15 (Terminated)
+===================================================================================
+
+===================================================================================
+=   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES
+=   RANK 2 PID 112505 RUNNING AT cncc-gnr-003
+=   KILLED BY SIGNAL: 15 (Terminated)
+===================================================================================
+
+===================================================================================
+=   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES
+=   RANK 3 PID 112506 RUNNING AT cncc-gnr-003
+=   KILLED BY SIGNAL: 15 (Terminated)
+===================================================================================
+
+===================================================================================
+=   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES
+=   RANK 4 PID 112507 RUNNING AT cncc-gnr-003
+=   KILLED BY SIGNAL: 15 (Terminated)
+===================================================================================
+
+===================================================================================
+=   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES
+=   RANK 5 PID 112508 RUNNING AT cncc-gnr-003
+=   KILLED BY SIGNAL: 15 (Terminated)
+===================================================================================
+
+===================================================================================
+=   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES
+=   RANK 6 PID 112509 RUNNING AT cncc-gnr-003
+=   KILLED BY SIGNAL: 15 (Terminated)
+===================================================================================
+
+===================================================================================
+=   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES
+=   RANK 7 PID 112510 RUNNING AT cncc-gnr-003
+=   KILLED BY SIGNAL: 15 (Terminated)
+===================================================================================
+
+===================================================================================
+=   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES
+=   RANK 8 PID 112511 RUNNING AT cncc-gnr-003
+=   KILLED BY SIGNAL: 15 (Terminated)
+===================================================================================
+
+===================================================================================
+=   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES
+=   RANK 9 PID 112512 RUNNING AT cncc-gnr-003
+=   KILLED BY SIGNAL: 15 (Terminated)
+===================================================================================
+
+===================================================================================
+=   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES
+=   RANK 10 PID 112513 RUNNING AT cncc-gnr-003
+=   KILLED BY SIGNAL: 15 (Terminated)
+===================================================================================
+
+===================================================================================
+=   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES
+=   RANK 11 PID 112514 RUNNING AT cncc-gnr-003
+=   KILLED BY SIGNAL: 15 (Terminated)
+===================================================================================
+
+===================================================================================
+=   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES
+=   RANK 12 PID 112515 RUNNING AT cncc-gnr-003
+=   KILLED BY SIGNAL: 15 (Terminated)
+===================================================================================
+
+===================================================================================
+=   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES
+=   RANK 13 PID 112516 RUNNING AT cncc-gnr-003
+=   KILLED BY SIGNAL: 15 (Terminated)
+===================================================================================
+
+===================================================================================
+=   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES
+=   RANK 14 PID 112517 RUNNING AT cncc-gnr-003
+=   KILLED BY SIGNAL: 15 (Terminated)
+===================================================================================
+
+===================================================================================
+=   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES
+=   RANK 15 PID 112518 RUNNING AT cncc-gnr-003
+=   KILLED BY SIGNAL: 15 (Terminated)
+===================================================================================

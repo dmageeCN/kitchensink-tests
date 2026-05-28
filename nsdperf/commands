@@ -1,0 +1,11 @@
+rdma
+buffsize 1048576
+threads 4
+parallel 4
+ttime 180
+server cncc-gnr-004
+client cncc-gnr-003
+status
+test write
+test read
+quit

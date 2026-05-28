@@ -1,0 +1,23 @@
+Run nsdperf from M clients to/from N servers.
+Requires pdsh to be installed, and passwordless ssh to/from all servers and clients.
+--> Note: often times it is better to use the pdsh-rcmd-ssh instead of pdsh-rcmd-rsh package. If not, connection problems may result.
+
+Usage:
+
+
+RDMA:
+./run-nsdperf.sh <serverList> <clientList> <rdmaDevice>
+
+ - <serverlist> and <clientlist> are files that contain lists of server/client names, like an MPI hostfile
+ - <rdmaDevice> is of the form hfi1_0:1, mlx5_0:1, etc
+
+IPoIB/TCP:
+./run-nsdperf-tcp.sh <serverList> <clientList>
+ - <serverlist> and <clientlist> need to be the IP addresses or hostnames associated with the TCP network in test.
+     For example, the IPoIB addresses for the hosts in test
+
+
+Notes:
+  - if nsdperf binary does not exist, it should compile automatically (see compile.sh)
+  - you can edit run-nsdperf*sh files to define the message size and level of concurrency.
+  - comment out "usecm on" if a proper ipoib network is not set up, or if you are using regular ethernet hostnames in the serverList and clientList

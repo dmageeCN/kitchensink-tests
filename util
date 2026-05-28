@@ -1,0 +1,246 @@
+#!/bin/bash
+
+#SBATCH -p icelake
+#SBATCH --reservation=icx
+
+setvar() {
+    while [[ $# -gt 0 ]]; do
+        export $1
+        shift
+    done
+}
+
+cleanup() {
+    echo "Cleaning up background processes..."
+    kill 0
+}
+trap cleanup EXIT
+
+seconds_since_modified() {
+    local fname=$1
+    echo $(( $(date +%s) - $(date -r "$fname" +%s) ))
+}
+
+get_nodes(){
+    nodes=$1
+    total_nodes=$2
+    if [[ $nodes -gt 0 ]]; then
+        seq 1 $nodes | paste -sd','
+    else
+        seq $(( total_nodes + nodes + 1 )) $total_nodes | paste -sd','
+    fi
+}
+
+get_ports(){
+  hostlist=$1
+  hostarray=($(echo $hostlist | tr ',' '\n'))  
+  NHFI=$(opainfo | grep -c Active)
+  hfi_nums=$(( NHFI-1 ))
+  port_f=""
+  for k in $(seq $hfi_nums); do
+    host0="${hostarray[0]} hfi1_${k}"
+    host1="${hostarray[1]} hfi1_${k}"
+    port=$(opareport -o route -S nodepat:"$host0" -D nodepat:"$host1" |& grep -m2 SW | awk '{print $3}' | paste -sd'-')
+    port_f+="${port}-"
+  done
+  echo "$port_f"
+}
+
+get_ifaces() {
+    ifconfig |& awk '/d1/ {print $1}' | tr -d :
+}
+
+export INTEL_SETVARS=/opt/intel/oneapi/setvars.sh
+export SINIT=$SECONDS
+export THEDATE=$(date +'%m-%d_%H-%M')
+export ORIG_PATH=$(pwd)
+
+get_swguid() {
+    swguid_full=$(opaextractlids |& awk -F';' '/SW/ {print $1}' | head -1)
+    SWGUID="${swguid_full: -6}"
+    : ${SWGUID:="FMDOWN-NOGUID"}
+    export OUTPUT_TAG="${SWGUID}_${THEDATE}"
+}
+
+universal_opts() {
+    : ${OUTDIR:=/tmp/$OUTPUT_TAG}
+    : ${END_MIN:=15} #TEST PROGRAM LENGTH MINS
+    : ${TIME_LIMIT:=45} #IN SECONDS FOR FILE UPDATE
+    : ${SIZE:=BYTE} #SMALL, LARGE, BYTE
+    : ${TEST_NAME:="Biband"}
+    : ${TCP_SIZE:='4:8'} #4:18
+    : ${NJOBS:=2} # N TCP JOBS TO LAUNCH
+    : ${KITCHENSINK:=1} # RUN ALL TESTS: OR
+    : ${NNODES:=2} # NUMBER OF NODES: Use a negative to count from the back
+    : ${IPADDR:=0} # USE IP ADDRESSES INSTEAD OF HOSTNAMES
+    : ${NSD_HFI:=1} #USE THIS HFI FOR NSDPERF
+    : ${TESTS:=opx} # TEST TO RUN IF KITCHENSINK == 0
+    : ${SMALL_ITER:=20000} # NITERATIONS SMALL CASE
+    : ${LARGE_ITER:=200} # NITERATIONS LARGE CASE
+    : ${BYTE_ITER:=100}
+    : ${TCP_ITER:=1000}
+    : ${SLEEP:=true}
+    export OUTDIR END_MIN TIME_LIMIT SIZE TEST_NAME TCP_SIZE PPN PPN_ALL NJOBS KITCHENSINK NNODES
+    export IPADDR NSD_HFI TESTS SMALL_ITER LARGE_ITER BYTE_ITER TCP_ITER SLEEP
+    export SUMMARY_OUT="${OUTDIR}/summary.out"
+    export END_SEC=$(( END_MIN*60 ))
+    export HALFLIM=$(( (TIME_LIMIT/4)*3 ))
+}
+
+set_opx_size() {
+    SMALL_SIZE='-msglog 4:8'
+    LARGE_SIZE='-msglog 16:24'
+    BYTE_SIZE='-msglen /root/kitchensink-tests/byte_file -data_type byte'
+    case "$SIZE" in
+        "SMALL")
+            SIZE_FINAL="$SMALL_SIZE"
+            ITER_FINAL="$SMALL_ITER"
+            ;;
+        "LARGE")
+            SIZE_FINAL="$LARGE_SIZE"
+            ITER_FINAL="$LARGE_ITER"
+            ;;
+        "BYTE")
+            SIZE_FINAL="$BYTE_SIZE"
+            ITER_FINAL="$BYTE_ITER"
+            #seq 5 10240 > length_file
+            ;;
+        *)
+            echo "BAD SIZE VALUE"
+            exit 1
+            ;;
+    esac
+    export SIZE_FINAL ITER_FINAL
+}
+
+setup_nsdperf() {
+    ## SET UP SERVERS/CLIENTS
+    hosts=$1
+    nservers=$(echo -n "${hosts//[^,]}" | wc -c)
+    total_nodes=$((nservers+1))
+    hostidx=$(get_nodes $NNODES $total_nodes)
+
+    echo $hosts $hostidx
+    hosts=$(echo "$hosts" | cut -d',' -f$hostidx)
+    nservers=$(echo -n "${hosts//[^,]}" | wc -c)
+    echo "${hosts##*,}" > servers
+    echo $hosts | tr ',' '\n' | head -n $nservers > clients
+    export NNODES=${NNODES#-}
+}
+
+export I_MPI_PIN_INFO=1
+export I_MPI_DEBUG=5
+# Takes iface_index starting_core.
+imb_tcp () {
+  # BASIC SETUP
+  export I_MPI_OFI_LIBRARY_INTERNAL=0
+  source $INTEL_SETVARS &> /dev/null
+  export FI_PROVIDER=tcp
+
+  # CHOOSE IFACE
+  IFACES=$(get_ifaces)
+  IFACE_A=($IFACES)
+  ifidx=$1
+  export TCP_IFACE=${IFACE_A[$ifidx]}
+  export FI_TCP_IFACE=$TCP_IFACE
+  export I_MPI_OFI_INTERFACE=$TCP_IFACE
+  export FI_IFACE=$TCP_IFACE
+  NPROCS=$(( NNODES*PPN ))
+
+  # CHOSE CORES
+  startproc=$2
+  sleeper=$(( startproc/2 ));
+  if [[ $SLEEP == 'false' ]]; then
+    sleeper=0
+  fi
+  endproc=$(( startproc+PPN-1 ))
+  export I_MPI_PIN_PROCESSOR_LIST="${startproc}-${endproc}"
+
+  #LAUNCH
+  OUTFILE="${OUTDIR}/TCP-${OUTNAME}-${ifidx}.out"
+  FILES+=("${OUTDIR}/OPX-${OUTNAME}-${startproc}.out")
+  TCP_ARGS="-npmin 99999 -msglog ${TCP_SIZE} -time 1000 -iter ${TCP_ITER}"
+  i=1
+  while true; do
+    echo "TCP N${nlaunch} - ITERATION ${i} :: $(date) " | tee -a ${OUTFILE} ${SUMMARY_OUT}
+    echo "mpirun -np $NPROCS -ppn $PPN -host ${hosts} IMB-MPI1 $TEST_NAME ${TCP_ARGS}" >> $OUTFILE
+    mpirun -np $NPROCS -ppn $PPN -host ${hosts} IMB-MPI1 $TEST_NAME ${TCP_ARGS} &>> $OUTFILE
+    sleep $sleeper
+    i=$(( i+1 ))
+  done
+}
+
+imb_opx () {
+  # BASIC SETUP
+  export I_MPI_OFI_LIBRARY_INTERNAL=0
+  source $INTEL_SETVARS &> /dev/null
+  export FI_PROVIDER=opx
+
+  # CHOOSE HFI
+  hfiidx=$1
+  export FI_OPX_HFI_SELECT=$hfiidx
+  NPROCS=$(( NNODES*PPN ))
+
+  # CHOOSE CORES
+  startproc=$2
+  sleeper=$(( startproc/2 ))
+  if [[ $SLEEP == 'false' ]]; then
+    sleeper=0
+  fi
+  endproc=$(( startproc+PPN-1 ))
+  export I_MPI_PIN_PROCESSOR_LIST="${startproc}-${endproc}"
+
+  # LAUNCH
+  OUTFILE="${OUTDIR}/OPX-${OUTNAME}-${startproc}.out"
+  IMB_ARGS="-npmin 99999 ${SIZE_FINAL} -time 10000 -iter ${ITER_FINAL}"
+  i=1
+  while true; do
+    echo "OPX N${startproc} - ITERATION $i :: $(date)" | tee -a $OUTFILE ${SUMMARY_OUT}
+    echo "mpirun -np $NPROCS -ppn $PPN -host ${hosts} IMB-MPI1 $TEST_NAME ${IMB_ARGS}" >> $OUTFILE
+    mpirun -np $NPROCS -ppn $PPN -host ${hosts} IMB-MPI1 $TEST_NAME ${IMB_ARGS} &>> $OUTFILE
+    sleep $sleeper
+    i=$(( i+1 ))
+  done
+}
+
+run_run-nsdperf() {
+  srv=$1
+  cln=$2
+  outfile=$3
+  cd nsdperf
+  i=1
+  while true; do
+    echo "------ nsdperf ITERATION: ${i} $(date) -----" | tee -a $outfile ${SUMMARY_OUT}
+    ./run-nsdperf.sh $srv $cln hfi1_${NSD_HFI}:2 &>> $outfile
+    sleep 1
+    i=$(( i+1 ))
+  done
+}
+
+check_files() {
+    file_str=$1
+    FILES=($(echo "$file_str" | tr ',' ' '))
+    END_SEC=$(( END_MIN*60 ))
+    while [[ $(( SECONDS-SINIT )) -lt $END_SEC ]]; do
+        for f in "${FILES[@]}"; do
+            [[ -f "$f" ]] || continue
+            fstr=$(basename $f)
+            sfile=$(seconds_since_modified $f)
+            if [[ $sfile -gt $HALFLIM ]]; then
+		        echo "$fstr is getting close: $sfile seconds."
+	        fi
+            if [[ $sfile -gt $TIME_LIMIT ]]; then
+                echo "--HANG $sfile seconds - $fstr-- Kitchen Sink is DIRTY -- $(date)"
+                echo "TIME SINCE START $(( SECONDS-SINIT )) sec"
+                exit 1
+            fi
+            if grep -qi ERROR $f; then
+                echo "--ERROR $fstr-- Kitchen Sink is DIRTY -- $(date)"
+                echo "TIME SINCE START $(( SECONDS-SINIT )) sec"
+                exit 1
+            fi
+        done
+        sleep 1
+    done
+    echo "+++ Kitchen Sink is CLEAN"
+}

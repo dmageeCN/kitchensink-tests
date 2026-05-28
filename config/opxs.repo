@@ -1,0 +1,5 @@
+[opxs-repo]
+name=opxs-repo
+baseurl=/root/swfw/Cn5k-sw_12.1.2.0.32
+enabled=1
+gpgcheck=0
