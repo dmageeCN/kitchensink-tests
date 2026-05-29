@@ -3,12 +3,6 @@
 #SBATCH -p icelake
 #SBATCH --reservation=icx
 
-cleanup() {
-    echo "Cleaning up background processes..."
-    kill 0
-}
-trap cleanup EXIT
-
 THISFILE=${BASH_SOURCE[0]}
 : ${THISFILE:=$0}
 
@@ -34,6 +28,17 @@ get_swguid
 setvar "$@"
 
 universal_opts
+
+cleanup() {
+    export I_MPI_OFI_LIBRARY_INTERNAL=0
+    source $INTEL_SETVARS &> /dev/null
+    export FI_PROVIDER=opx
+    echo "Cleaning up background processes..."
+    mpirun -np $NNODES -ppn 1 -host ${HOSTS} pkill -9 nsdperf
+    kill 0
+}
+trap cleanup EXIT
+
 
 TOTAL_JOBS=$(( TCP_NJOBS+OPX_NJOBS ))
 TOTAL_PROCS=$(( TOTAL_JOBS*PPN ))
