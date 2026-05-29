@@ -78,7 +78,7 @@ universal_opts() {
     : ${KITCHENSINK:=1} # RUN ALL TESTS: OR
     : ${NNODES:=2} # NUMBER OF NODES: Use a negative to count from the back
     : ${IPADDR:=0} # USE IP ADDRESSES INSTEAD OF HOSTNAMES
-    : ${NSD_HFI:=1} #USE THIS HFI FOR NSDPERF
+    : ${NSD_HFI:=0} #USE THIS HFI FOR NSDPERF
     : ${TESTS:=opx} # TEST TO RUN IF KITCHENSINK == 0
     : ${SMALL_ITER:=20000} # NITERATIONS SMALL CASE
     : ${LARGE_ITER:=200} # NITERATIONS LARGE CASE
@@ -140,7 +140,7 @@ export I_MPI_DEBUG=5
 # Takes iface_index starting_core.
 imb_tcp () {
   # BASIC SETUP
-  export I_MPI_OFI_LIBRARY_INTERNAL=0
+  export I_MPI_OFI_LIBRARY_INTERNAL=1
   source $INTEL_SETVARS &> /dev/null
   export FI_PROVIDER=tcp
 

@@ -46,6 +46,7 @@ fi
 
 HALF_CORES=$(( NCORES/2 ))
 start_count=(0 $HALF_CORES)
+echo $HALF_CORES
 
 # SETUP A FIRST AND SECOND HALF COUNT TO TALLY PUTTING PROCESSES ON CORES
 # FIRST STARTS AT 0 second starts at half count. then add PPN to them every time they launch.
@@ -81,7 +82,7 @@ if [[ $TESTS =~ 'tcp' ]]; then
     start_pos=${start_count[$count_idx]}
     imb_tcp $count_idx $start_pos &
     FILES+="${OUTDIR}/TCP-${OUTNAME}-${start_pos}.out,"
-    start_count[$count_idx]+=$(( start_pos+PPN ))
+    start_count[$count_idx]=$(( start_pos+PPN ))
     sleep $sleeper
   done
 fi
@@ -92,7 +93,7 @@ if [[ $TESTS =~ 'opx' ]]; then
       start_pos=${start_count[$count_idx]}
       imb_opx $count_idx $start_pos &
       FILES+="${OUTDIR}/OPX-${OUTNAME}-${start_pos}.out,"
-      start_count[$count_idx]+=$(( start_pos+PPN ))
+      start_count[$count_idx]=$(( start_pos+PPN ))
       sleep $sleeper
     done
 fi
