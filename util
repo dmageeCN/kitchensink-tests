@@ -10,12 +10,6 @@ setvar() {
     done
 }
 
-cleanup() {
-    echo "Cleaning up background processes..."
-    kill 0
-}
-trap cleanup EXIT
-
 seconds_since_modified() {
     local fname=$1
     echo $(( $(date +%s) - $(date -r "$fname" +%s) ))
@@ -69,7 +63,10 @@ universal_opts() {
     : ${SIZE:=BYTE} #SMALL, LARGE, BYTE
     : ${TEST_NAME:="Biband"}
     : ${TCP_SIZE:='4:8'} #4:18
-    : ${NJOBS:=2} # N TCP JOBS TO LAUNCH
+    : ${PPN:=4} # PROCS PER NODE
+    : ${NCORES:=16} # N CORES PER NODE
+    : ${TCP_NJOBS:=2} # N TCP JOBS TO LAUNCH
+    : ${OPX_NJOBS:=2} # N TCP JOBS TO LAUNCH
     : ${KITCHENSINK:=1} # RUN ALL TESTS: OR
     : ${NNODES:=2} # NUMBER OF NODES: Use a negative to count from the back
     : ${IPADDR:=0} # USE IP ADDRESSES INSTEAD OF HOSTNAMES
@@ -77,11 +74,13 @@ universal_opts() {
     : ${TESTS:=opx} # TEST TO RUN IF KITCHENSINK == 0
     : ${SMALL_ITER:=20000} # NITERATIONS SMALL CASE
     : ${LARGE_ITER:=200} # NITERATIONS LARGE CASE
-    : ${BYTE_ITER:=100}
-    : ${TCP_ITER:=1000}
-    : ${SLEEP:=true}
-    export OUTDIR END_MIN TIME_LIMIT SIZE TEST_NAME TCP_SIZE PPN PPN_ALL NJOBS KITCHENSINK NNODES
-    export IPADDR NSD_HFI TESTS SMALL_ITER LARGE_ITER BYTE_ITER TCP_ITER SLEEP
+    : ${BYTE_ITER:=100} # NITERATIONS BYTE CASE
+    : ${TCP_ITER:=1000} # NITERATIONS TCP CASE
+    : ${SLEEP:=true} # SLEEP TO STAGGER LAUNCHES?
+    : ${UNIT_TEST:=false} # CHECK LAUNCH CONFIGS?
+    export OUTDIR END_MIN TIME_LIMIT SIZE TEST_NAME TCP_SIZE PPN NCORES
+    export NCORES TCP_NJOBS OPX_NJOBS KITCHENSINK NNODES IPADDR NSD_HFI
+    export TESTS SMALL_ITER LARGE_ITER BYTE_ITER TCP_ITER SLEEP UNIT_TEST
     export SUMMARY_OUT="${OUTDIR}/summary.out"
     export END_SEC=$(( END_MIN*60 ))
     export HALFLIM=$(( (TIME_LIMIT/4)*3 ))
@@ -158,13 +157,19 @@ imb_tcp () {
 
   #LAUNCH
   OUTFILE="${OUTDIR}/TCP-${OUTNAME}-${ifidx}.out"
-  FILES+=("${OUTDIR}/OPX-${OUTNAME}-${startproc}.out")
   TCP_ARGS="-npmin 99999 -msglog ${TCP_SIZE} -time 1000 -iter ${TCP_ITER}"
+  if [[ $UNIT_TEST == 'true' ]]; then
+    echo "TCP - ${startproc} - $TCP_IFACE"
+    echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} IMB-MPI1 $TEST_NAME ${TCP_ARGS}" >> $OUTFILE
+    env | grep FI
+    env | grep I_MPI
+    return 0
+  fi
   i=1
   while true; do
-    echo "TCP N${nlaunch} - ITERATION ${i} :: $(date) " | tee -a ${OUTFILE} ${SUMMARY_OUT}
-    echo "mpirun -np $NPROCS -ppn $PPN -host ${hosts} IMB-MPI1 $TEST_NAME ${TCP_ARGS}" >> $OUTFILE
-    mpirun -np $NPROCS -ppn $PPN -host ${hosts} IMB-MPI1 $TEST_NAME ${TCP_ARGS} &>> $OUTFILE
+    echo "TCP N${startproc} - ITERATION ${i} :: $(date) " | tee -a ${OUTFILE} ${SUMMARY_OUT}
+    echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} IMB-MPI1 $TEST_NAME ${TCP_ARGS}" >> $OUTFILE
+    mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} IMB-MPI1 $TEST_NAME ${TCP_ARGS} &>> $OUTFILE
     sleep $sleeper
     i=$(( i+1 ))
   done
@@ -194,10 +199,17 @@ imb_opx () {
   OUTFILE="${OUTDIR}/OPX-${OUTNAME}-${startproc}.out"
   IMB_ARGS="-npmin 99999 ${SIZE_FINAL} -time 10000 -iter ${ITER_FINAL}"
   i=1
+  if [[ $UNIT_TEST == 'true' ]]; then
+    echo "OPX - ${startproc} - $hfiidx"
+    echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} IMB-MPI1 $TEST_NAME ${IMB_ARGS}" >> $OUTFILE
+    env | grep FI
+    env | grep I_MPI
+    return 0
+  fi
   while true; do
     echo "OPX N${startproc} - ITERATION $i :: $(date)" | tee -a $OUTFILE ${SUMMARY_OUT}
-    echo "mpirun -np $NPROCS -ppn $PPN -host ${hosts} IMB-MPI1 $TEST_NAME ${IMB_ARGS}" >> $OUTFILE
-    mpirun -np $NPROCS -ppn $PPN -host ${hosts} IMB-MPI1 $TEST_NAME ${IMB_ARGS} &>> $OUTFILE
+    echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} IMB-MPI1 $TEST_NAME ${IMB_ARGS}" >> $OUTFILE
+    mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} IMB-MPI1 $TEST_NAME ${IMB_ARGS} &>> $OUTFILE
     sleep $sleeper
     i=$(( i+1 ))
   done
@@ -207,6 +219,12 @@ run_run-nsdperf() {
   srv=$1
   cln=$2
   outfile=$3
+  if [[ $UNIT_TEST == 'true' ]]; then
+    echo "./run-nsdperf.sh $srv $cln hfi1_${NSD_HFI}:2" >> $OUTFILE
+    echo "clients: $(cat $cln)"
+    echo "servers: $(cat $srv)"
+    return 0
+  fi
   cd nsdperf
   i=1
   while true; do
