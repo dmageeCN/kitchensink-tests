@@ -15,7 +15,15 @@ seconds_since_modified() {
     echo $(( $(date +%s) - $(date -r "$fname" +%s) ))
 }
 
-get_nodes(){
+### GLOBAL VARS
+export INTEL_SETVARS=/opt/intel/oneapi/setvars.sh
+export SINIT=$SECONDS
+export THEDATE=$(date +'%m-%d_%H-%M')
+export ORIG_PATH=$(pwd)
+export NHFI=$(opainfo | grep -c Active)
+
+### GET STUFF
+get_nodes() {
     nodes=$1
     total_nodes=$2
     if [[ $nodes -gt 0 ]]; then
@@ -28,7 +36,6 @@ get_nodes(){
 get_ports(){
   hostlist=$1
   hostarray=($(echo $hostlist | tr ',' '\n'))  
-  NHFI=$(opainfo | grep -c Active)
   hfi_nums=$(( NHFI-1 ))
   port_f=""
   for k in $(seq $hfi_nums); do
@@ -41,13 +48,14 @@ get_ports(){
 }
 
 get_ifaces() {
-    ifconfig |& awk '/d1/ {print $1}' | tr -d :
+    if_out=$(ifconfig &> /dev/null)
+    if [[ $if_out =~ 'opa_ib0' ]]; then
+        var=$(for k in $(seq $NHFI); do echo 'opa_ib0'; done)
+        echo "$var"
+        return 0
+    fi    
+    echo "$if_out" |& awk '/d1/ {print $1}' | tr -d :
 }
-
-export INTEL_SETVARS=/opt/intel/oneapi/setvars.sh
-export SINIT=$SECONDS
-export THEDATE=$(date +'%m-%d_%H-%M')
-export ORIG_PATH=$(pwd)
 
 get_swguid() {
     swguid_full=$(opaextractlids |& awk -F';' '/SW/ {print $1}' | head -1)

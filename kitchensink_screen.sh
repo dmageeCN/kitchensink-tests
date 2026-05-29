@@ -22,8 +22,11 @@ fi
 
 source $THISDIR/util
 
-host_prefix=$(hostname | cut -c-2)
-
+if which srun &> /dev/null; then
+  host_prefix=slurm
+else
+  host_prefix=$(hostname | cut -c-2)
+fi
 source $THISDIR/config-${host_prefix}.sh
 
 get_swguid
@@ -41,7 +44,6 @@ if [[ $TOTAL_PROCS -gt $NCORES ]]; then
     exit 1
 fi
 
-NHFI=$(opainfo | grep -c Active)
 HALF_CORES=$(( NCORES/2 ))
 start_count=(0 $HALF_CORES)
 
