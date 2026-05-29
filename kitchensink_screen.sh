@@ -34,7 +34,7 @@ cleanup() {
     source $INTEL_SETVARS &> /dev/null
     export FI_PROVIDER=opx
     echo "Cleaning up background processes..."
-    mpirun -np $NNODES -ppn 1 -host ${HOSTS} pkill -9 nsdperf
+    mpirun -np $NNODES -ppn 1 -host ${HOSTS} pkill -9 nsdperf &> /dev/null
     kill 0
 }
 trap cleanup EXIT
@@ -83,7 +83,7 @@ echo "TESTS: ${TESTS}, PPN: ${PPN}, SIZE: ${SIZE}"
 FILES=''
 if [[ $TESTS =~ 'tcp' ]]; then
   for k in $(seq $TCP_NJOBS); do
-    count_idx=$(( (k-1)%$NHFI ))
+    count_idx=$(( (k-1)%NHFI ))
     start_pos=${start_count[$count_idx]}
     imb_tcp $count_idx $start_pos &
     FILES+="${OUTDIR}/TCP-${OUTNAME}-${start_pos}.out,"
@@ -94,7 +94,7 @@ fi
 
 if [[ $TESTS =~ 'opx' ]]; then
     for k in $(seq $OPX_NJOBS); do
-      count_idx=$(( (k-1)%$NHFI ))
+      count_idx=$(( (k-1)%NHFI ))
       start_pos=${start_count[$count_idx]}
       imb_opx $count_idx $start_pos &
       FILES+="${OUTDIR}/OPX-${OUTNAME}-${start_pos}.out,"

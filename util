@@ -48,7 +48,7 @@ get_ports(){
 }
 
 get_ifaces() {
-    if_out=$(ifconfig &> /dev/null)
+    if_out=$(ifconfig 2> /dev/null)
     if [[ $if_out =~ 'opa_ib0' ]]; then
         var=$(for k in $(seq $NHFI); do echo 'opa_ib0'; done)
         echo "$var"
