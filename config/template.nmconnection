@@ -1,0 +1,14 @@
+[connection]
+id=<cxid>
+type=infiniband
+interface-name=<cxid>
+
+[infiniband]
+transport-mode=datagram
+
+[ipv4]
+address1=10.228.22<if_ip>.<node_ip>/16
+method=manual
+
+[ipv6]
+method=ignore

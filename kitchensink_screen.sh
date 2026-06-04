@@ -83,9 +83,11 @@ echo "TESTS: ${TESTS}, PPN: ${PPN}, SIZE: ${SIZE}"
 FILES=''
 if [[ $TESTS =~ 'tcp' ]]; then
   for k in $(seq $TCP_NJOBS); do
-    count_idx=$(( (k-1)%NHFI ))
+    count_idx=$(( (k-1)%2 ))
+    hfi_idx=$(( (k-1)%NHFI ))
     start_pos=${start_count[$count_idx]}
-    imb_tcp $count_idx $start_pos &
+    echo "+++TCP+$k++ imb_tcp $hfi_idx $start_pos"
+    imb_tcp $hfi_idx $start_pos &
     FILES+="${OUTDIR}/TCP-${OUTNAME}-${start_pos}.out,"
     start_count[$count_idx]=$(( start_pos+PPN ))
     sleep $sleeper
@@ -94,9 +96,11 @@ fi
 
 if [[ $TESTS =~ 'opx' ]]; then
     for k in $(seq $OPX_NJOBS); do
-      count_idx=$(( (k-1)%NHFI ))
+      count_idx=$(( (k-1)%2 ))
+      hfi_idx=$(( (k-1)%NHFI ))
       start_pos=${start_count[$count_idx]}
-      imb_opx $count_idx $start_pos &
+      echo "+++OPX+$k++ imb_opx $hfi_idx $start_pos"
+      imb_opx $hfi_idx $start_pos &
       FILES+="${OUTDIR}/OPX-${OUTNAME}-${start_pos}.out,"
       start_count[$count_idx]=$(( start_pos+PPN ))
       sleep $sleeper

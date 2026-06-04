@@ -168,14 +168,14 @@ imb_tcp () {
   TCP_ARGS="-npmin 99999 -msglog ${TCP_SIZE} -time 1000 -iter ${TCP_ITER}"
   if [[ $UNIT_TEST == 'true' ]]; then
     echo "TCP - ${startproc} - $TCP_IFACE"
-    echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} IMB-MPI1 $TEST_NAME ${TCP_ARGS}" >> $OUTFILE
+    echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} IMB-MPI1 $TEST_NAME ${TCP_ARGS} $OUTFILE"
     env | grep FI
     env | grep I_MPI
     return 0
   fi
   i=1
   while true; do
-    echo "TCP N${startproc} - ITERATION ${i} :: $(date) " | tee -a ${OUTFILE} ${SUMMARY_OUT}
+    echo "TCP N${startproc} - ITERATION ${i} - IFACE ${TCP_IFACE} :: $(date) " | tee -a ${OUTFILE} ${SUMMARY_OUT}
     echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} IMB-MPI1 $TEST_NAME ${TCP_ARGS}" >> $OUTFILE
     mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} IMB-MPI1 $TEST_NAME ${TCP_ARGS} &>> $OUTFILE
     sleep $sleeper
@@ -209,7 +209,7 @@ imb_opx () {
   i=1
   if [[ $UNIT_TEST == 'true' ]]; then
     echo "OPX - ${startproc} - $hfiidx"
-    echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} IMB-MPI1 $TEST_NAME ${IMB_ARGS}" >> $OUTFILE
+    echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} IMB-MPI1 $TEST_NAME ${IMB_ARGS} $OUTFILE"
     env | grep FI
     env | grep I_MPI
     return 0
@@ -228,7 +228,7 @@ run_run-nsdperf() {
   cln=$2
   outfile=$3
   if [[ $UNIT_TEST == 'true' ]]; then
-    echo "./run-nsdperf.sh $srv $cln hfi1_${NSD_HFI}:2" >> $OUTFILE
+    echo "./run-nsdperf.sh $srv $cln hfi1_${NSD_HFI}:2 $outfile"
     echo "clients: $(cat $cln)"
     echo "servers: $(cat $srv)"
     return 0
