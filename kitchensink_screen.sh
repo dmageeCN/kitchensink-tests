@@ -75,10 +75,14 @@ sleeper=1
 if [[ $UNIT_TEST == 'false' ]]; then
   mkdir -p $OUTDIR
   sleeper=3
+else  
+  export SUMMARY_OUT=/tmp/unit-test-summary
 fi
 
 echo "OUTDIR: $OUTDIR"
-echo "TESTS: ${TESTS}, PPN: ${PPN}, SIZE: ${SIZE}"
+echo "TESTS: ${TESTS}, PPN: ${PPN}, SIZE: ${SIZE}"  | tee -a ${SUMMARY_OUT}
+echo "TCP JOBS: ${TCP_NJOBS}, OPX_JOBS: ${OPX_NJOBS}"  | tee -a ${SUMMARY_OUT}
+echo "NSD_HFI: ${NSD_HFI}, HFI_CYCLE: ${HFI_CYCLE}"  | tee -a ${SUMMARY_OUT}
 
 FILES=''
 if [[ $TESTS =~ 'tcp' ]]; then

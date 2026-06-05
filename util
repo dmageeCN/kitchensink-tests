@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#SBATCH -p icelake
-#SBATCH --reservation=icx
+# TRY THIS ENV VAR:
+# FI_OPX_RELIABILITY_SERVICE_USEC_MAX=5000
 
 setvar() {
     while [[ $# -gt 0 ]]; do
@@ -57,6 +57,8 @@ get_ifaces() {
     echo "$if_out" |& awk '/d1/ {print $1}' | tr -d :
 }
 
+export -f get_ifaces
+
 get_swguid() {
     swguid_full=$(opaextractlids |& awk -F';' '/SW/ {print $1}' | head -1)
     SWGUID="${swguid_full: -6}"
@@ -78,7 +80,7 @@ universal_opts() {
     : ${KITCHENSINK:=1} # RUN ALL TESTS: OR
     : ${NNODES:=2} # NUMBER OF NODES: Use a negative to count from the back
     : ${IPADDR:=0} # USE IP ADDRESSES INSTEAD OF HOSTNAMES
-    : ${NSD_HFI:=0} #USE THIS HFI FOR NSDPERF
+    : ${NSD_HFI:='cycle'} #USE THIS HFI FOR NSDPERF OR cycle
     : ${TESTS:=opx} # TEST TO RUN IF KITCHENSINK == 0
     : ${SMALL_ITER:=20000} # NITERATIONS SMALL CASE
     : ${LARGE_ITER:=200} # NITERATIONS LARGE CASE
@@ -86,9 +88,10 @@ universal_opts() {
     : ${TCP_ITER:=1000} # NITERATIONS TCP CASE
     : ${SLEEP:=true} # SLEEP TO STAGGER LAUNCHES?
     : ${UNIT_TEST:=false} # CHECK LAUNCH CONFIGS?
+    : ${HFI_CYCLE:='none'} # HOW TO CYCLE THROUGH HFI's in a job. rr, random, chunk, none
     export OUTDIR END_MIN TIME_LIMIT SIZE TEST_NAME TCP_SIZE PPN NCORES
     export NCORES TCP_NJOBS OPX_NJOBS KITCHENSINK NNODES IPADDR NSD_HFI
-    export TESTS SMALL_ITER LARGE_ITER BYTE_ITER TCP_ITER SLEEP UNIT_TEST
+    export TESTS SMALL_ITER LARGE_ITER BYTE_ITER TCP_ITER SLEEP UNIT_TEST HFI_CYCLE
     export SUMMARY_OUT="${OUTDIR}/summary.out"
     export END_SEC=$(( END_MIN*60 ))
     export HALFLIM=$(( (TIME_LIMIT/4)*3 ))
@@ -135,6 +138,12 @@ setup_nsdperf() {
     export NNODES=${NNODES#-}
 }
 
+CMD=""
+if [[ ! ($HFI_CYCLE == 'none') ]]; then
+    CMD+="${THISDIR}/kitchensink_wrap "
+fi
+CMD+="IMB-MPI1 $TEST_NAME"
+
 export I_MPI_PIN_INFO=1
 export I_MPI_DEBUG=5
 # Takes iface_index starting_core.
@@ -168,16 +177,16 @@ imb_tcp () {
   TCP_ARGS="-npmin 99999 -msglog ${TCP_SIZE} -time 1000 -iter ${TCP_ITER}"
   if [[ $UNIT_TEST == 'true' ]]; then
     echo "TCP - ${startproc} - $TCP_IFACE"
-    echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} IMB-MPI1 $TEST_NAME ${TCP_ARGS} $OUTFILE"
+    echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} ${CMD} ${TCP_ARGS} $OUTFILE"
     env | grep FI
     env | grep I_MPI
     return 0
   fi
   i=1
   while true; do
-    echo "TCP N${startproc} - ITERATION ${i} - IFACE ${TCP_IFACE} :: $(date) " | tee -a ${OUTFILE} ${SUMMARY_OUT}
-    echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} IMB-MPI1 $TEST_NAME ${TCP_ARGS}" >> $OUTFILE
-    mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} IMB-MPI1 $TEST_NAME ${TCP_ARGS} &>> $OUTFILE
+    echo "TCP N${startproc} - ITERATION ${i} :: $(date) " | tee -a ${OUTFILE} ${SUMMARY_OUT}
+    echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} ${CMD} ${TCP_ARGS}" >> $OUTFILE
+    mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} ${CMD} ${TCP_ARGS} &>> $OUTFILE
     sleep $sleeper
     i=$(( i+1 ))
   done
@@ -209,15 +218,15 @@ imb_opx () {
   i=1
   if [[ $UNIT_TEST == 'true' ]]; then
     echo "OPX - ${startproc} - $hfiidx"
-    echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} IMB-MPI1 $TEST_NAME ${IMB_ARGS} $OUTFILE"
+    echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} ${CMD} ${IMB_ARGS} $OUTFILE"
     env | grep FI
     env | grep I_MPI
     return 0
   fi
   while true; do
     echo "OPX N${startproc} - ITERATION $i :: $(date)" | tee -a $OUTFILE ${SUMMARY_OUT}
-    echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} IMB-MPI1 $TEST_NAME ${IMB_ARGS}" >> $OUTFILE
-    mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} IMB-MPI1 $TEST_NAME ${IMB_ARGS} &>> $OUTFILE
+    echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} ${CMD} ${IMB_ARGS}" >> $OUTFILE
+    mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} ${CMD} ${IMB_ARGS} &>> $OUTFILE
     sleep $sleeper
     i=$(( i+1 ))
   done
@@ -236,8 +245,13 @@ run_run-nsdperf() {
   cd nsdperf
   i=1
   while true; do
+    if [[ ${NSD_HFI} == 'cycle' ]]; then
+        hfi_id=$(( i%NHFI ))
+    else
+        hfi_id=$NSD_HFI
+    fi
     echo "------ nsdperf ITERATION: ${i} $(date) -----" | tee -a $outfile ${SUMMARY_OUT}
-    ./run-nsdperf.sh $srv $cln hfi1_${NSD_HFI}:2 &>> $outfile
+    ./run-nsdperf.sh $srv $cln hfi1_${hfi_id}:2 &>> $outfile
     sleep 1
     i=$(( i+1 ))
   done

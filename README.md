@@ -21,6 +21,8 @@ Create a new config based on server names and populate it with the hostnames, IP
 
 That being said, groups of servers with different names CAN be run together under this script. The user can set set HOSTNM as a comma delimited list of hosts and the PPN variables on the command line.
 
+**BEWARE**: If the servers don't have iommu=pt set on their boot line TCP just won't work. Check it with `cat /proc/cmdline`. If it's not there, `grubby --update-kernel=ALL --args="iommu=pt"` will fix it. Then reboot. (For all servers)
+
 ### Get SW/FW
 
 Grab sw and fw from the shared space, i.e. phwfstl030 and transfer to the new servers.
@@ -106,6 +108,8 @@ You can check for the ib_ipoib kernel module with lsmod.
 If it's there look for it on `ifconfig`.
 If you see an ip address there, it's probably done, but double check with `nmcli connection show`.
 The interfaces (ifname: ib*d1) should show up in green.
+
+Make sure eth0 is there too. If not, make a similar config for eth0 (For all servers).
 
 **NOTE:** If there's two hfis there should be two ifnames. The correct ifnames are the names that end in d1 (this refers to the second port on the NIC which is the active port).
 
