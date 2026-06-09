@@ -82,8 +82,6 @@ universal_opts() {
     : ${SIZE:=BYTE} #SMALL, LARGE, BYTE
     : ${TEST_NAME:="Biband"}
     : ${TCP_SIZE:='4:8'} #4:18
-    : ${PPN:=4} # PROCS PER NODE
-    : ${NCORES:=16} # N CORES PER NODE
     : ${TCP_NJOBS:=2} # N TCP JOBS TO LAUNCH
     : ${OPX_NJOBS:=2} # N TCP JOBS TO LAUNCH
     : ${KITCHENSINK:=1} # RUN ALL TESTS: OR
