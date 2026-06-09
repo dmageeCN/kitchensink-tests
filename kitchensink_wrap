@@ -5,12 +5,12 @@ LOCAL_RANK=$MPI_LOCALRANKID
 LOCAL_SIZE=$MPI_LOCALNRANKS
 
 hid=0
-echo "$HN: $LOCAL_RANK: FI_TCP_IFACE=$FI_TCP_IFACE I_MPI_OFI_INTERFACE=$I_MPI_OFI_INTERFACE"
+# echo "$HN: $LOCAL_RANK: FI_TCP_IFACE=$FI_TCP_IFACE I_MPI_OFI_INTERFACE=$I_MPI_OFI_INTERFACE"
 
-if [[ $LOCAL_RANK == 0 ]]; then
-    env | grep FI
-    env | grep MPI
-fi
+# if [[ $LOCAL_RANK == 0 ]]; then
+#     env | grep FI
+#     env | grep MPI
+# fi
 
 case "$HFI_CYCLE" in
     rr)

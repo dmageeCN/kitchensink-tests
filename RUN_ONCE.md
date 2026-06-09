@@ -12,7 +12,7 @@ export I_MPI_DEBUG=12
 
 ## OPTIONAL
 export FI_LOG_LEVEL=debug
-export I_MPI_PIN_PROCESSOR_LIST="0-3"s
+export I_MPI_PIN_PROCESSOR_LIST="0-3"
 
 ## IF OPX
 export FI_OPX_HFI_SELECT=0 # SOME HFI ID

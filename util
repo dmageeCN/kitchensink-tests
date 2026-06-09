@@ -166,14 +166,14 @@ imb_tcp () {
     # CHOOSE IFACE
     ifidx=$1
     IFACE=$HFI_CYCLE
-    if [[ $HFI_CYCLE == 'none' ]]; then
-        IFACES=$(get_ifaces)
-        IFACE_A=($IFACES)
-        IFACE=${IFACE_A[$ifidx]}
-        export FI_TCP_IFACE=$IFACE
-        export I_MPI_OFI_INTERFACE=$IFACE
-        export FI_IFACE=$IFACE
-    fi
+    # if [[ $HFI_CYCLE == 'none' ]]; then
+    IFACES=$(get_ifaces)
+    IFACE_A=($IFACES)
+    IFACE=${IFACE_A[$ifidx]}
+    export FI_TCP_IFACE=$IFACE
+    export I_MPI_OFI_INTERFACE=$IFACE
+    export FI_IFACE=$IFACE
+    # fi
     NPROCS=$(( NNODES*PPN ))
 
     # CHOSE CORES
@@ -187,7 +187,8 @@ imb_tcp () {
 
     #LAUNCH
     OUTFILE="${OUTDIR}/TCP-${OUTNAME}-${ifidx}.out"
-    CMD=$(start_cmd)
+    # CMD=$(start_cmd)
+    CMD="IMB-MPI1 $TEST_NAME -npmin 99999 -time 1000"
     CMD+=" -msglog ${TCP_SIZE} -iter ${TCP_ITER}"
     if [[ $UNIT_TEST == 'true' ]]; then
         echo "TCP - ${startproc} - $IFACE"
@@ -198,7 +199,7 @@ imb_tcp () {
     fi
     i=1
     while true; do
-        echo "TCP N${startproc} - ITERATION ${i} - IFACE: ${IFACE} $:: $(date) " | tee -a ${OUTFILE} ${SUMMARY_OUT}
+        echo "TCP N${startproc} - ITERATION ${i} - IFACE: ${IFACE} :: $(date) " | tee -a ${OUTFILE} ${SUMMARY_OUT}
         echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} ${CMD}" >> $OUTFILE
         mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} ${CMD} &>> $OUTFILE
         sleep $sleeper
