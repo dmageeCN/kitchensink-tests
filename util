@@ -147,11 +147,14 @@ setup_nsdperf() {
     export NNODES=${NNODES#-}
 }
 
-CMD=""
-if [[ ! ($HFI_CYCLE == 'none') ]]; then
-    CMD+="${THISDIR}/kitchensink_wrap "
-fi
-CMD+="IMB-MPI1 $TEST_NAME"
+start_cmd() {
+    CMD=""
+    if [[ ! ($HFI_CYCLE == 'none') ]]; then
+        CMD+="${THISDIR}/kitchensink_wrap "
+    fi
+    CMD+="IMB-MPI1 $TEST_NAME -npmin 99999 -time 1000"
+    echo $CMD
+}
 
 export I_MPI_PIN_INFO=1
 export I_MPI_DEBUG=5
@@ -183,10 +186,11 @@ imb_tcp () {
 
   #LAUNCH
   OUTFILE="${OUTDIR}/TCP-${OUTNAME}-${ifidx}.out"
-  TCP_ARGS="-npmin 99999 -msglog ${TCP_SIZE} -time 1000 -iter ${TCP_ITER}"
+  CMD=$(start_cmd)
+  CMD+=" -msglog ${TCP_SIZE} -iter ${TCP_ITER}"
   if [[ $UNIT_TEST == 'true' ]]; then
     echo "TCP - ${startproc} - $TCP_IFACE"
-    echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} ${CMD} ${TCP_ARGS} $OUTFILE"
+    echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} ${CMD} > $OUTFILE"
     env | grep FI
     env | grep I_MPI
     return 0
@@ -194,8 +198,8 @@ imb_tcp () {
   i=1
   while true; do
     echo "TCP N${startproc} - ITERATION ${i} :: $(date) " | tee -a ${OUTFILE} ${SUMMARY_OUT}
-    echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} ${CMD} ${TCP_ARGS}" >> $OUTFILE
-    mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} ${CMD} ${TCP_ARGS} &>> $OUTFILE
+    echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} ${CMD}" >> $OUTFILE
+    mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} ${CMD} &>> $OUTFILE
     sleep $sleeper
     i=$(( i+1 ))
   done
@@ -223,19 +227,20 @@ imb_opx () {
 
   # LAUNCH
   OUTFILE="${OUTDIR}/OPX-${OUTNAME}-${startproc}.out"
-  IMB_ARGS="-npmin 99999 ${SIZE_FINAL} -time 10000 -iter ${ITER_FINAL}"
+  CMD=$(start_cmd)
+  CMD+=" ${SIZE_FINAL} -iter ${ITER_FINAL}"
   i=1
   if [[ $UNIT_TEST == 'true' ]]; then
     echo "OPX - ${startproc} - $hfiidx"
-    echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} ${CMD} ${IMB_ARGS} $OUTFILE"
+    echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} ${CMD} > $OUTFILE"
     env | grep FI
     env | grep I_MPI
     return 0
   fi
   while true; do
     echo "OPX N${startproc} - ITERATION $i :: $(date)" | tee -a $OUTFILE ${SUMMARY_OUT}
-    echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} ${CMD} ${IMB_ARGS}" >> $OUTFILE
-    mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} ${CMD} ${IMB_ARGS} &>> $OUTFILE
+    echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} ${CMD}" >> $OUTFILE
+    mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} ${CMD} &>> $OUTFILE
     sleep $sleeper
     i=$(( i+1 ))
   done
