@@ -158,115 +158,119 @@ export I_MPI_PIN_INFO=1
 export I_MPI_DEBUG=5
 # Takes iface_index starting_core.
 imb_tcp () {
-  # BASIC SETUP
-  export I_MPI_OFI_LIBRARY_INTERNAL=1
-  source $INTEL_SETVARS &> /dev/null
-  export FI_PROVIDER=tcp
+    # BASIC SETUP
+    export I_MPI_OFI_LIBRARY_INTERNAL=1
+    source $INTEL_SETVARS &> /dev/null
+    export FI_PROVIDER=tcp
 
-  # CHOOSE IFACE
-  IFACES=$(get_ifaces)
-  IFACE_A=($IFACES)
-  ifidx=$1
-  export TCP_IFACE=${IFACE_A[$ifidx]}
-  export FI_TCP_IFACE=$TCP_IFACE
-  export I_MPI_OFI_INTERFACE=$TCP_IFACE
-  export FI_IFACE=$TCP_IFACE
-  NPROCS=$(( NNODES*PPN ))
+    # CHOOSE IFACE
+    if [[ $HFI_CYCLE == 'none' ]]; then
+        IFACES=$(get_ifaces)
+        IFACE_A=($IFACES)
+        ifidx=$1
+        export TCP_IFACE=${IFACE_A[$ifidx]}
+        export FI_TCP_IFACE=$TCP_IFACE
+        export I_MPI_OFI_INTERFACE=$TCP_IFACE
+        export FI_IFACE=$TCP_IFACE
+    fi
+    NPROCS=$(( NNODES*PPN ))
 
-  # CHOSE CORES
-  startproc=$2
-  sleeper=$(( startproc/2 ));
-  if [[ $SLEEP == 'false' ]]; then
-    sleeper=0
-  fi
-  endproc=$(( startproc+PPN-1 ))
-  export I_MPI_PIN_PROCESSOR_LIST="${startproc}-${endproc}"
+    # CHOSE CORES
+    startproc=$2
+    sleeper=$(( startproc/2 ));
+    if [[ $SLEEP == 'false' ]]; then
+        sleeper=0
+    fi
+    endproc=$(( startproc+PPN-1 ))
+    export I_MPI_PIN_PROCESSOR_LIST="${startproc}-${endproc}"
 
-  #LAUNCH
-  OUTFILE="${OUTDIR}/TCP-${OUTNAME}-${ifidx}.out"
-  CMD=$(start_cmd)
-  CMD+=" -msglog ${TCP_SIZE} -iter ${TCP_ITER}"
-  if [[ $UNIT_TEST == 'true' ]]; then
-    echo "TCP - ${startproc} - $TCP_IFACE"
-    echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} ${CMD} > $OUTFILE"
-    env | grep FI
-    env | grep I_MPI
-    return 0
-  fi
-  i=1
-  while true; do
-    echo "TCP N${startproc} - ITERATION ${i} :: $(date) " | tee -a ${OUTFILE} ${SUMMARY_OUT}
-    echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} ${CMD}" >> $OUTFILE
-    mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} ${CMD} &>> $OUTFILE
-    sleep $sleeper
-    i=$(( i+1 ))
-  done
+    #LAUNCH
+    OUTFILE="${OUTDIR}/TCP-${OUTNAME}-${ifidx}.out"
+    CMD=$(start_cmd)
+    CMD+=" -msglog ${TCP_SIZE} -iter ${TCP_ITER}"
+    if [[ $UNIT_TEST == 'true' ]]; then
+        echo "TCP - ${startproc} - $TCP_IFACE"
+        echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} ${CMD} > $OUTFILE"
+        env | grep FI
+        env | grep I_MPI
+        return 0
+    fi
+    i=1
+    while true; do
+        echo "TCP N${startproc} - ITERATION ${i} :: $(date) " | tee -a ${OUTFILE} ${SUMMARY_OUT}
+        echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} ${CMD}" >> $OUTFILE
+        mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} ${CMD} &>> $OUTFILE
+        sleep $sleeper
+        i=$(( i+1 ))
+    done
 }
 
 imb_opx () {
-  # BASIC SETUP
-  export I_MPI_OFI_LIBRARY_INTERNAL=0
-  source $INTEL_SETVARS &> /dev/null
-  export FI_PROVIDER=opx
+    # BASIC SETUP
+    export I_MPI_OFI_LIBRARY_INTERNAL=0
+    source $INTEL_SETVARS &> /dev/null
+    export FI_PROVIDER=opx
 
-  # CHOOSE HFI
-  hfiidx=$1
-  export FI_OPX_HFI_SELECT=$hfiidx
-  NPROCS=$(( NNODES*PPN ))
+    # CHOOSE HFI
+    hfiidx=$1
+    if [[ $HFI_CYCLE == 'none' ]]; then
+        export FI_OPX_HFI_SELECT=$hfiidx
+    fi
+    NPROCS=$(( NNODES*PPN ))
 
   # CHOOSE CORES
-  startproc=$2
-  sleeper=$(( startproc/2 ))
-  if [[ $SLEEP == 'false' ]]; then
-    sleeper=0
-  fi
-  endproc=$(( startproc+PPN-1 ))
-  export I_MPI_PIN_PROCESSOR_LIST="${startproc}-${endproc}"
+    startproc=$2
+    sleeper=$(( startproc/2 ))
+    if [[ $SLEEP == 'false' ]]; then
+        sleeper=0
+    fi
+    endproc=$(( startproc+PPN-1 ))
+    export I_MPI_PIN_PROCESSOR_LIST="${startproc}-${endproc}"
 
-  # LAUNCH
-  OUTFILE="${OUTDIR}/OPX-${OUTNAME}-${startproc}.out"
-  CMD=$(start_cmd)
-  CMD+=" ${SIZE_FINAL} -iter ${ITER_FINAL}"
-  i=1
-  if [[ $UNIT_TEST == 'true' ]]; then
-    echo "OPX - ${startproc} - $hfiidx"
-    echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} ${CMD} > $OUTFILE"
-    env | grep FI
-    env | grep I_MPI
-    return 0
-  fi
-  while true; do
-    echo "OPX N${startproc} - ITERATION $i :: $(date)" | tee -a $OUTFILE ${SUMMARY_OUT}
-    echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} ${CMD}" >> $OUTFILE
-    mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} ${CMD} &>> $OUTFILE
-    sleep $sleeper
-    i=$(( i+1 ))
-  done
+    # LAUNCH
+    OUTFILE="${OUTDIR}/OPX-${OUTNAME}-${startproc}.out"
+    CMD=$(start_cmd)
+    CMD+=" ${SIZE_FINAL} -iter ${ITER_FINAL}"
+    i=1
+    if [[ $UNIT_TEST == 'true' ]]; then
+        echo "OPX - ${startproc} - $hfiidx"
+        echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} ${CMD} > $OUTFILE"
+        env | grep FI
+        env | grep I_MPI
+        return 0
+    fi
+    while true; do
+        echo "OPX N${startproc} - ITERATION $i :: $(date)" | tee -a $OUTFILE ${SUMMARY_OUT}
+        echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} ${CMD}" >> $OUTFILE
+        mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} ${CMD} &>> $OUTFILE
+        sleep $sleeper
+        i=$(( i+1 ))
+    done
 }
 
 run_run-nsdperf() {
-  srv=$1
-  cln=$2
-  outfile=$3
-  if [[ $UNIT_TEST == 'true' ]]; then
-    echo "./run-nsdperf.sh $srv $cln hfi1_${NSD_HFI}:2 $outfile"
-    echo "clients: $(cat $cln)"
-    echo "servers: $(cat $srv)"
-    return 0
-  fi
-  cd nsdperf
-  i=1
-  while true; do
-    if [[ ${NSD_HFI} == 'cycle' ]]; then
-        hfi_id=$(( i%NHFI ))
-    else
-        hfi_id=$NSD_HFI
+    srv=$1
+    cln=$2
+    outfile=$3
+    if [[ $UNIT_TEST == 'true' ]]; then
+        echo "./run-nsdperf.sh $srv $cln hfi1_${NSD_HFI}:2 $outfile"
+        echo "clients: $(cat $cln)"
+        echo "servers: $(cat $srv)"
+        return 0
     fi
-    echo "------ nsdperf ITERATION: ${i} $(date) -----" | tee -a $outfile ${SUMMARY_OUT}
-    ./run-nsdperf.sh $srv $cln hfi1_${hfi_id}:2 &>> $outfile
-    sleep 1
-    i=$(( i+1 ))
-  done
+    cd nsdperf
+    i=1
+    while true; do
+        if [[ ${NSD_HFI} == 'cycle' ]]; then
+            hfi_id=$(( i%NHFI ))
+        else
+            hfi_id=$NSD_HFI
+        fi
+        echo "------ nsdperf ITERATION: ${i} $(date) -----" | tee -a $outfile ${SUMMARY_OUT}
+        ./run-nsdperf.sh $srv $cln hfi1_${hfi_id}:2 &>> $outfile
+        sleep 1
+        i=$(( i+1 ))
+    done
 }
 
 check_files() {
@@ -279,8 +283,8 @@ check_files() {
             fstr=$(basename $f)
             sfile=$(seconds_since_modified $f)
             if [[ $sfile -gt $HALFLIM ]]; then
-		        echo "$fstr is getting close: $sfile seconds."
-	        fi
+                echo "$fstr is getting close: $sfile seconds."
+            fi
             if [[ $sfile -gt $TIME_LIMIT ]]; then
                 echo "--HANG $sfile seconds - $fstr-- Kitchen Sink is DIRTY -- $(date)"
                 echo "TIME SINCE START $(( SECONDS-SINIT )) sec"

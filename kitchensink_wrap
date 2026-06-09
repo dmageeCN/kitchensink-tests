@@ -1,35 +1,39 @@
 #!/bin/bash
 
+HN=$(hostname)
 LOCAL_RANK=$MPI_LOCALRANKID
 LOCAL_SIZE=$MPI_LOCALNRANKS
 
 hid=0
 
 case "$HFI_CYCLE" in
-  rr)
-    hid=$(( LOCAL_RANK%NHFI ))
-    ;;
-  random)
-    hid=$(( RANDOM % 4 ))
-    ;;
-  chunk)
-    chunk=$(( LOCAL_SIZE/NHFI ))
-    if [[ $chunk -lt 1 ]]; then
-        chunk=1
-    fi
-    hid=$(( LOCAL_RANK/chunk ))
-    ;;
+    rr)
+        hid=$(( LOCAL_RANK%NHFI ))
+        ;;
+    random)
+        hid=$(( RANDOM % 4 ))
+        ;;
+    chunk)
+        chunk=$(( LOCAL_SIZE/NHFI ))
+        if [[ $chunk -lt 1 ]]; then
+            chunk=1
+        fi
+        hid=$(( LOCAL_RANK/chunk ))
+        ;;
 esac
 
 if [[ $FI_PROVIDER == 'opx' ]]; then
     export FI_OPX_HFI_SELECT=$hid
+    IFACE=$hid
 elif [[ $FI_PROVIDER == 'tcp' ]]; then
     IFACES=$(get_ifaces)
     IFACE_A=($IFACES)
-    TCP_IFACE=${IFACE_A[$hid]}
-    export FI_TCP_IFACE=$TCP_IFACE
-    export I_MPI_OFI_INTERFACE=$TCP_IFACE
-    export FI_IFACE=$TCP_IFACE
+    IFACE=${IFACE_A[$hid]}
+    export FI_TCP_IFACE=$IFACE
+    export I_MPI_OFI_INTERFACE=$IFACE
+    export FI_IFACE=$IFACE
 fi
+
+echo $HN-$IFACE
 
 "$@"
