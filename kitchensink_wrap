@@ -32,5 +32,4 @@ elif [[ $FI_PROVIDER == 'tcp' ]]; then
     export FI_IFACE=$TCP_IFACE
 fi
 
-## ROUND ROBIN
 "$@"

@@ -23,6 +23,15 @@ export ORIG_PATH=$(pwd)
 export NHFI=$(opainfo | grep -c Active)
 
 ### GET STUFF
+get_config() {
+    HOSTSNM=$(opaextractlids |& awk -F ';' '/FI/ {print $4}' | awk '{print $1}' | sort -nr | uniq | paste -sd ',')
+    CORE_PER_SOCKET=$(lscpu | awk '/^Core/ {print $NF}')
+    SOCKETS=$(lscpu | awk '/^Sock/ {print $NF}')
+    NCORES=$(( SOCKETS*CORE_PER_SOCKET ))
+    export HOSTSNM NCORES
+
+}
+
 get_nodes() {
     nodes=$1
     total_nodes=$2
@@ -79,7 +88,7 @@ universal_opts() {
     : ${OPX_NJOBS:=2} # N TCP JOBS TO LAUNCH
     : ${KITCHENSINK:=1} # RUN ALL TESTS: OR
     : ${NNODES:=2} # NUMBER OF NODES: Use a negative to count from the back
-    : ${IPADDR:=0} # USE IP ADDRESSES INSTEAD OF HOSTNAMES
+    # : ${IPADDR:=0} # USE IP ADDRESSES INSTEAD OF HOSTNAMES
     : ${NSD_HFI:='cycle'} #USE THIS HFI FOR NSDPERF OR cycle
     : ${TESTS:=opx} # TEST TO RUN IF KITCHENSINK == 0
     : ${SMALL_ITER:=20000} # NITERATIONS SMALL CASE
@@ -90,7 +99,7 @@ universal_opts() {
     : ${UNIT_TEST:=false} # CHECK LAUNCH CONFIGS?
     : ${HFI_CYCLE:='none'} # HOW TO CYCLE THROUGH HFI's in a job. rr, random, chunk, none
     export OUTDIR END_MIN TIME_LIMIT SIZE TEST_NAME TCP_SIZE PPN NCORES
-    export NCORES TCP_NJOBS OPX_NJOBS KITCHENSINK NNODES IPADDR NSD_HFI
+    export NCORES TCP_NJOBS OPX_NJOBS KITCHENSINK NNODES NSD_HFI # IPADDR
     export TESTS SMALL_ITER LARGE_ITER BYTE_ITER TCP_ITER SLEEP UNIT_TEST HFI_CYCLE
     export SUMMARY_OUT="${OUTDIR}/summary.out"
     export END_SEC=$(( END_MIN*60 ))
@@ -127,7 +136,7 @@ setup_nsdperf() {
     ## SET UP SERVERS/CLIENTS
     hosts=$1
     nservers=$(echo -n "${hosts//[^,]}" | wc -c)
-    total_nodes=$((nservers+1))
+    total_nodes=$(( nservers+1 ))
     hostidx=$(get_nodes $NNODES $total_nodes)
 
     echo $hosts $hostidx

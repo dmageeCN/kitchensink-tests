@@ -1,3 +1,5 @@
+# SAMPLE ETC HOSTS
+
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
 
@@ -7,8 +9,5 @@
 10.228.221.128 cncc-gnr-004
 10.228.221.141 cots-006
 10.228.221.142 cots-007
-
-#192.168.72.169 cn5kEmerald169-opa
-#192.168.72.175 cn5kEmerald175-opa
-#192.168.72.185 cn5kGranite185-opa
-#192.168.72.186 cn5kGranite186-opa
+10.228.221.145 cots-09
+10.228.221.146 cots-08

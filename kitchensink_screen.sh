@@ -16,12 +16,7 @@ fi
 
 source $THISDIR/util
 
-if which srun &> /dev/null; then
-  host_prefix=slurm
-else
-  host_prefix=$(hostname | cut -c-2)
-fi
-source $THISDIR/config-${host_prefix}.sh
+get_config
 
 get_swguid
 
@@ -39,25 +34,26 @@ cleanup() {
 }
 trap cleanup EXIT
 
-
 TOTAL_JOBS=$(( TCP_NJOBS+OPX_NJOBS ))
-TOTAL_PROCS=$(( TOTAL_JOBS*PPN ))
-if [[ $TOTAL_PROCS -gt $NCORES ]]; then
-    echo "ERROR ERROR"
-    echo "  --- You've launched too many processes: $TOTAL_PROCS."
-    echo "You only have $NCORES cores and launching $TOTAL_JOBS with $PPN procs per node exceeds that."
-    exit 1
+ppn=$(( NCORES/TOTAL_JOBS ))
+if [[ ! (-v $PPN) || ($PPN -gt $ppn) ]]; then
+    export PPN=$ppn
 fi
+
+# TOTAL_PROCS=$(( TOTAL_JOBS*PPN ))
+# if [[ $TOTAL_PROCS -gt $NCORES ]]; then
+#     echo "ERROR ERROR"
+#     echo "  --- You've launched too many processes: $TOTAL_PROCS."
+#     echo "You only have $NCORES cores and launching $TOTAL_JOBS with $PPN procs per node exceeds that."
+#     exit 1
+# fi
 
 HALF_CORES=$(( NCORES/2 ))
 start_count=(0 $HALF_CORES)
 echo $HALF_CORES
 
-# SETUP A FIRST AND SECOND HALF COUNT TO TALLY PUTTING PROCESSES ON CORES
-# FIRST STARTS AT 0 second starts at half count. then add PPN to them every time they launch.
-
 HOSTS=$HOSTSNM
-if [[ $IPADDR -ne 0 ]]; then HOSTS=$HOSTSIP; fi
+# if [[ $IPADDR -ne 0 ]]; then HOSTS=$HOSTSIP; fi
 
 export HOSTS
 setup_nsdperf $HOSTS
