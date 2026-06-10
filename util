@@ -162,6 +162,7 @@ imb_tcp () {
     export I_MPI_OFI_LIBRARY_INTERNAL=1
     source $INTEL_SETVARS &> /dev/null
     export FI_PROVIDER=tcp
+    export FI_OPX_RELIABILITY_SERVICE_USEC_MAX=5000
 
     # CHOOSE IFACE
     ifidx=$1
@@ -212,6 +213,7 @@ imb_opx () {
     export I_MPI_OFI_LIBRARY_INTERNAL=0
     source $INTEL_SETVARS &> /dev/null
     export FI_PROVIDER=opx
+    export FI_OPX_RELIABILITY_SERVICE_USEC_MAX=5000
 
     # CHOOSE HFI
     hfiidx=$1
