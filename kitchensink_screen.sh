@@ -8,6 +8,8 @@ THISFILE=${BASH_SOURCE[0]}
 
 THISDIR=$(dirname $(realpath ${THISFILE}))
 
+cd $THISDIR
+
 if [[ ! (-f $THISDIR/util) ]]; then
     echo YOU NEED util.sh in the same directory as this script
     echo in order to run this test
