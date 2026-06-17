@@ -63,7 +63,7 @@ get_ifaces() {
         echo "$var"
         return 0
     fi    
-    echo "$if_out" |& awk '/d1/ {print $1}' | tr -d :
+    echo "$if_out" |& awk '/d1: / {print $1}' | tr -d :
 }
 
 export -f get_ifaces
