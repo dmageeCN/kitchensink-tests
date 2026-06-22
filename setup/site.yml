@@ -1,0 +1,217 @@
+---
+- name: Set up kitchensink test nodes
+  hosts: nodes
+  become: true
+
+  vars_files: []
+
+  tasks:
+
+    # -------------------------------------------------------------------------
+    # IOMMU check / fix
+    # -------------------------------------------------------------------------
+    - name: Check iommu=pt is present in kernel cmdline
+      command: grep -q "iommu=pt" /proc/cmdline
+      register: iommu_check
+      changed_when: false
+      failed_when: false
+
+    - name: Add iommu=pt to all kernel boot entries
+      command: grubby --update-kernel=ALL --args="iommu=pt"
+      when: iommu_check.rc != 0
+      notify: reboot nodes
+
+    # -------------------------------------------------------------------------
+    # /etc/hosts
+    # -------------------------------------------------------------------------
+    - name: Deploy /etc/hosts from repo template
+      copy:
+        src: "{{ playbook_dir }}/../config/hosts"
+        dest: /etc/hosts
+        owner: root
+        group: root
+        mode: "0644"
+
+    # -------------------------------------------------------------------------
+    # yum repo for OPX SW
+    # -------------------------------------------------------------------------
+    - name: Deploy opxs.repo
+      copy:
+        src: "{{ playbook_dir }}/../config/opxs.repo"
+        dest: /etc/yum.repos.d/opxs.repo
+        owner: root
+        group: root
+        mode: "0644"
+
+    # -------------------------------------------------------------------------
+    # Install SW packages
+    # -------------------------------------------------------------------------
+    - name: Install kernel-abi-stablelists
+      dnf:
+        name: kernel-abi-stablelists
+        state: present
+
+    - name: Install build and NUMA utilities
+      dnf:
+        name:
+          - cmake
+          - pkgconfig
+          - numactl
+          - hwloc
+          - hwloc-devel
+        state: present
+
+    - name: Install pdsh
+      dnf:
+        name:
+          - pdsh
+          - pdsh-rcmd-ssh
+        state: present
+
+    - name: Remove pdsh-rcmd-rsh
+      dnf:
+        name: pdsh-rcmd-rsh
+        state: absent
+
+    - name: Install Intel oneAPI toolkit (silent)
+      command: >
+        sh /root/{{ oneapi_installer }} -a --silent --eula accept
+      args:
+        creates: /opt/intel/oneapi
+
+    - name: Clean dnf cache and rebuild metadata
+      command: dnf clean all
+      changed_when: true
+
+    - name: Rebuild dnf metadata cache
+      command: dnf makecache
+      changed_when: true
+
+    - name: Install cn5000 meta package
+      dnf:
+        name: cn5000_pkgs_non_gpu_meta
+        state: present
+
+    - name: Rebuild kernel SRPM
+      command: >
+        rpmbuild --rebuild --target x86_64 /root/{{ kernel_srpm }}
+      args:
+        creates: /root/rpmbuild/RPMS/x86_64
+
+    - name: Install rebuilt kernel RPMs
+      shell: dnf install -y /root/rpmbuild/RPMS/x86_64/*
+      args:
+        executable: /bin/bash
+
+    # -------------------------------------------------------------------------
+    # Load hfi1 kernel module
+    # -------------------------------------------------------------------------
+    - name: Load hfi1 kernel module
+      modprobe:
+        name: hfi1
+        state: present
+
+    - name: Persist hfi1 module across reboots
+      copy:
+        dest: /etc/modules-load.d/hfi1.conf
+        content: "hfi1\n"
+        owner: root
+        group: root
+        mode: "0644"
+
+    # -------------------------------------------------------------------------
+    # Update JKR firmware
+    # -------------------------------------------------------------------------
+    - name: Update SuperNIC firmware
+      command: updateAgent -v /root/{{ fw_pkg }}
+      changed_when: true
+
+    # -------------------------------------------------------------------------
+    # Passwordless SSH setup
+    # -------------------------------------------------------------------------
+    - name: Generate SSH keypair for root (if absent)
+      openssh_keypair:
+        path: /root/.ssh/id_rsa
+        type: rsa
+        size: 4096
+        owner: root
+        group: root
+        mode: "0600"
+
+    - name: Collect public keys from all nodes
+      slurp:
+        src: /root/.ssh/id_rsa.pub
+      register: node_pubkey
+
+    - name: Authorize every node's key on every other node
+      authorized_key:
+        user: root
+        key: "{{ hostvars[item]['node_pubkey']['content'] | b64decode }}"
+        state: present
+      loop: "{{ groups['nodes'] }}"
+
+    - name: Ensure known_hosts entries exist (suppress first-login prompt)
+      known_hosts:
+        name: "{{ item }}"
+        key: "{{ lookup('pipe', 'ssh-keyscan -t rsa ' + item) }}"
+        state: present
+      loop: "{{ groups['nodes'] }}"
+      ignore_errors: true
+
+    # -------------------------------------------------------------------------
+    # IPoIB setup
+    # -------------------------------------------------------------------------
+    - name: Check for ib_ipoib kernel module
+      command: lsmod
+      register: lsmod_out
+      changed_when: false
+
+    - name: Find IPoIB interface names (d1 port)
+      shell: |
+        ip link show | awk -F': ' '/ib.*d1/{print $2}'
+      register: ipoib_ifaces
+      changed_when: false
+
+    - name: Deploy ifcfg for each IPoIB interface (if not already configured)
+      template:
+        src: ifcfg-ipoib.j2
+        dest: "/etc/sysconfig/network-scripts/ifcfg-{{ item }}"
+        owner: root
+        group: root
+        mode: "0644"
+      loop: "{{ ipoib_ifaces.stdout_lines }}"
+      when: ipoib_ifaces.stdout_lines | length > 0
+      notify: restart NetworkManager
+
+    # -------------------------------------------------------------------------
+    # OPAFM (Fabric Manager) — only on the elected FM node
+    # -------------------------------------------------------------------------
+    - name: Deploy opafm.xml to FM node
+      copy:
+        src: "{{ playbook_dir }}/../config/opafm.xml"
+        dest: /etc/opa-fm/opafm.xml
+        owner: root
+        group: root
+        mode: "0644"
+      when: opafm_node | bool
+
+    - name: Enable opafm service on FM node
+      systemd:
+        name: opafm
+        enabled: true
+        state: started
+      when: opafm_node | bool
+
+  # ---------------------------------------------------------------------------
+  # Handlers
+  # ---------------------------------------------------------------------------
+  handlers:
+    - name: reboot nodes
+      reboot:
+        msg: "Rebooting to apply iommu=pt kernel parameter"
+        reboot_timeout: 300
+
+    - name: restart NetworkManager
+      systemd:
+        name: NetworkManager
+        state: restarted

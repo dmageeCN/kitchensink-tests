@@ -132,3 +132,12 @@ Copy `config/opafm.xml` to `/etc/opa-fm` on the node you've elected to be your F
 Stop and start the service as needed. This can often fix missing links.
 
 To check that all the links are up on an ibnetwork run `opaextractlids` and check for missing links.
+
+### Ansible playbook
+
+You still need to copy all the files over, the Cn5k-sw_<version> dir, the FW and the intel installer.
+
+Install ansible: `dnf install ansible`
+
+Run:
+`ansible-playbook -i <PATH>/inventory.ini <PATH>/site.yml`

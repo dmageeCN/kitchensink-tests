@@ -1,0 +1,6 @@
+TYPE=InfiniBand
+DEVICE={{ item }}
+BOOTPROTO=static
+IPADDR={{ ipoib_ipaddr | default('') }}
+NETMASK=255.255.0.0
+ONBOOT=true
