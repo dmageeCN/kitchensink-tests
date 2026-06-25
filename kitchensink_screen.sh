@@ -60,9 +60,7 @@ HOSTS=$HOSTSNM
 export HOSTS
 setup_nsdperf $HOSTS
 
-if [[ $KITCHENSINK != 1 ]]; then
-  PPN=$(( NCORES/TOTAL_JOBS ))
-else
+if [[ $KITCHENSINK == 1 ]]; then
   TESTS="opx,tcp,verbs"
 fi
 
