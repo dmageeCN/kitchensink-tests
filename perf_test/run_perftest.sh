@@ -9,7 +9,7 @@ set -m
 
 KITCHEN_DIR=$(dirname $THISDIR)
 kitchen_script=$KITCHEN_DIR/kitchensink_screen.sh
-ARGS='KITCHENSINK=0 OPX_NJOBS=1 END_MIN=5 PPN=16'
+ARGS='KITCHENSINK=0 OPX_NJOBS=1 END_MIN=5 PPN=16 TIME_LIMIT=500'
 
 outd=$HOME/perftest/small
 mkdir -p $outd
