@@ -38,7 +38,7 @@ trap cleanup EXIT
 
 TOTAL_JOBS=$(( TCP_NJOBS+OPX_NJOBS ))
 ppn=$(( NCORES/TOTAL_JOBS ))
-if [[ ! (-v $PPN) || ($PPN -gt $ppn) ]]; then
+if [[ ! (-v PPN) || ($PPN -gt $ppn) ]]; then
     export PPN=$ppn
 fi
 
