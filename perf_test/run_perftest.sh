@@ -13,10 +13,10 @@ ARGS='KITCHENSINK=0 OPX_NJOBS=1 END_MIN=5 PPN=16 TIME_LIMIT=500'
 
 outd=$HOME/perftest/small
 mkdir -p $outd
-$kitchen_script $ARGS SIZE=SMALL SMALL_ITER=5000 OUTDIR=$outd
+$kitchen_script $ARGS SIZE=SMALL OUTDIR=$outd "$@"
 
 outd=$HOME/perftest/large
 mkdir -p $outd
-$kitchen_script $ARGS SIZE=LARGE LARGE_ITER=30 OUTDIR=$outd
+$kitchen_script $ARGS SIZE=LARGE OUTDIR=$outd "$@"
 
 $THISDIR/parse_perftest.sh $HOME/perftest

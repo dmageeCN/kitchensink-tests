@@ -36,10 +36,23 @@ cleanup() {
 }
 trap cleanup EXIT
 
+if [[ $KITCHENSINK == 1 ]]; then
+  TESTS="opx,tcp,verbs"
+fi
+
+if [[ ! ($TESTS =~ 'tcp') ]]; then
+  export TCP_NJOBS=0
+fi
+if [[ ! ($TESTS =~ 'opx') ]]; then
+  export OPX_NJOBS=0
+fi
+
 TOTAL_JOBS=$(( TCP_NJOBS+OPX_NJOBS ))
-ppn=$(( NCORES/TOTAL_JOBS ))
-if [[ ! (-v PPN) || ($PPN -gt $ppn) ]]; then
-    export PPN=$ppn
+if [[ $TOTAL_JOBS -gt 0 ]]; then
+  ppn=$(( NCORES/TOTAL_JOBS ))
+  if [[ ! (-v PPN) || ($PPN -gt $ppn) ]]; then
+      export PPN=$ppn
+  fi
 fi
 
 # TOTAL_PROCS=$(( TOTAL_JOBS*PPN ))
@@ -59,10 +72,6 @@ HOSTS=$HOSTSNM
 
 export HOSTS
 setup_nsdperf $HOSTS
-
-if [[ $KITCHENSINK == 1 ]]; then
-  TESTS="opx,tcp,verbs"
-fi
 
 export OUTNAME="${TEST_NAME}-${SIZE}"
 
