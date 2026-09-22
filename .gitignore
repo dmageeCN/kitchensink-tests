@@ -2,3 +2,4 @@
 servers
 clients
 nsdperf/commands
+.install/

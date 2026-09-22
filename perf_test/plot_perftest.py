@@ -36,9 +36,10 @@ def plot_csv(csv_path: Path) -> None:
     ax.set_xlabel("Size (bytes)")
     ax.set_ylabel("Mbytes/sec")
     ax.set_xscale("log", base=2)
+    ax.set_yscale("log")
     ax.set_title(csv_path.stem)
     plt.grid(True, alpha=0.5)
-    ax.legend(title="Iteration", fontsize="small", ncol=2)
+    ax.legend(title="Iteration", fontsize="xx-small", ncol=2)
     fig.tight_layout()
 
     out_path = csv_path.with_suffix(".png")

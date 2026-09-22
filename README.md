@@ -15,6 +15,17 @@ The output directory will have files for TCP, OPX, and nsdperf.
 
 The script reads from a config file `config-${nm}.sh` where `nm` is the first two characters of the hostname where the script is running.
 
+### PERFORMANCE TESTS
+
+In the perf_test dir there are three scripts to run, parse, and plot a performance test.
+The performance test performs one, shorter (5 min) OPX run with 16 processes per node and no additional traffic for large and small test sizes.
+This run won't stop due to a hang and is meant to test the performance impact of a code change rather than provoke and detect a switch issue.
+
+The results are stored in `$HOME/perftest`, a user may edit the OUTDIR variable at the top of the `run_perftest.sh` script to change this.
+Run the tests with `./perf_test/run_perftest.sh` to run the tests and produce csvs and plots where each column/line is an iteration.
+There are a lot of lines on the plots, they're meant for the user to quickly identify performance degradations and patterns visually if they are present.
+
+
 ## SETTING UP NEW SYS
 
 Create a new config based on server names and populate it with the hostnames, IP addresses, and PPN intended as default (PPN=NCORES/4), NCORES is the number of physical cores on the server. To make this work, servers that are intended to be run together must be given names that have the same first two letters (i.e. rb11,rb12). And these names must not have the same first two letters as other groups of servers intended for this task (cots, cncc is cutting it close).
