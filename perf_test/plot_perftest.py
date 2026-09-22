@@ -16,12 +16,22 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
+# Marker changes only once the color cycle wraps around, so e.g. with the
+# default 10-color cycle: blue-o, orange-o, green-o, ... cyan-o (10),
+# blue-s, orange-s, ... cyan-s (20), blue-^, ...
+MARKERS = ["o", "s", "^", "D", "v", "P", "X", "*", "<", ">"]
+
 def plot_csv(csv_path: Path) -> None:
     df = pd.read_csv(csv_path, index_col="Size")
 
+    colors = plt.rcParams["axes.prop_cycle"].by_key()["color"]
+    ncolors = len(colors)
+
     fig, ax = plt.subplots()
-    for col in df.columns:
-        ax.plot(df.index, df[col], marker="o", label=col)
+    for i, col in enumerate(df.columns):
+        color = colors[i % ncolors]
+        marker = MARKERS[(i // ncolors) % len(MARKERS)]
+        ax.plot(df.index, df[col], marker=marker, color=color, label=col)
 
     ax.set_xlabel("Size (bytes)")
     ax.set_ylabel("Mbytes/sec")

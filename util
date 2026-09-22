@@ -89,8 +89,8 @@ universal_opts() {
     # : ${IPADDR:=0} # USE IP ADDRESSES INSTEAD OF HOSTNAMES
     : ${NSD_HFI:='cycle'} #USE THIS HFI FOR NSDPERF OR cycle
     : ${TESTS:=opx} # TEST TO RUN IF KITCHENSINK == 0
-    : ${SMALL_ITER:=10000} # NITERATIONS SMALL CASE
-    : ${LARGE_ITER:=50} # NITERATIONS LARGE CASE
+    : ${SMALL_ITER:=20000} # NITERATIONS SMALL CASE
+    : ${LARGE_ITER:=20} # NITERATIONS LARGE CASE
     : ${BYTE_ITER:=100} # NITERATIONS BYTE CASE
     : ${TCP_ITER:=1000} # NITERATIONS TCP CASE
     : ${SLEEP:=true} # SLEEP TO STAGGER LAUNCHES?
@@ -106,7 +106,7 @@ universal_opts() {
 
 set_opx_size() {
     SMALL_SIZE='-msglog 4:8'
-    LARGE_SIZE='-msglog 16:24'
+    LARGE_SIZE='-msglog 16:23'
     BYTE_SIZE="-msglen ${THISDIR}/byte_file -data_type byte"
     case "$SIZE" in
         "SMALL")
@@ -189,7 +189,7 @@ imb_tcp () {
     #LAUNCH
     OUTFILE="${OUTDIR}/TCP-${OUTNAME}-${ifidx}.out"
     # CMD=$(start_cmd)
-    CMD="IMB-MPI1 $TEST_NAME -npmin 99999 -time 1000"
+    CMD="IMB-MPI1 $TEST_NAME -npmin 99999 -time 1000 -iter_policy off"
     CMD+=" -msglog ${TCP_SIZE} -iter ${TCP_ITER}"
     if [[ $UNIT_TEST == 'true' ]]; then
         echo "TCP - ${startproc} - $IFACE"
@@ -234,7 +234,7 @@ imb_opx () {
     # LAUNCH
     OUTFILE="${OUTDIR}/OPX-${OUTNAME}-${startproc}.out"
     CMD=$(start_cmd)
-    CMD+=" ${SIZE_FINAL} -iter ${ITER_FINAL}"
+    CMD+=" ${SIZE_FINAL} -iter ${ITER_FINAL} -iter_policy off"
     i=1
     if [[ $UNIT_TEST == 'true' ]]; then
         echo "OPX - ${startproc} - $hfiidx"
