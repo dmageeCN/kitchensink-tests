@@ -75,7 +75,7 @@ setup_nsdperf $HOSTS
 
 export OUTNAME="${TEST_NAME}-${SIZE}"
 
-set_opx_size
+set_opx_size # sets default SIZE_FINAL/ITER_FINAL for TCP_SIZE echo below; imb_opx re-sets per-job
 sleeper=1
 if [[ $UNIT_TEST == 'false' ]]; then
   mkdir -p $OUTDIR
@@ -108,9 +108,10 @@ if [[ $TESTS =~ 'opx' ]]; then
       count_idx=$(( (k-1)%2 ))
       hfi_idx=$(( (k-1)%NHFI ))
       start_pos=${start_count[$count_idx]}
-      echo "+++OPX+$k++ imb_opx $hfi_idx $start_pos"
-      imb_opx $hfi_idx $start_pos &
-      FILES+="${OUTDIR}/OPX-${OUTNAME}-${start_pos}.out,"
+      job_size=$(opx_job_size $k)
+      echo "+++OPX+$k++ imb_opx $hfi_idx $start_pos $job_size"
+      imb_opx $hfi_idx $start_pos $job_size &
+      FILES+="${OUTDIR}/OPX-${TEST_NAME}-${job_size}-${start_pos}.out,"
       start_count[$count_idx]=$(( start_pos+PPN ))
       sleep $sleeper
     done

@@ -80,6 +80,7 @@ universal_opts() {
     : ${END_MIN:=15} #TEST PROGRAM LENGTH MINS
     : ${TIME_LIMIT:=45} #IN SECONDS FOR FILE UPDATE
     : ${SIZE:=BYTE} #SMALL, LARGE, BYTE
+    : ${SIZES:=$SIZE} #COMMA-SEP LIST, ONE PER OPX JOB, CYCLED IF FEWER THAN OPX_NJOBS e.g. SMALL,LARGE,BYTE
     : ${TEST_NAME:="Biband"}
     : ${TCP_SIZE:='4:8'} #4:18
     : ${TCP_NJOBS:=2} # N TCP JOBS TO LAUNCH
@@ -96,7 +97,7 @@ universal_opts() {
     : ${SLEEP:=true} # SLEEP TO STAGGER LAUNCHES?
     : ${UNIT_TEST:=false} # CHECK LAUNCH CONFIGS?
     : ${HFI_CYCLE:='none'} # HOW TO CYCLE THROUGH HFI's in a job. rr, random, chunk, none
-    export OUTDIR END_MIN TIME_LIMIT SIZE TEST_NAME TCP_SIZE PPN NCORES
+    export OUTDIR END_MIN TIME_LIMIT SIZE SIZES TEST_NAME TCP_SIZE PPN NCORES
     export NCORES TCP_NJOBS OPX_NJOBS KITCHENSINK NNODES NSD_HFI # IPADDR
     export TESTS SMALL_ITER LARGE_ITER BYTE_ITER TCP_ITER SLEEP UNIT_TEST HFI_CYCLE
     export SUMMARY_OUT="${OUTDIR}/summary.out"
@@ -105,10 +106,13 @@ universal_opts() {
 }
 
 set_opx_size() {
+    # Sets SIZE_FINAL/ITER_FINAL for the given SIZE name (defaults to $SIZE).
+    # Usage: set_opx_size [SMALL|LARGE|BYTE]
+    local this_size="${1:-$SIZE}"
     SMALL_SIZE='-msglog 4:8'
     LARGE_SIZE='-msglog 16:23'
     BYTE_SIZE="-msglen ${THISDIR}/byte_file -data_type byte"
-    case "$SIZE" in
+    case "$this_size" in
         "SMALL")
             SIZE_FINAL="$SMALL_SIZE"
             ITER_FINAL="$SMALL_ITER"
@@ -128,6 +132,16 @@ set_opx_size() {
             ;;
     esac
     export SIZE_FINAL ITER_FINAL
+}
+
+# Returns (via echo) the SIZE name to use for OPX job index $1 (1-based),
+# cycling through the comma-separated $SIZES list.
+opx_job_size() {
+    local k=$1
+    local -a size_arr
+    IFS=',' read -ra size_arr <<< "$SIZES"
+    local n=${#size_arr[@]}
+    echo "${size_arr[$(( (k-1)%n ))]}"
 }
 
 setup_nsdperf() {
@@ -187,12 +201,12 @@ imb_tcp () {
     export I_MPI_PIN_PROCESSOR_LIST="${startproc}-${endproc}"
 
     #LAUNCH
-    OUTFILE="${OUTDIR}/TCP-${OUTNAME}-${ifidx}.out"
+    OUTFILE="${OUTDIR}/TCP-${OUTNAME}-${startproc}.out"
     # CMD=$(start_cmd)
     CMD="IMB-MPI1 $TEST_NAME -npmin 99999 -time 1000 -iter_policy off"
     CMD+=" -msglog ${TCP_SIZE} -iter ${TCP_ITER}"
     if [[ $UNIT_TEST == 'true' ]]; then
-        echo "TCP - ${startproc} - $IFACE"
+        echo "TCP N${startproc} - $IFACE"
         echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} ${CMD} > $OUTFILE"
         env | grep FI
         env | grep I_MPI
@@ -231,20 +245,25 @@ imb_opx () {
     endproc=$(( startproc+PPN-1 ))
     export I_MPI_PIN_PROCESSOR_LIST="${startproc}-${endproc}"
 
+    # CHOOSE SIZE (per-job override, defaults to global SIZE)
+    job_size="${3:-$SIZE}"
+    set_opx_size "$job_size"
+    job_outname="${TEST_NAME}-${job_size}"
+
     # LAUNCH
-    OUTFILE="${OUTDIR}/OPX-${OUTNAME}-${startproc}.out"
+    OUTFILE="${OUTDIR}/OPX-${job_outname}-${startproc}.out"
     CMD=$(start_cmd)
     CMD+=" ${SIZE_FINAL} -iter ${ITER_FINAL} -iter_policy off"
     i=1
     if [[ $UNIT_TEST == 'true' ]]; then
-        echo "OPX - ${startproc} - $hfiidx"
+        echo "OPX N${startproc} - $hfiidx - ${job_size}"
         echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} ${CMD} > $OUTFILE"
         env | grep FI
         env | grep I_MPI
         return 0
     fi
     while true; do
-        echo "OPX N${startproc} - ITERATION $i :: $(date)" | tee -a $OUTFILE ${SUMMARY_OUT}
+        echo "OPX N${startproc} - ITERATION ${i} -  SIZE: ${job_size} :: $(date)" | tee -a $OUTFILE ${SUMMARY_OUT}
         echo "mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} ${CMD}" >> $OUTFILE
         mpirun -np $NPROCS -ppn $PPN -host ${HOSTS} ${CMD} &>> $OUTFILE
         sleep $sleeper
