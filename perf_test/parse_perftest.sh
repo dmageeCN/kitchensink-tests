@@ -70,6 +70,6 @@ parse_size() {
     echo "Wrote $out_csv"
 }
 
-for f in $(find "$PERFDIR" -type f -name 'OPX*.out'); do
+for f in $(find "$PERFDIR" -type f -name 'OPX*.out' | grep -v BYTE-); do
     parse_size "$f"
 done
