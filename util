@@ -24,7 +24,11 @@ export NHFI=$(opainfo | grep -c Active)
 
 ### GET STUFF
 get_config() {
-    HOSTSNM=$(opaextractlids |& awk -F ';' '/FI/ {print $4}' | awk '{print $1}' | sort -nr | uniq | paste -sd ',')
+    if [[ -n $SLURM_NODELIST ]]; then
+        HOSTSNM=$(scontrol show hostnames $SLURM_NODELIST | paste -sd ',')
+    else
+        HOSTSNM=$(opaextractlids |& awk -F ';' '/FI/ {print $4}' | awk '{print $1}' | sort -nr | uniq | paste -sd ',')
+    fi
     CORE_PER_SOCKET=$(lscpu | awk '/^Core/ {print $NF}')
     SOCKETS=$(lscpu | awk '/^Sock/ {print $NF}')
     NCORES=$(( SOCKETS*CORE_PER_SOCKET ))
@@ -44,7 +48,7 @@ get_nodes() {
 
 get_ports(){
   hostlist=$1
-  hostarray=($(echo $hostlist | tr ',' '\n'))  
+  hostarray=($(echo $hostlist | tr ',' '\n'))
   hfi_nums=$(( NHFI-1 ))
   port_f=""
   for k in $(seq $hfi_nums); do
@@ -62,7 +66,7 @@ get_ifaces() {
         var=$(for k in $(seq $NHFI); do echo 'opa_ib0'; done)
         echo "$var"
         return 0
-    fi    
+    fi
     echo "$if_out" |& awk '/d1: / {print $1}' | tr -d :
 }
 
