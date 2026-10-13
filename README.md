@@ -5,15 +5,13 @@ The kitchensink tests run asynchronous IMB-Biband jobs with OPX and TCP provider
 ## RUNNING
 
 There are a lot of options for the kitchen sink tests.
-You can see them in util:universal_opts.
+You can see them in the function `util:universal_opts`.
 Override any of the defaults on the command line.
 The test is run with `./kitchensink_screen.sh KEY=value` for as many key value pairs as necessary.
 
 The logs will be saved to `/tmp/<last 6 of switch guid>_<switch ports>_<date: MM-DD_HH-MM>`.
 This output directory also shows up at the top of the command line output.
 The output directory will have files for TCP, OPX, and nsdperf.
-
-The script reads from a config file `config-${nm}.sh` where `nm` is the first two characters of the hostname where the script is running.
 
 ### PERFORMANCE TESTS
 
@@ -24,7 +22,6 @@ This run won't stop due to a hang and is meant to test the performance impact of
 The results are stored in `$HOME/perftest`, a user may edit the OUTDIR variable at the top of the `run_perftest.sh` script to change this.
 Run the tests with `./perf_test/run_perftest.sh` to run the tests and produce csvs and plots where each column/line is an iteration.
 There are a lot of lines on the plots, they're meant for the user to quickly identify performance degradations and patterns visually if they are present.
-
 
 ## SETTING UP NEW SYS
 
